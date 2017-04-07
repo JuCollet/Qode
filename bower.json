@@ -1,0 +1,24 @@
+{
+  "name": "qode",
+  "description": "Share infos & files with a code.",
+  "main": "app.js",
+  "authors": [
+    "Julien Collet"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular-ui-router": "^0.4.2",
+    "angular-resource": "^1.6.4"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "curly":true,
+  "browser":true,
+  "esversion":6,
+  "node":true,
+  "strict":true,
+  "undef":true,
+  "jquery":true,
+  "expr":true,
+  "predef": ["angular"]
+}

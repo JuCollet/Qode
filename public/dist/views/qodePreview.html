@@ -1,0 +1,14 @@
+<div class="qode-preview">
+  <div class="qode-preview-content">
+    <span class="qode-preview-small-qode">{{newQode.qode}}</span>
+    <span class="qode-preview-title qode-preview-title-big">{{newQode.title}}</span>
+    <span class="qode-preview-subtitle">{{newQode.subtitle}}</span>
+    <div class="small-hr hr-blue"></div>
+    <p class="qode-preview-intro">{{newQode.description}}</p>
+    <div class="card qode-preview-card" data-color="{{card.color}}" ng-repeat="card in newQode.cards">
+      <span class="qode-preview-title qode-preview-title-small">{{card.cardTitle}}</span>
+      <p class="qode-preview-card-text">{{card.cardText}}</p>
+    </div>
+  </div>
+</div>
+<small class="is-centered"><i class="fa fa-eye" aria-hidden="true"></i>Preview</small>
