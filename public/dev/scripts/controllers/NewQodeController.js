@@ -2,21 +2,21 @@
 
 angular.module('app')
 
-.controller('NewQodeController', ['$rootScope','$scope', function($rootScope,$scope){
+.controller('NewQodeController', ['$rootScope','$scope','$state','$timeout','newQodeFactory', function($rootScope,$scope,$state,$timeout,newQodeFactory){
 
   let card = function() {
-        this.cardTitle = "card title ok";
-        this.cardText = "card text ok";
-        this.cardReferences = "Reference ok";
-        this.files = "";
+        this.cardTitle = "";
+        this.cardText = "";
+        this.cardReferences = [];
+        this.files = [];
         this.color = "default";
     };
-  
+    
   $scope.newQode = {
-    qode : "NG666",
-    title : "title ok",
-    subtitle : "subtitle ok",
-    description : "description ok",
+    qode : $state.params.qode,
+    title : "",
+    subtitle : "",
+    description : "",
     cards : []
   };
   
@@ -30,6 +30,15 @@ angular.module('app')
         $scope.newQode.cards.splice(parseInt(index),1);
         $scope.$apply();
       });
+    });
+  };
+  
+  $scope.postQode = function(){
+    newQodeFactory.save($scope.newQode).$promise.then(function(){
+      $rootScope.$broadcast('notification',{color:'green', message:'Your Qode is online', title:'Congratulations !', glyph:'fa fa-check'});
+      $timeout(function(){
+        $state.go('root.qode', {id:$scope.newQode.qode});
+      },3000);
     });
   };
   

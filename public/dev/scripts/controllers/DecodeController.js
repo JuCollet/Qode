@@ -2,42 +2,63 @@
 
 angular.module('app')
 
-.controller('DecodeController', ['$scope', function($scope){
+.controller('DecodeController', ['$scope', 'qodeViewFactory', '$timeout', '$state', function($scope, qodeViewFactory, $timeout, $state){
   
   const $qodeChars = $('.qode-code')[0].children,
         alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
   let pos = 0,
-      qode = "";
+      qode = "",
+      checking = false;
   
   $scope.complete = false;
-  
+
   document.onkeyup = function(e){
     
-    if(pos<2 && alphabet.indexOf((e.key).toLowerCase()) !== -1){
-      $($qodeChars[pos]).text(e.key);
-      if(pos<5) {
-        qode += e.key;
-        pos++;
-      }      
-    } else if(pos > 1 && parseInt(e.key) >= 0 && parseInt(e.key) <= 9) {
-      $($qodeChars[pos]).text(e.key);
-      if(pos<=4) {
-        qode += e.key;
-        pos++;
-      }            
-    }
-    if(e.key === "Backspace"){
-      if(pos>0) {
-        pos--;
-        qode = qode.slice(0,pos);
+    // Check if div Qode is currently in the displayed DOM.
+    // Otherwise, this will be triggered everywhere in the site. 
+    if(document.getElementById('qodeDecode') !== null){
+           
+      if(pos<2 && alphabet.indexOf((e.key).toLowerCase()) !== -1){
+        $($qodeChars[pos]).text(e.key);
+        if(pos<5) {
+          qode += e.key.toUpperCase();
+          pos++;
+        }      
+      } else if(pos > 1 && parseInt(e.key) >= 0 && parseInt(e.key) <= 9) {
+        $($qodeChars[pos]).text(e.key);
+        if(pos<=4) {
+          qode += e.key;
+          pos++;
+        }            
       }
-      $($qodeChars[pos]).html("&nbsp;");
-    }
-    if(qode.length === 5){
-      $('#status').html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;Searching...');
-    } else {
-      $('#status').html('&nbsp;');
-    }
-  };
-  
+      if(e.key === "Backspace"){
+        if(pos>0) {
+          pos--;
+          qode = qode.slice(0,pos);
+        }
+        $($qodeChars[pos]).html("&nbsp;");
+      }
+      if(qode.length === 5 && checking === false){
+        checking = true;
+        $('#status').html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;Searching...');
+
+        qodeViewFactory.query({id:qode}).$promise
+          .then(function(){
+            $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
+            $timeout(function(){
+              $state.go('root.qode', {id:qode});
+            },500);
+            checking = false;
+          }, function(){
+            $('#status').html('<i class="fa fa-times is-red"></i>&nbsp;&nbsp;Not found :(');
+            checking = false;
+          });
+      } else {
+        $('#status').html('&nbsp;');
+      }
+     
+    } // end if;
+    
+  }; //end onkeyup function;
+
 }]);
