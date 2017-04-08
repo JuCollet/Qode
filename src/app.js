@@ -14,6 +14,6 @@ app.use(express.static(path.join(__dirname, '/../public/dist')));
 
 app.use('/qodes', qodeRouter);
 
-app.listen(8080, function(){
+app.listen(process.env.PORT || 5000, function(){
   console.log('Server running');
 });
