@@ -49,8 +49,8 @@ angular.module('app')
               $state.go('root.qode', {id:qode});
             },500);
             checking = false;
-          }, function(){
-            $('#status').html('<i class="fa fa-times is-red"></i>&nbsp;&nbsp;Not found :(');
+          }, function(err){
+            $('#status').html(`<i class="fa fa-times is-red"></i>&nbsp;&nbsp;${err.statusText} :(`);
             checking = false;
           });
       } else {

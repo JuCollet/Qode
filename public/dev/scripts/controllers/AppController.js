@@ -32,7 +32,6 @@ angular.module('app')
 
     //Système de notification;
     $scope.$on('notification', function(event, args) {
-      console.log('Notification triggered !');
       $scope.notificationColor = args.color;
       $scope.notificationMessageTitle = args.title;
       $scope.notificationMessage = args.message;

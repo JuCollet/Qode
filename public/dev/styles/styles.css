@@ -535,7 +535,7 @@ input:-moz-placeholder {
   white-space: pre-wrap;
 }
 .notification {
-  position: absolute;
+  position: fixed;
   padding: .7vw 1vw 1.2vw 1vw;
   width: 20vw;
   height: 14vw;
