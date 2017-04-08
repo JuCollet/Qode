@@ -2,7 +2,7 @@
 
 angular.module('app')
 
-.controller('DecodeController', ['$scope', 'qodeViewFactory', '$timeout', '$state', function($scope, qodeViewFactory, $timeout, $state){
+.controller('DecodeController', ['$scope', 'viewQodeFactory', '$timeout', '$state', function($scope, viewQodeFactory, $timeout, $state){
   
   const $qodeChars = $('.qode-code')[0].children,
         alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -42,7 +42,7 @@ angular.module('app')
         checking = true;
         $('#status').html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;Searching...');
 
-        qodeViewFactory.query({id:qode}).$promise
+        viewQodeFactory.query({id:qode}).$promise
           .then(function(){
             $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
             $timeout(function(){

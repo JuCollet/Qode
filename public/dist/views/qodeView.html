@@ -2,11 +2,11 @@
   <span class="small-qode">{{qode.qode}}</span>
   <h1>{{qode.title}}</h1>
   <h2>{{qode.subtitle}}</h2>
-  <p class="long-text">{{qode.description}}</p>
+  <p class="long-text is-multilined">{{qode.description}}</p>
 
   <div class="card" data-color="{{card.color}}" ng-repeat="card in qode.cards">
     <h4>{{card.cardTitle}}</h4>
-    <p>{{card.cardText}}</p>
+    <p class="long-text is-multilined">{{card.cardText}}</p>
     <hr class="is-light" ng-show="card.cardReferences.length > 0">
     <small ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}" class="is-white"><p>{{reference.text}}</a></p></small>
     <hr class="is-light" ng-show="card.files.length > 0">

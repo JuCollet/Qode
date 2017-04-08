@@ -7,7 +7,7 @@ angular.module('app')
   let encodeQode = $state.params.encode || 'encode';
   const posEncode = 4,
         posDecode = 34,
-        toggleSpeed = 100,
+        toggleSpeed = 50,
         $switchQode = $(".switch"),
         $switchCursor = $(".switch-cursor");
   
