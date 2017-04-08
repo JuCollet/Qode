@@ -3,13 +3,13 @@
   <form>
     <input type="text" class="form-input" placeholder="Page title" ng-model="newQode.title"></input>
     <input type="text" class="form-input" placeholder="Page subtitle" ng-model="newQode.subtitle"></input>
-    <textarea class="form-textarea" rows="5" placeholder="Description" ng-model="newQode.description"></textarea>
+    <textarea class="form-textarea" rows="7" placeholder="Description" ng-model="newQode.description"></textarea>
   </form>
 
   <div class="card" id="card{{$index}}" data-color="{{card.color}}" ng-repeat="card in newQode.cards">
     <div class="card-delete"><div class="card-delete-button" ng-click="deleteCard($index)"><i class="fa fa-times"></i></div></div>
     <input type="text" class="card-input card-input-bold" ng-model="card.cardTitle" placeholder="Title"></input>
-    <textarea type="text" class="card-textarea autoExpand" ng-model="card.cardText" placeholder="Content" rows='3' data-min-rows='3'></textarea>
+    <textarea type="text" class="card-textarea" ng-model="card.cardText" rows="5" placeholder="Content"></textarea>
     <hr class="is-light">
     <input type="text" class="card-input card-input-light" ng-model="card.cardReferences" placeholder="Références"></input>
     <div class="button button-small is-enabled"><i class="fa fa-plus" aria-hidden="true"></i>Add files</div>

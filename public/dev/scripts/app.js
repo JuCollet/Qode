@@ -88,7 +88,7 @@ angular.module('app',['ui.router','ngResource'])
       },
       'contentView@root' : {
         templateUrl : 'views/qodeView.html',
-        controller : 'QodeViewController'
+        controller : 'ViewQodeController'
       }
     }
   })

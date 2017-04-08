@@ -1,13 +1,16 @@
 <div class="qode-preview">
   <div class="qode-preview-content">
-    <span class="qode-preview-small-qode">{{newQode.qode}}</span>
-    <span class="qode-preview-title qode-preview-title-big">{{newQode.title}}</span>
-    <span class="qode-preview-subtitle">{{newQode.subtitle}}</span>
-    <div class="small-hr hr-blue"></div>
-    <p class="qode-preview-intro">{{newQode.description}}</p>
+    <span class="preview-small-qode">{{newQode.qode}}</span>
+    <h1>{{newQode.title}}</h1>
+    <h2>{{newQode.subtitle}}</h2>
+    <p class="preview-content is-multilined">{{newQode.description}}</p>
     <div class="card qode-preview-card" data-color="{{card.color}}" ng-repeat="card in newQode.cards">
-      <span class="qode-preview-title qode-preview-title-small">{{card.cardTitle}}</span>
-      <p class="qode-preview-card-text">{{card.cardText}}</p>
+      <h4>{{card.cardTitle}}</h4>
+      <p class="preview-card-text is-multilined">{{card.cardText}}</p>
+      <hr class="is-light" ng-show="card.cardReferences.length > 0">
+      <small ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}" class="is-white"><p>{{reference.text}}</a></p></small>
+      <hr class="is-light" ng-show="card.files.length > 0">
+      <small ng-repeat="file in card.files"><p><a href="{{file.path}}" class="is-white"><i class="fa fa-cloud-download" ></i>{{file.name}}</a> | {{file.type}}</p></small>
     </div>
   </div>
 </div>
