@@ -2,36 +2,45 @@
 
 angular.module('app')
 
-.controller('AppController', ['$scope', function($scope){
+  .controller('AppController', ['$scope', '$timeout', function($scope, $timeout){
 
-  // Initialize tooltips
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-  
-  // Auto-expand textarea from http://codepen.io/vsync/pen/frudD
-  $(document)
-    .one('focus.autoExpand', 'textarea.autoExpand', function(){
-        var savedValue = this.value;
-        this.value = '';
-        this.baseScrollHeight = this.scrollHeight;
-        this.value = savedValue;
-    })
-    .on('input.autoExpand', 'textarea.autoExpand', function(){
-        var minRows = this.getAttribute('data-min-rows') | 0, rows;
-        this.rows = minRows;
-        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 24);
-        this.rows = minRows + rows;
+    $scope.notificationColor = "";
+    $scope.notificationMessageTitle = "";
+    $scope.notificationMessage = "";
+    $scope.notificationGlyph = "";
+    $scope.notificationVisible = false;
+    
+    // Initialize tooltips
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
     });
-  
-  /*
-  //Système de notification;
-  $scope.$on('notification', function(event, args) {
-      // Utiliser cette syntaxe pour broadcaster les notifications à afficher :
-      $rootScope.$broadcast('notification',{type:'Error',message:'Erreur de connexion'});
-  });
-  */
-  
-  
+
+    // Auto-expand textarea from http://codepen.io/vsync/pen/frudD
+    $(document)
+      .one('focus.autoExpand', 'textarea.autoExpand', function(){
+          var savedValue = this.value;
+          this.value = '';
+          this.baseScrollHeight = this.scrollHeight;
+          this.value = savedValue;
+      })
+      .on('input.autoExpand', 'textarea.autoExpand', function(){
+          var minRows = this.getAttribute('data-min-rows') | 0, rows;
+          this.rows = minRows;
+          rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 24);
+          this.rows = minRows + rows;
+      });
+
+    //Système de notification;
+    $scope.$on('notification', function(event, args) {
+      console.log('Notification triggered !');
+      $scope.notificationColor = args.color;
+      $scope.notificationMessageTitle = args.title;
+      $scope.notificationMessage = args.message;
+      $scope.notificationGlyph = args.glyph;
+      $scope.notificationVisible = true;
+      $timeout(function(){
+        $scope.notificationVisible = false;
+      },3000);
+    });
 
 }]);

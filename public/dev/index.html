@@ -27,6 +27,7 @@
 </head>
 
 <body>
+  <notification ng-show="notificationVisible"></notification>
 
   <div class="container-fluid">
     <div id="navigation" class="col-xs-12 col-sm-3">
@@ -44,9 +45,7 @@
     <div class="footer-col"></div>
     <div class="footer-col"></div>
   </div>
-
-  <notification ng-show="false"></notification>
-
+  
   <!-- build:js scripts/main.js -->
   <script src="../../bower_components/angular/angular.min.js"></script>
   <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -57,11 +56,12 @@
   <script src="scripts/controllers/AppController.js"></script>
   <script src="scripts/controllers/NavController.js"></script>
   <script src="scripts/controllers/NewQodeController.js"></script>
-  <script src="scripts/controllers/QodeController.js"></script>
+  <script src="scripts/controllers/EncodeController.js"></script>
   <script src="scripts/controllers/DecodeController.js"></script>
   <script src="scripts/controllers/QodeViewController.js"></script>
   <script src="scripts/services/qodeFactory.js"></script>
   <script src="scripts/services/qodeViewFactory.js"></script>
+  <script src="scripts/services/newQodeFactory.js"></script>
   <script src="scripts/directives.js"></script>
   <!-- endbuild -->
 

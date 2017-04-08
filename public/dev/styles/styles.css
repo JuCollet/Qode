@@ -544,6 +544,7 @@ input:-moz-placeholder {
   left: 0;
   right: 0;
   margin: auto;
+  z-index: 999;
   border-radius: 5px;
   text-align: center;
   color: #FFF;
@@ -612,6 +613,9 @@ input:-moz-placeholder {
 }
 .is-red {
   color: #F3803B;
+}
+.is-green {
+  color: #9AD179;
 }
 .is-white {
   color: white;

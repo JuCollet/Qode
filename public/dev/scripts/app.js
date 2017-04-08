@@ -30,7 +30,7 @@ angular.module('app',['ui.router','ngResource'])
       },
       'contentView@root' : {
         templateUrl : 'views/home.html',
-        controller : 'QodeController'
+        controller : 'EncodeController'
       }
     }
   })
@@ -65,7 +65,7 @@ angular.module('app',['ui.router','ngResource'])
   })
 
   .state('root.newQode', {
-    url:'/new',
+    url:'/new/:qode',
     views : {
       'options@root' : {
         templateUrl : 'views/navBack.html'
@@ -81,7 +81,7 @@ angular.module('app',['ui.router','ngResource'])
   })
 
   .state('root.qode', {
-    url:'/qode',
+    url:'/qode/:id',
     views : {
       'options@root' : {
         templateUrl : 'views/navBack.html'
