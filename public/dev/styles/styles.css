@@ -486,7 +486,7 @@ input:-moz-placeholder {
   padding-left: 1vw;
   padding-right: 1vw;
   padding-top: 1.5vw;
-  overflow: scroll;
+  overflow: hidden;
 }
 .qode-preview-content h1 {
   margin-bottom: .65em;
