@@ -11,8 +11,10 @@
     <input type="text" class="card-input card-input-bold" ng-model="card.cardTitle" placeholder="Title"></input>
     <textarea type="text" class="card-textarea" ng-model="card.cardText" rows="5" placeholder="Content"></textarea>
     <hr class="is-light">
-    <input type="text" class="card-input card-input-light" ng-model="card.cardReferences" placeholder="Références"></input>
-    <div class="button button-small is-enabled"><i class="fa fa-plus" aria-hidden="true"></i>Add files</div>
+    <small ng-repeat="reference in card.cardReferences"><p>{{reference.text}}</p></small>
+    <hr class="is-light">    
+    <div class="button button-small is-enabled"><i class="fa fa-plus" aria-hidden="true"></i>Add reference</div><div class="button button-small is-enabled"><i class="fa fa-plus" aria-hidden="true"></i>Add files</div>
+    <small ng-repeat="file in card.files" class="is-light"><p>{{file.fileText}}</p></small>
 
     <ul class="card-color-selector">
       <li>
