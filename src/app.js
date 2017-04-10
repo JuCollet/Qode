@@ -6,7 +6,13 @@ const express = require('express'),
       bodyParser = require('body-parser').json,
       qodeRouter = require('./routes/qodeRouter'),
       logger = require('morgan'),
-      aws = require('aws-sdk');
+      aws = require('aws-sdk'),
+      cfg = require('../config').awsS3;
+
+aws.config.update({
+    accessKeyId: cfg.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: cfg.secretAccessKey || process.env.AWS_SECRET_ACCESS_KEY
+});
 
 require('./db'); // Singleton
 
@@ -16,8 +22,14 @@ app.use(express.static(path.join(__dirname, '/../public/dist')));
 
 app.use('/api/qodes', qodeRouter);
 
+// Issue with authenticating - Need to specify signature Version v4 for AWS4-HMAC-SHA256
+// http://stackoverflow.com/questions/26533245/the-authorization-mechanism-you-have-provided-is-not-supported-please-use-aws4
 app.get('/sign-s3', (req, res) => {
-  const s3 = new aws.S3();
+  const s3 = new aws.S3({
+    endpoint: 's3-eu-central-1.amazonaws.com',
+    signatureVersion: 'v4',
+    region: 'eu-central-1'
+  });
   const fileName = req.query['file-name'];
   const fileType = req.query['file-type'];
   const s3Params = {
@@ -35,7 +47,7 @@ app.get('/sign-s3', (req, res) => {
     }
     const returnData = {
       signedRequest: data,
-      url: `https://qodefiles.s3.amazonaws.com/${fileName}`
+      url: `https://${cfg.bucketName || process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`
     };
     res.write(JSON.stringify(returnData));
     res.end();

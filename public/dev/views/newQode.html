@@ -14,7 +14,7 @@
     <small ng-repeat="reference in card.cardReferences"><p>{{reference.text}}</p></small>
     <hr class="is-light">    
     <small ng-repeat="file in card.files" class="is-light"><p>{{file.fileText}}</p></small>
-    <div class="button button-small is-enabled"><i class="fa fa-plus" aria-hidden="true"></i>Add reference</div><div class="button button-small is-enabled" type="file"><i class="fa fa-plus" aria-hidden="true"></i>Add files</div>
+    <div class="button button-small is-enabled"><i class="fa fa-plus" aria-hidden="true"></i>Add reference</div>
 
     <ul class="card-color-selector">
       <li>
@@ -53,16 +53,9 @@
   <div ng-click="addNewCard()" class="button button-small button-form button-blue is-enabled" type="submit"><i class="fa fa-plus" aria-hidden="true"></i></i>Add a card</div>
   <div ng-click="postQode()" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></i>Send it !</div>
   <p>&nbsp;</p>
-  <input type="file" id="file-input">
-  <p id="status">Please select a file</p>
-  <img id="preview" src="/images/default.png">
+  
+  <label class="button button-small is-enabled"><i class="fa fa-plus"></i>Add files<input type="file" id="file-input" style="display: none;"></label>
 
-  <form method="POST" action="/save-details">
-    <input type="hidden" id="avatar-url" name="avatar-url" value="/images/default.png">
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="text" name="full-name" placeholder="Full name"><br><br>
-    <input type="submit" value="Update profile">
-  </form>
 </div>
 
 <div class="hidden-xs hidden-sm col-md-4">
