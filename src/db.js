@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose'),
-      cfg = require('../config.js').mongodb;
+      cfg = require('../cfg.js').mongodb;
 
 mongoose.Promise = global.Promise;
 

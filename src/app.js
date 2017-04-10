@@ -7,7 +7,7 @@ const express = require('express'),
       qodeRouter = require('./routes/qodeRouter'),
       logger = require('morgan'),
       aws = require('aws-sdk'),
-      cfg = require('../config').awsS3;
+      cfg = require('../cfg').awsS3;
 
 aws.config.update({
     accessKeyId: cfg.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
