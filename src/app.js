@@ -5,7 +5,8 @@ const express = require('express'),
       path = require('path'),
       bodyParser = require('body-parser').json,
       qodeRouter = require('./routes/qodeRouter'),
-      logger = require('morgan');
+      logger = require('morgan'),
+      aws = require('aws-sdk');
 
 require('./db'); // Singleton
 
@@ -14,6 +15,32 @@ app.use(bodyParser());
 app.use(express.static(path.join(__dirname, '/../public/dist')));
 
 app.use('/api/qodes', qodeRouter);
+
+app.get('/sign-s3', (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query['file-name'];
+  const fileType = req.query['file-type'];
+  const s3Params = {
+    Bucket: 'qodefiles',
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if(err){
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://qodefiles.s3.amazonaws.com/${fileName}`
+    };
+    res.write(JSON.stringify(returnData));
+    res.end();
+  });
+});
 
 // Catch 404 and forward to error handler;
 app.use(function(req,res,next){
