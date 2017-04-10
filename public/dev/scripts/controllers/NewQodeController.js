@@ -4,6 +4,18 @@ angular.module('app')
 
 .controller('NewQodeController', ['$rootScope','$scope','$state','$timeout','newQodeFactory', function($rootScope,$scope,$state,$timeout,newQodeFactory){
 
+  (function(){
+    document.getElementById("file-input").onchange = function(){
+    const files = document.getElementById('file-input').files;
+    const file = files[0];
+    console.log(file);
+    if(file === null){
+      return alert('No file selected.');
+    }
+    newQodeFactory.getSignedRequest(file);
+    };
+  })();
+  
   $scope.newQode = {
     qode : $state.params.qode,
     title : "",
@@ -65,7 +77,7 @@ angular.module('app')
       });
       return;
     } else {
-      newQodeFactory.save($scope.newQode).$promise.then(function(){
+      newQodeFactory.dbOperations.save($scope.newQode).$promise.then(function(){
         $rootScope.$broadcast('notification',{
           color:'green', 
           message:'Your Qode is online', 
