@@ -8,9 +8,8 @@ angular.module('app')
     document.getElementById("file-input").onchange = function(){
     const files = document.getElementById('file-input').files;
     const file = files[0];
-    console.log(file);
     if(file === null){
-      return alert('No file selected.');
+      return;
     }
     newQodeFactory.getSignedRequest(file);
     };
