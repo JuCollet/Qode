@@ -164,6 +164,15 @@ hr {
   border: 1px solid #36bbc3;
   color: #FFF;
 }
+.button-yellow {
+  background-color: #E8C033;
+  border: 1px solid #E8C033;
+}
+.button.button-yellow.is-enabled:hover {
+  background-color: #ba9515;
+  border: 1px solid #ba9515;
+  color: #FFF;
+}
 .card {
   position: relative;
   padding: 20px 20px 0px 20px;

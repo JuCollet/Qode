@@ -3,25 +3,6 @@
 angular.module('app')
 
 .controller('NewQodeController', ['$rootScope','$scope','$state','$timeout','newQodeFactory', function($rootScope,$scope,$state,$timeout,newQodeFactory){
-
-  (function(){
-    document.getElementById("file-input").onchange = function(){
-    const files = document.getElementById('file-input').files;
-    const file = files[0];
-    if(file === null){
-      return;
-    }
-    newQodeFactory.getSignedRequest(file);
-    };
-  })();
-  
-  $scope.newQode = {
-    qode : $state.params.qode,
-    title : "",
-    subtitle : "",
-    description : "",
-    cards : []
-  };
   
   let card = function() {
         this.cardTitle = "";
@@ -45,14 +26,28 @@ angular.module('app')
     this.fileType = "";
   };
   
+  (function(){
+    document.getElementById("fileUpload").onchange = function(){
+    const files = document.getElementById("fileUpload").files;
+    const file = files[0];
+    if(file === null){return;}
+    newQodeFactory.getSignedRequest(file);
+    //$scope.newQode.cards[index].files.push(new file());
+    };
+  })();
+  
+  $scope.newQode = {
+    qode : $state.params.qode,
+    title : "",
+    subtitle : "",
+    description : "",
+    cards : []
+  };
+  
   $scope.addNewCard = function(){
     $scope.newQode.cards.push(new card());
   };
-  
-  $scope.addFile = function(i){
-    $scope.newQode.cards[i].files.push(new file());
-  };
-  
+    
   $scope.addReference = function(i){
     $scope.newQode.cards[i].cardReferences.push(new cardReference());
   };
@@ -85,7 +80,7 @@ angular.module('app')
         });
         $timeout(function(){
           $state.go('root.qode', {id:$scope.newQode.qode});
-        },3000);
+        }, 3000);
       });
     }
   };
