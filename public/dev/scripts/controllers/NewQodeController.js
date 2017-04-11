@@ -30,17 +30,20 @@ angular.module('app')
     document.getElementById("fileUpload").onchange = function(){
     const files = document.getElementById("fileUpload").files;
     const file = files[0];
-    console.log(file.size);
-    console.log(file);
     if(file === null){return;}
     else if(file.size < 1024000) { // 10485760 octets = 10mb
       newQodeFactory.getSignedRequest(file);
     } else {
-      alert(file.name + ' est un fichier trop lourd');
+      $rootScope.$broadcast('notification',{
+        color:'red', 
+        title:'Oops...', 
+        message:'This file is too big', 
+        glyph:'fa fa-tachometer'
+      });
     }
     //$scope.newQode.cards[index].files.push(new file());
     };
-  })();
+  }());
   
   $scope.newQode = {
     qode : $state.params.qode,
@@ -72,7 +75,7 @@ angular.module('app')
       $rootScope.$broadcast('notification',{
         color:'red', 
         message:'You forgot the title', 
-        title:'Ooops...', 
+        title:'Oops...', 
         glyph:'fa fa-times'
       });
       return;

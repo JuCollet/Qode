@@ -40,7 +40,7 @@ angular.module('app')
       }
       if(qode.length === 5 && checking === false){
         checking = true;
-        $('#status').html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;Searching...');
+        $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
 
         viewQodeFactory.query({id:qode}).$promise
           .then(function(){

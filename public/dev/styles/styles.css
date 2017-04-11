@@ -28,6 +28,9 @@ form {
 input {
   outline: none;
 }
+notification {
+  display: none;
+}
 a,
 a:active,
 a:visited,
