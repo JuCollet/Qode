@@ -51,10 +51,11 @@
   </div>
 
   <div ng-click="addNewCard()" class="button button-small button-form button-blue is-enabled" type="submit"><i class="fa fa-plus" aria-hidden="true"></i></i>Add a card</div>
-  <label class="button button-small button-yellow is-enabled"><i class="fa fa-plus"></i>Add files<input type="file" id="fileUpload" style="display: none;"></label>
+  <label class="button button-small button-yellow is-enabled" id="ulButton" ng-disabled="false"><i class="fa fa-plus"></i>Add file<input type="file" id="fileUpload" style="display: none;"></label>
   <div ng-click="postQode()" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></i>Send it !</div>
+  <br><small>Free storage is limited to 5 files of 10Mo maximum.</small>
   <p>&nbsp;</p>
-  
+
 </div>
 
 <div class="hidden-xs hidden-sm col-md-4">

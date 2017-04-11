@@ -3,7 +3,7 @@
 angular.module('app')
 
 .controller('NewQodeController', ['$rootScope','$scope','$state','$timeout','newQodeFactory', function($rootScope,$scope,$state,$timeout,newQodeFactory){
-  
+   
   let card = function() {
         this.cardTitle = "";
         this.cardText = "";
@@ -26,12 +26,12 @@ angular.module('app')
     this.fileType = "";
   };
   
-  (function(){
-    document.getElementById("fileUpload").onchange = function(){
-    const files = document.getElementById("fileUpload").files;
-    const file = files[0];
+  document.getElementById("fileUpload").onchange = function(){
+    newQodeFactory.uploadButtonStateChange.disable();
+    let files = document.getElementById("fileUpload").files;
+    let file = files[0];
     if(file === null){return;}
-    else if(file.size < 1024000) { // 10485760 octets = 10mb
+    if(file.size < 10485760) { // 10485760 octets = 10mb
       newQodeFactory.getSignedRequest(file);
     } else {
       $rootScope.$broadcast('notification',{
@@ -40,10 +40,11 @@ angular.module('app')
         message:'This file is too big', 
         glyph:'fa fa-tachometer'
       });
+      newQodeFactory.uploadButtonStateChange.activate();
     }
+    files = null;
     //$scope.newQode.cards[index].files.push(new file());
-    };
-  }());
+  };
   
   $scope.newQode = {
     qode : $state.params.qode,

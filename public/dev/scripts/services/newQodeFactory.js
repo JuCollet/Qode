@@ -6,6 +6,23 @@ angular.module('app')
   
     const dbOperations = $resource(url,null,{'save':{method:'POST'}}); 
     
+    const $ulButton = $('#ulButton'),
+          $ulButtonGlyph = $('#ulButton i'),
+          $ulButtonInput = $('#ulButton input');
+    
+    const uploadButtonStateChange = {
+      activate : function(){
+        $ulButton.removeClass('is-light');
+        $ulButtonGlyph.removeClass('fa-spinner fa-spin').addClass('fa-plus');
+        $ulButtonInput.attr('disabled', false);
+      },
+      disable : function(){
+        $ulButton.addClass('is-light');
+        $ulButtonGlyph.removeClass('fa-plus').addClass('fa-spinner fa-spin');
+        $ulButtonInput.attr('disabled', true);
+      }
+    };
+    
     const _uploadFile = function(file, signedRequest, url){
       $http({
         method: 'PUT',
@@ -18,7 +35,7 @@ angular.module('app')
           message:'Your file is online.', 
           glyph:'fa fa-check'
         });
-        return;
+        uploadButtonStateChange.activate();
       }, function errorCallback(){
         $rootScope.$broadcast('notification',{
           color:'red', 
@@ -26,7 +43,7 @@ angular.module('app')
           message:'Try again later', 
           glyph:'fa fa-times'
         });
-        return;
+        uploadButtonStateChange.activate();
       });
     };
   
@@ -43,13 +60,14 @@ angular.module('app')
             message:'Try again later', 
             glyph:'fa fa-times'
           });
-          return;
+        uploadButtonStateChange.activate();
       });
     };
     
     return {
       dbOperations: dbOperations,
-      getSignedRequest: getSignedRequest
+      getSignedRequest: getSignedRequest,
+      uploadButtonStateChange: uploadButtonStateChange
     };
 
 }]);
