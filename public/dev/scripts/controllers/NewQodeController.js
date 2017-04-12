@@ -27,10 +27,10 @@ angular.module('app')
   };
   
   document.getElementById("fileUpload").onchange = function(){
-    newQodeFactory.uploadButtonStateChange.disable();
     let files = document.getElementById("fileUpload").files;
     let file = files[0];
-    if(file === null){return;}
+    if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
+    else newQodeFactory.uploadButtonStateChange.disable();
     if(file.size < 10485760) { // 10485760 octets = 10mb
       newQodeFactory.getSignedRequest(file);
     } else {
@@ -42,7 +42,6 @@ angular.module('app')
       });
       newQodeFactory.uploadButtonStateChange.activate();
     }
-    files = null;
     //$scope.newQode.cards[index].files.push(new file());
   };
   
