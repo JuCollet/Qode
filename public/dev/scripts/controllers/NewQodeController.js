@@ -28,12 +28,7 @@ angular.module('app')
   
   $scope.confirm = false;
   
-  $scope.confirmToggle = function(timer) {
-    if(timer){
-      $timeout(function(){
-        $scope.confirm = !$scope.confirm;
-      },10000);
-    }
+  $scope.confirmToggle = function() {
     $scope.confirm = !$scope.confirm;
   };
   
@@ -89,6 +84,7 @@ angular.module('app')
         title:'Oops...', 
         glyph:'fa fa-times'
       });
+      $scope.confirmToggle();
       return;
     } else {
       newQodeFactory.dbOperations.save($scope.newQode).$promise.then(function(){
