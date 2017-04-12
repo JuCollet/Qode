@@ -87,7 +87,7 @@ angular.module('app')
       $scope.confirmToggle();
       return;
     } else {
-      newQodeFactory.dbOperations.save($scope.newQode).$promise.then(function(){
+      newQodeFactory.dbOperations.save({id:$scope.newQode.qode},$scope.newQode).$promise.then(function(){
         $rootScope.$broadcast('notification',{
           color:'green', 
           message:'Your Qode is online', 

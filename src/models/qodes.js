@@ -9,8 +9,7 @@ const qodeSchema = new mongoose.Schema({
     unique: true
   },
   title: {
-    type: String,
-    required : true
+    type: String
   },
   subtitle: String,
   description: String,

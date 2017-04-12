@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('app')
-  .constant('url', "/api/qodes/")
-  .factory('newQodeFactory', ['$rootScope','$resource', '$http', 'url', function($rootScope, $resource, $http, url){
+  .factory('newQodeFactory', ['$rootScope','$resource', '$http', function($rootScope, $resource, $http){
   
-    const dbOperations = $resource(url,null,{'save':{method:'POST'}}); 
+    const dbOperations = $resource("/api/qodes/:id",null,{'create':{method:'POST'},'save':{method:'PUT'}}); 
     
     const $ulButton = $('#ulButton'),
           $ulButtonGlyph = $('#ulButton i'),

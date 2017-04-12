@@ -21,7 +21,7 @@ qodeRouter.route('/')
         res.json('Successfully Created');
       }
     })    
-  })
+  });
 
 qodeRouter.route('/:id')
   .get(function(req,res,next){
@@ -37,12 +37,16 @@ qodeRouter.route('/:id')
     })
   })
   .put(function(req,res){
-    res.json({response : "You updated a qode"});
-  })
+    Qodes.findOneAndUpdate({qode:req.params.id},req.body, function(err,doc){
+      if(err) throw err;
+      console.log(doc);
+      res.json({response : "Your qode is saved !"});
+    })
+  });
 
 qodeRouter.route('/check/')
   .post(function(req,res){
-    const checkQode = req.qode;
+    const checkQode = req.body.qode;
     Qodes.find({qode:checkQode}, function(err,result){
       if(err) throw err;
       if(result.length === 0){
@@ -52,6 +56,5 @@ qodeRouter.route('/check/')
       }
     });
   });
-
 
 module.exports = qodeRouter;

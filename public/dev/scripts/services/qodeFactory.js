@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('app')
-.constant('url', "/api/qodes/check/")
-.factory('qodeFactory', ['$resource', 'url', '$q', function($resource, url, $q){
+.factory('qodeFactory', ['$resource', '$q', function($resource, $q){
 
-  const dbConnection = $resource(url,null,{'check':{method:'POST'}});
+  const dbConnection = $resource("/api/qodes/check/",null,{'check':{method:'POST'}});
   
   const checkQodeIfAvailable = function(qodeToCheck, success, error){
     dbConnection.check({qode:qodeToCheck}).$promise
@@ -24,6 +23,8 @@ angular.module('app')
   let qodeArray = [],
       qode = "";
 
+  // This function return a promise because it use checkQodeIfAvailable function wich is asynchronous.
+  // It pass a resolve function in it, wich returns the array of mock qodes with a unique one at index length-1.
   const mockQodes = function(nbrMocks = 3){
     return $q(function(resolve, reject){
       qodeArray = [];
@@ -49,7 +50,8 @@ angular.module('app')
   };
 
   return {
-    mockQodes: mockQodes
+    mockQodes: mockQodes,
+    checkQodeIfAvailable: checkQodeIfAvailable
   };
 
 }]);

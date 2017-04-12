@@ -2,10 +2,10 @@
 
 angular.module('app')
 
-.controller('EncodeController', ['$rootScope','$scope','qodeFactory', function($rootScope, $scope, qodeFactory){
+.controller('EncodeController', ['$rootScope','$scope','qodeFactory', 'newQodeFactory', '$state', function($rootScope, $scope, qodeFactory, newQodeFactory, $state){
     
   const $qodeChars = $('.qode-code')[0].children;
-  let i = 0, j = 0;
+  let i = 0, j = 0, selectedQode;
 
   const displayQodes = function(qodes){
     setTimeout(function(){
@@ -27,13 +27,32 @@ angular.module('app')
       }
     },25);
   };
-  
-const getQodes = qodeFactory.mockQodes(5);
 
-getQodes.then(function(qodes){
-  displayQodes(qodes);
-}, function(err){
-  console.log(err);
-});
+$scope.getThisQode = function(){
+  qodeFactory.checkQodeIfAvailable(selectedQode, 
+    function successCb(){
+      newQodeFactory.dbOperations.create({qode:selectedQode}).$promise.then(function(){
+        $state.go('root.newQode', {qode:selectedQode});
+      });
+    }, function errorCb(){
+      console.log('code already used')
+  });
+};          
+  
+const getQodes = function(){
+
+  // mockQodes return a promise.
+  let getQodesAsync = qodeFactory.mockQodes(5);
+
+  getQodesAsync.then(function(qodes){
+    selectedQode = qodes[qodes.length-1];
+    displayQodes(qodes);
+  }, function(){
+    getQodes();
+  });
+  
+};
+
+getQodes();
        
 }]);

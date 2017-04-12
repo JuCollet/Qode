@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('app')
-.constant('url', "/api/qodes/:id")
-.service('viewQodeFactory', ['$resource', 'url', function($resource, url){
+.service('viewQodeFactory', ['$resource', function($resource){
   
-    return $resource(url,null,{'update':{method:'PUT'}});
+    return $resource("/api/qodes/:id",null,{'update':{method:'PUT'}});
 
 }]);
