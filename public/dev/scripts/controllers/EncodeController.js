@@ -5,29 +5,20 @@ angular.module('app')
 .controller('EncodeController', ['$rootScope','$scope','qodeFactory', function($rootScope, $scope, qodeFactory){
     
   const $qodeChars = $('.qode-code')[0].children;
-  let mockQodes = qodeFactory.mockQodes(5),
-      i = 0, j = 0;
+  let i = 0, j = 0;
 
-  $scope.refreshQode = function(){
-    mockQodes = qodeFactory.mockQodes(5);
-    $scope.charsDisplay();
-    $scope.newQode = mockQodes[4].toUpperCase();
-  };
-
-  $scope.newQode = mockQodes[4].toUpperCase();
-  
-  $scope.charsDisplay = function(){
+  const displayQodes = function(qodes){
     setTimeout(function(){
-      if(i<mockQodes.length){
-        if(j<mockQodes[0].length){
-          $($qodeChars[i]).text(mockQodes[j][i]);
+      if(i<qodes.length){
+        if(j<qodes[0].length){
+          $($qodeChars[i]).text(qodes[j][i]);
           j++;
-          $scope.charsDisplay();
+          displayQodes(qodes);
           return;
         } else {
           j = 0;
           i++;
-          $scope.charsDisplay();
+          displayQodes(qodes);
           return;
         }
       } else {
@@ -37,7 +28,12 @@ angular.module('app')
     },25);
   };
   
-  $scope.charsDisplay();
+const getQodes = qodeFactory.mockQodes(5);
 
-
+getQodes.then(function(qodes){
+  displayQodes(qodes);
+}, function(err){
+  console.log(err);
+});
+       
 }]);

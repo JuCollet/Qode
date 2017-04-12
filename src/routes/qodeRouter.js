@@ -40,5 +40,18 @@ qodeRouter.route('/:id')
     res.json({response : "You updated a qode"});
   })
 
+qodeRouter.route('/check/')
+  .post(function(req,res){
+    const checkQode = req.qode;
+    Qodes.find({qode:checkQode}, function(err,result){
+      if(err) throw err;
+      if(result.length === 0){
+        res.json({isAvailable:true});
+      } else {
+        res.json({isAvailable:false});
+      }
+    });
+  });
+
 
 module.exports = qodeRouter;
