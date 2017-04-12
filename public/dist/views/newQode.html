@@ -51,11 +51,12 @@
   </div>
 
   <div ng-click="addNewCard()" ng-show="!confirm" class="button button-small button-form button-blue is-enabled" type="submit"><i class="fa fa-plus" aria-hidden="true"></i></i>Add a card</div>
-  <label class="button button-small button-yellow is-enabled" ng-show="!confirm" id="ulButton" ng-disabled="false"><i class="fa fa-plus"></i>Add file<input type="file" id="fileUpload" style="display: none;"></label>
-  <div ng-click="confirmToggle(true)" ng-show="!confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></i>Send it !</div>
+  <label class="button button-small button-yellow is-enabled" ng-show="!confirm" id="ulButton" ng-disabled="false"><i class="fa fa-plus"></i><span style="display:inline-block;">Add file</span><input type="file" id="fileUpload" style="display: none;"></label>
+  <div ng-click="confirmToggle()" ng-show="!confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></i>Send it !</div>
   <div ng-click="postQode()" ng-show="confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-check" aria-hidden="true"></i></i>Confirm</div>
   <div ng-click="confirmToggle()" ng-show="confirm" class="button button-small button-form button-red is-enabled" type="submit"><i class="fa fa-times" aria-hidden="true"></i></i>Cancel</div>  
   <br><small>Free storage is limited to 5 files of 10Mo maximum.</small>
+  <br><small>Files are not encrypted !</small>
   <p>&nbsp;</p>
 
 </div>

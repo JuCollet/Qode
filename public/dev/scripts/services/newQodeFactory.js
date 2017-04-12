@@ -8,16 +8,19 @@ angular.module('app')
     
     const $ulButton = $('#ulButton'),
           $ulButtonGlyph = $('#ulButton i'),
-          $ulButtonInput = $('#ulButton input');
+          $ulButtonInput = $('#ulButton input'),
+          $ulButtonText = $('#ulButton span');
     
     const uploadButtonStateChange = {
       activate : function(){
         $ulButton.removeClass('is-light').addClass('button-yellow');
+        $ulButtonText.text('Add file');
         $ulButtonGlyph.removeClass('fa-spinner fa-spin').addClass('fa-plus');
         $ulButtonInput.attr('disabled', false);
       },
       disable : function(){
         $ulButton.addClass('is-light').removeClass('button-yellow');
+        $ulButtonText.text('Uploading...');
         $ulButtonGlyph.removeClass('fa-plus').addClass('fa-spinner fa-spin');
         $ulButtonInput.attr('disabled', true);
       }

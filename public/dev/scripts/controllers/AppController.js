@@ -21,12 +21,14 @@ angular.module('app')
       $scope.notificationMessageTitle = args.title;
       $scope.notificationMessage = args.message;
       $scope.notificationGlyph = args.glyph;
-      // Put JQuery method in angular $timeout to put in digest queue, 
+      // Set JQuery method in angular $applyAsync method to put in $digest queue, 
       // so the $scope is correctly updated before the notification pane is shown;
-      $timeout(function(){
+      // This is the new evlSync method (angular > 1.2) explained here :
+      // https://www.bennadel.com/blog/2605-scope-evalasync-vs-timeout-in-angularjs.htm
+      $scope.$applyAsync(function(){
         $('body > div').addClass('is-blurred');
         $notification.fadeIn(250).delay(1500).fadeOut(500);
-      },0);
+      });
       $timeout(function(){
         $('body > div').removeClass('is-blurred');
       }, 2250);
