@@ -12,12 +12,12 @@ angular.module('app')
     
     const uploadButtonStateChange = {
       activate : function(){
-        $ulButton.removeClass('is-light');
+        $ulButton.removeClass('is-light').addClass('button-yellow');
         $ulButtonGlyph.removeClass('fa-spinner fa-spin').addClass('fa-plus');
         $ulButtonInput.attr('disabled', false);
       },
       disable : function(){
-        $ulButton.addClass('is-light');
+        $ulButton.addClass('is-light').removeClass('button-yellow');
         $ulButtonGlyph.removeClass('fa-plus').addClass('fa-spinner fa-spin');
         $ulButtonInput.attr('disabled', true);
       }
