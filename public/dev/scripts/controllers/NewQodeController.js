@@ -26,11 +26,22 @@ angular.module('app')
     this.fileType = "";
   };
   
+  $scope.confirm = false;
+  
+  $scope.confirmToggle = function(timer) {
+    if(timer){
+      $timeout(function(){
+        $scope.confirm = !$scope.confirm;
+      },10000);
+    }
+    $scope.confirm = !$scope.confirm;
+  };
+  
   document.getElementById("fileUpload").onchange = function(){
     let files = document.getElementById("fileUpload").files;
     let file = files[0];
     if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
-    else newQodeFactory.uploadButtonStateChange.disable();
+    else {newQodeFactory.uploadButtonStateChange.disable();}
     if(file.size < 10485760) { // 10485760 octets = 10mb
       newQodeFactory.getSignedRequest(file);
     } else {

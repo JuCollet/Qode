@@ -176,6 +176,15 @@ hr {
   border: 1px solid #ba9515;
   color: #FFF;
 }
+.button-red {
+  background-color: #F3803B;
+  border: 1px solid #F3803B;
+}
+.button.button-red.is-enabled:hover {
+  background-color: #d4580d;
+  border: 1px solid #d4580d;
+  color: #FFF;
+}
 .card {
   position: relative;
   padding: 20px 20px 0px 20px;
@@ -527,7 +536,7 @@ input:-moz-placeholder {
 }
 .notification {
   position: fixed;
-  padding: .7vw 1vw 1.2vw 1vw;
+  padding: 1vw 1vw 1.2vw 1vw;
   width: 20vw;
   height: 14vw;
   top: 0;
@@ -539,6 +548,7 @@ input:-moz-placeholder {
   border-radius: 5px;
   text-align: center;
   color: #FFF;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 .notification-glyph {
   display: block;
