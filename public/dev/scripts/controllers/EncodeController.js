@@ -39,7 +39,7 @@ $scope.getThisQode = function(){
   });
 };          
   
-const getQodes = function(){
+$scope.getQodes = function(){
 
   // mockQodes return a promise.
   let getQodesAsync = qodeFactory.mockQodes(5);
@@ -48,11 +48,11 @@ const getQodes = function(){
     selectedQode = qodes[qodes.length-1];
     displayQodes(qodes);
   }, function(){
-    getQodes();
+    $scope.getQodes();
   });
   
 };
 
-getQodes();
+$scope.getQodes();
        
 }]);

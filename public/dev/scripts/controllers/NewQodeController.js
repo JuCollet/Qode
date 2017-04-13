@@ -7,11 +7,7 @@ angular.module('app')
   let card = function() {
         this.cardTitle = "";
         this.cardText = "";
-        this.cardReferences = [{
-          text : "Test de référence",
-          link : null
-        }];
-        this.files = [];
+        this.cardReferences = [];
         this.color = "default";
   };
   
@@ -21,7 +17,7 @@ angular.module('app')
   };
   
   let file = function() {
-    this.fileText = "";
+    this.fileName = "";
     this.filePath = "";
     this.fileType = "";
   };
@@ -56,7 +52,8 @@ angular.module('app')
     title : "",
     subtitle : "",
     description : "",
-    cards : []
+    cards : [],
+    files : []
   };
   
   $scope.addNewCard = function(){

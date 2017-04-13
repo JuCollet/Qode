@@ -1,7 +1,7 @@
 /* Presets */
 
 @darkGrey: #141414;
-@mediumGrey: #333333;
+@mediumGrey: #494949;
 @grey: #777777;
 @lightGrey : #CCCCCC;
 
@@ -111,7 +111,8 @@ small i {
 }
 
 hr {
-  border: 1px solid @grey;
+	border-top:0;
+  border-bottom: 1px solid #FFF;
 }
 
 /******* LAYOUT *******/
@@ -295,6 +296,17 @@ hr {
 	opacity:0;
 	transition: opacity .15s ease-in;
 	-webkit-transition: opacity .15s ease-in;
+	
+	animation-name: card-delete-create-show;
+	animation-duration: 5s;
+	animation-iteration-count: 1;
+}
+
+@keyframes card-delete-create-show {
+    0%   {opacity: 0;}
+    15%  {opacity: 1;}
+		75%  {opacity: 1;}
+    100% {opacity: 0;}
 }
 
 .card-delete:hover{
@@ -339,6 +351,28 @@ hr {
   font-size: 1.25rem;
   font-weight: 300;
   color: white;
+}
+
+.card-input-link {
+  width:35%;
+  float:left;
+  margin-right:1em;
+  
+  border-bottom: 1px solid #FFF;
+  
+  font-weight:300;
+}
+
+.card-input-link-40 {
+  width:40%;
+}
+
+.card-input-link-25 {
+  width:25%;
+}
+
+.card-input-button {
+  margin-top:0;
 }
 
 .card-textarea {
@@ -698,7 +732,7 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
   text-align: center;
   color: #FFF;
 	
-	box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+	box-shadow: 3px 3px 7px rgba(0,0,0,0.5);
 }
 
 .notification-glyph {

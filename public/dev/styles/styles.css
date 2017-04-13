@@ -61,7 +61,7 @@ h2 {
   font-weight: 400;
 }
 h3 {
-  color: #333333;
+  color: #494949;
   font-size: 1.5em;
   font-weight: 400;
 }
@@ -83,7 +83,8 @@ small i {
   margin-right: .375em;
 }
 hr {
-  border: 1px solid #777777;
+  border-top: 0;
+  border-bottom: 1px solid #FFF;
 }
 /******* LAYOUT *******/
 /* Only biggest components of the site & global layouts*/
@@ -147,7 +148,7 @@ hr {
 .button.is-enabled:hover {
   background-color: #FFF;
   border-color: transparent;
-  color: #333333;
+  color: #494949;
 }
 .button-green {
   background-color: #9AD179;
@@ -226,6 +227,23 @@ hr {
   opacity: 0;
   transition: opacity 0.15s ease-in;
   -webkit-transition: opacity 0.15s ease-in;
+  animation-name: card-delete-create-show;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+}
+@keyframes card-delete-create-show {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .card-delete:hover {
   opacity: 1;
@@ -238,7 +256,7 @@ hr {
   left: 35px;
   padding-top: 6px;
   border-radius: 100%;
-  background-color: #333333;
+  background-color: #494949;
   text-align: center;
   color: #777777;
   box-shadow: 1px 1px 1px 3px rgba(0, 0, 0, 0.2);
@@ -259,6 +277,22 @@ hr {
   font-size: 1.25rem;
   font-weight: 300;
   color: white;
+}
+.card-input-link {
+  width: 35%;
+  float: left;
+  margin-right: 1em;
+  border-bottom: 1px solid #FFF;
+  font-weight: 300;
+}
+.card-input-link-40 {
+  width: 40%;
+}
+.card-input-link-25 {
+  width: 25%;
+}
+.card-input-button {
+  margin-top: 0;
 }
 .card-textarea {
   display: block;
@@ -324,7 +358,7 @@ input[type=radio]:checked ~ .check {
   box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.3) inset;
 }
 .card-color-selector li .check.default {
-  background-color: #333333;
+  background-color: #494949;
 }
 .card-color-selector li .check.orange {
   background-color: #F3803B;
@@ -381,28 +415,28 @@ input[type=radio]:checked ~ .check {
 textarea::-webkit-input-placeholder,
 input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #333333;
+  color: #494949;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 textarea::-moz-placeholder,
 input::-moz-placeholder {
   /* Firefox 19+ */
-  color: #333333;
+  color: #494949;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 textarea:-ms-input-placeholder,
 input:-ms-input-placeholder {
   /* IE 10+ */
-  color: #333333;
+  color: #494949;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 textarea:-moz-placeholder,
 input:-moz-placeholder {
   /* Firefox 18- */
-  color: #333333;
+  color: #494949;
   opacity: 0.8;
   letter-spacing: 0px;
 }
@@ -548,7 +582,7 @@ input:-moz-placeholder {
   border-radius: 5px;
   text-align: center;
   color: #FFF;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
 }
 .notification-glyph {
   display: block;

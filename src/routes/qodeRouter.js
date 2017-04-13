@@ -39,7 +39,6 @@ qodeRouter.route('/:id')
   .put(function(req,res){
     Qodes.findOneAndUpdate({qode:req.params.id},req.body, function(err,doc){
       if(err) throw err;
-      console.log(doc);
       res.json({response : "Your qode is saved !"});
     })
   });

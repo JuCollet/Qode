@@ -20,15 +20,15 @@ const qodeSchema = new mongoose.Schema({
       text: String,
       link: String
     }],
-    files: [{
-      fileText: String,
-      filePath: String,
-      fileType: String,
-    }],
     color: {
       type: String,
       default: 'default'
     }
+  }],
+  files: [{
+    fileName: String,
+    filePath: String,
+    fileType: String,
   }],
   upVotes: {
     type: Number,
