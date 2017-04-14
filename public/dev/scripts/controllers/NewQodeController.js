@@ -22,31 +22,6 @@ angular.module('app')
     this.fileType = "";
   };
   
-  $scope.confirm = false;
-  
-  $scope.confirmToggle = function() {
-    $scope.confirm = !$scope.confirm;
-  };
-  
-  document.getElementById("fileUpload").onchange = function(){
-    let files = document.getElementById("fileUpload").files;
-    let file = files[0];
-    if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
-    else {newQodeFactory.uploadButtonStateChange.disable();}
-    if(file.size < 10485760) { // 10485760 octets = 10mb
-      newQodeFactory.getSignedRequest(file);
-    } else {
-      $rootScope.$broadcast('notification',{
-        color:'red', 
-        title:'Oops...', 
-        message:'This file is too big', 
-        glyph:'fa fa-tachometer'
-      });
-      newQodeFactory.uploadButtonStateChange.activate();
-    }
-    //$scope.newQode.cards[index].files.push(new file());
-  };
-  
   $scope.newQode = {
     qode : $state.params.qode,
     title : "",
@@ -54,6 +29,12 @@ angular.module('app')
     description : "",
     cards : [],
     files : []
+  };
+  
+  $scope.confirm = false;
+  
+  $scope.confirmToggle = function() {
+    $scope.confirm = !$scope.confirm;
   };
   
   $scope.addNewCard = function(){
@@ -96,6 +77,25 @@ angular.module('app')
         }, 3000);
       });
     }
+  };
+  
+  document.getElementById("fileUpload").onchange = function(){
+    let files = document.getElementById("fileUpload").files;
+    let file = files[0];
+    if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
+    else {newQodeFactory.uploadButtonStateChange.disable();}
+    if(file.size < 10485760) { // 10485760 octets = 10mb
+      newQodeFactory.getSignedRequest(file);
+    } else {
+      $rootScope.$broadcast('notification',{
+        color:'red', 
+        title:'Oops...', 
+        message:'This file is too big', 
+        glyph:'fa fa-tachometer'
+      });
+      newQodeFactory.uploadButtonStateChange.activate();
+    }
+    //$scope.newQode.cards[index].files.push(new file());
   };
   
   $('.card-color-choice').click(function(e){

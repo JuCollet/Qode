@@ -4,24 +4,19 @@ angular.module('app')
   .factory('newQodeFactory', ['$rootScope','$resource', '$http', function($rootScope, $resource, $http){
   
     const dbOperations = $resource("/api/qodes/:id",null,{'create':{method:'POST'},'save':{method:'PUT'}}); 
-    
-    const $ulButton = $('#ulButton'),
-          $ulButtonGlyph = $('#ulButton i'),
-          $ulButtonInput = $('#ulButton input'),
-          $ulButtonText = $('#ulButton span');
-    
+        
     const uploadButtonStateChange = {
       activate : function(){
-        $ulButton.removeClass('is-light').addClass('button-yellow');
-        $ulButtonText.text('Add file');
-        $ulButtonGlyph.removeClass('fa-spinner fa-spin').addClass('fa-plus');
-        $ulButtonInput.attr('disabled', false);
+        $('#ulButton').removeClass('is-light').addClass('button-yellow');
+        $('#ulButton span').text('Add file');
+        $('#ulButton i').removeClass('fa-spinner fa-spin').addClass('fa-plus');
+        $('#ulButton input').attr('disabled', false);
       },
       disable : function(){
-        $ulButton.addClass('is-light').removeClass('button-yellow');
-        $ulButtonText.text('Uploading...');
-        $ulButtonGlyph.removeClass('fa-plus').addClass('fa-spinner fa-spin');
-        $ulButtonInput.attr('disabled', true);
+        $('#ulButton').addClass('is-light').removeClass('button-yellow');
+        $('#ulButton span').text('Uploading...');
+        $('#ulButton i').removeClass('fa-plus').addClass('fa-spinner fa-spin');
+        $('#ulButton input').attr('disabled', true);
       }
     };
     
