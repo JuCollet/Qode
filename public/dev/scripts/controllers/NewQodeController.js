@@ -4,11 +4,14 @@ angular.module('app')
 
 .controller('NewQodeController', ['$rootScope','$scope','$state','$timeout','newQodeFactory', function($rootScope,$scope,$state,$timeout,newQodeFactory){
    
-  let card = function() {
+  let actualCardColor = 0;
+  const cardColors = ['default','orange','yellow','green','blue','purple'];
+  
+  let card = function(color) {
         this.cardTitle = "";
         this.cardText = "";
         this.cardReferences = [];
-        this.color = "default";
+        this.color = color;
   };
   
   let cardReference = function() {
@@ -38,7 +41,9 @@ angular.module('app')
   };
   
   $scope.addNewCard = function(){
-    $scope.newQode.cards.push(new card());
+    actualCardColor++;
+    if(actualCardColor === cardColors.length){actualCardColor = 1;}
+    $scope.newQode.cards.push(new card(cardColors[actualCardColor]));
   };
     
   $scope.addReference = function(i){
