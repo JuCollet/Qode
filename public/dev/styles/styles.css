@@ -378,6 +378,7 @@ input[type=radio]:checked ~ .check {
 .card-options {
   display: block;
   margin-left: 20px;
+  font-size: .8rem;
   color: white;
 }
 .form-input {

@@ -19,10 +19,14 @@ angular.module('app')
     this.link = "";
   };
   
-  let file = function() {
-    this.fileName = "";
-    this.filePath = "";
-    this.fileType = "";
+  let file = function(name, path, type) {
+    this.fileName = name;
+    this.filePath = path;
+    this.fileType = type;
+  };
+  
+  const addFileToScope = function(name, path, type) {
+    $scope.newQode.files.push(new file(name, path, type));
   };
   
   $scope.newQode = {
@@ -90,7 +94,7 @@ angular.module('app')
     if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
     else {newQodeFactory.uploadButtonStateChange.disable();}
     if(file.size < 10485760) { // 10485760 octets = 10mb
-      newQodeFactory.getSignedRequest(file);
+      newQodeFactory.getSignedRequest(file, addFileToScope);
     } else {
       $rootScope.$broadcast('notification',{
         color:'red', 

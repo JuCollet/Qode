@@ -15,13 +15,15 @@
 
   <small>
     <p><span class="card-options"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;THANKS THE AUTHOR</span></p>
-    <p><span class="card-options"><i class="fa fa-heart is-red"></i>&nbsp;&nbsp;&nbsp;ADD TO FAVORITES</span></p>
+    <p><span class="card-options"><i class="fa fa-heart is-red"></i>&nbsp;&nbsp;ADD TO FAVORITES</span></p>
   </small>
   
   <p>&nbsp;</p>
 </div>
-<div class="col-xs-12 col-sm-2 col-md3">
-  <div class="card" data-color="default" ng-repeat="file in qode.files">
-    <small><a href="file.filePath">{{file.fileName}}&nbsp;</a><span class="small-qode">{{file.fileType}}</span></small>
+<div class="col-xs-12 col-sm-2 col-md-4">
+  <div class="card" data-color="default" ng-show="newQode.files.length > 0">
+    <h4>Attached files</h4>
+    <span ng-repeat="file in newQode.files"><small><i class="fa fa-file"></i><a href="{{file.filePath}}">{{file.fileName}}</a> | {{file.fileType}}</small><br></span>
+    <p>&nbsp;</p>
   </div>
 </div>

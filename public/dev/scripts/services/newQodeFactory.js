@@ -20,12 +20,13 @@ angular.module('app')
       }
     };
     
-    const _uploadFile = function(file, signedRequest, url){
+    const _uploadFile = function(file, signedRequest, url, cb){
       $http({
         method: 'PUT',
         url: signedRequest,
         data:file
       }).then(function successCallback(){
+        cb(file.name, url, file.type.split('/')[1].toUpperCase());             
         $rootScope.$broadcast('notification',{
           color:'green', 
           title:'Success !', 
@@ -44,12 +45,12 @@ angular.module('app')
       });
     };
   
-    const getSignedRequest = function(file){
+    const getSignedRequest = function(file, cb){
       $http({
         method: 'GET',
         url: `/sign-s3?file-name=${file.name}&file-type=${file.type}`
         }).then(function successCallback(res) {
-          _uploadFile(file, res.data.signedRequest, res.data.url);
+          _uploadFile(file, res.data.signedRequest, res.data.url, cb);
         }, function errorCallback() {
           $rootScope.$broadcast('notification',{
             color:'red', 
