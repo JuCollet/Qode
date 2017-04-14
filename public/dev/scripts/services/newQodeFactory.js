@@ -31,14 +31,9 @@ angular.module('app')
           shortName = file.name.split('');
           shortName.splice(25, shortName.length-25);
           shortName.push('...');
+          shortName = shortName.join('');
         }
-        cb(shortName.join('') || file.name, url, file.type.split('/')[1].toUpperCase());             
-        $rootScope.$broadcast('notification',{
-          color:'green', 
-          title:'Success !', 
-          message:'Your file is online.', 
-          glyph:'fa fa-check'
-        });
+        cb(shortName || file.name, url, file.type.split('/')[1].toUpperCase());
         uploadButtonStateChange.activate();
       }, function errorCallback(){
         $rootScope.$broadcast('notification',{

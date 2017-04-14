@@ -95,22 +95,31 @@ angular.module('app')
   };
   
   document.getElementById("fileUpload").onchange = function(){
-    let files = document.getElementById("fileUpload").files;
-    let file = files[0];
-    if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
-    else {newQodeFactory.uploadButtonStateChange.disable();}
-    if(file.size < 10485760) { // 10485760 octets = 10mb
-      newQodeFactory.getSignedRequest(file, addFileToScope);
+    if($scope.newQode.files.length < 5){
+      let files = document.getElementById("fileUpload").files;
+      let file = files[0];
+      if(file === null || file === undefined){return;}  // Standard is : if (variable == null) though, to check both null & undefined;
+      else {newQodeFactory.uploadButtonStateChange.disable();}
+      if(file.size < 10485760) { // 10485760 octets = 10mb
+        newQodeFactory.getSignedRequest(file, addFileToScope);
+      } else {
+        $rootScope.$broadcast('notification',{
+          color:'red', 
+          title:'Oops...', 
+          message:'This file is too big', 
+          glyph:'fa fa-tachometer'
+        });
+        newQodeFactory.uploadButtonStateChange.activate();
+      }      
     } else {
-      $rootScope.$broadcast('notification',{
-        color:'red', 
-        title:'Oops...', 
-        message:'This file is too big', 
-        glyph:'fa fa-tachometer'
-      });
-      newQodeFactory.uploadButtonStateChange.activate();
+        $rootScope.$broadcast('notification',{
+          color:'red', 
+          message:'5 files maximum', 
+          title:'Sorry...', 
+          glyph:'fa fa-times'
+        });
     }
-    //$scope.newQode.cards[index].files.push(new file());
+
   };
   
   $('.card-color-choice').click(function(e){

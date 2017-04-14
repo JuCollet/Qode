@@ -639,6 +639,9 @@ input:-moz-placeholder {
 .is-multilined {
   white-space: pre-wrap;
 }
+.is-clickable {
+  cursor: pointer;
+}
 .is-light {
   opacity: .3;
 }
