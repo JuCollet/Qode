@@ -26,7 +26,13 @@ angular.module('app')
         url: signedRequest,
         data:file
       }).then(function successCallback(){
-        cb(file.name, url, file.type.split('/')[1].toUpperCase());             
+        let shortName;
+        if(file.name.length > 25){
+          shortName = file.name.split('');
+          shortName.splice(25, shortName.length-25);
+          shortName.push('...');
+        }
+        cb(shortName.join('') || file.name, url, file.type.split('/')[1].toUpperCase());             
         $rootScope.$broadcast('notification',{
           color:'green', 
           title:'Success !', 

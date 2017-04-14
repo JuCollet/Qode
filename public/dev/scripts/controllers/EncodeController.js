@@ -35,9 +35,14 @@ $scope.getThisQode = function(){
         $state.go('root.newQode', {qode:selectedQode});
       });
     }, function errorCb(){
-      console.log('code already used')
+      $rootScope.$broadcast('notification',{
+        color:'red', 
+        message:"It's not available anymore", 
+        title:'Oops...', 
+        glyph:'fa fa-times'
+      });
   });
-};          
+};
   
 $scope.getQodes = function(){
 

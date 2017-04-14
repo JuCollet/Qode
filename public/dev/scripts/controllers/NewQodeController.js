@@ -29,6 +29,12 @@ angular.module('app')
     $scope.newQode.files.push(new file(name, path, type));
   };
   
+  $scope.removeFile = function(index){
+    if(index !== null){
+      $scope.newQode.files.splice(index,1);  
+    }
+  };
+  
   $scope.newQode = {
     qode : $state.params.qode,
     title : "",

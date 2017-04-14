@@ -52,8 +52,7 @@
 
   <div class="card" data-color="default" ng-show="newQode.files.length > 0">
     <h4>Attached files</h4>
-    <span ng-repeat="file in newQode.files"><small><i class="fa fa-file"></i><a href="{{file.filePath}}">{{file.fileName}}</a> | {{file.fileType}}</small><br></span>
-    <p>&nbsp;</p>
+    <p ng-repeat="file in newQode.files"><small><i class="fa fa-file"></i><a href="{{file.filePath}}" download>{{file.fileName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{file.fileType}} &nbsp;</small><i class="fa fa-times is-red" ng-click="removeFile($index)"></i></p>
   </div>
 
   <div ng-click="addNewCard()" ng-show="!confirm" class="button button-small button-form button-blue is-enabled" type="submit"><i class="fa fa-plus" aria-hidden="true"></i>Add a card</div>
