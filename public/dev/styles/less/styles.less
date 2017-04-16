@@ -27,6 +27,8 @@
 
 html {
   font-size: 1em;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 html,body,form,ul {
@@ -113,6 +115,15 @@ small i {
 hr {
 	border-top:0;
   border-bottom: 1px solid #FFF;
+}
+
+/**********************************/
+/***********SCROLLBAR**************/
+/**********************************/
+
+
+::-webkit-scrollbar {
+    width: 0px;
 }
 
 /******* LAYOUT *******/
@@ -680,7 +691,8 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
   padding-right: 1vw;
   padding-top: 1.5vw;
 
-  overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 	
 	h1 {
 		margin-bottom: .65em;
