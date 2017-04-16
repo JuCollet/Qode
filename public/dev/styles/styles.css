@@ -178,12 +178,12 @@ hr {
   color: #FFF;
 }
 .button-red {
-  background-color: #F3803B;
-  border: 1px solid #F3803B;
+  background-color: #d15104;
+  border: 1px solid #d15104;
 }
 .button.button-red.is-enabled:hover {
-  background-color: #d4580d;
-  border: 1px solid #d4580d;
+  background-color: #863403;
+  border: 1px solid #863403;
   color: #FFF;
 }
 .card {
@@ -583,7 +583,7 @@ input:-moz-placeholder {
   border-radius: 5px;
   text-align: center;
   color: #FFF;
-  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
 }
 .notification-glyph {
   display: block;
@@ -654,7 +654,7 @@ input:-moz-placeholder {
   color: #141414;
 }
 .is-red {
-  color: #F3803B;
+  color: #d15104;
 }
 .is-green {
   color: #9AD179;

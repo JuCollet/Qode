@@ -14,9 +14,9 @@ angular.module('app')
         this.color = color;
   };
   
-  let cardReference = function() {
-    this.text = "";
-    this.link = "";
+  let cardReference = function(name, url) {
+    this.text = name;
+    this.link = url;
   };
   
   let file = function(name, path, type) {
@@ -29,10 +29,17 @@ angular.module('app')
     $scope.newQode.files.push(new file(name, path, type));
   };
   
+  $scope.newReference = {
+    url: "",
+    name: ""
+  };
+  
   $scope.removeFile = function(index){
-    if(index !== null){
-      $scope.newQode.files.splice(index,1);  
-    }
+    $scope.newQode.files.splice(index,1);  
+  };
+  
+  $scope.removeReference = function(cardIndex,refIndex){
+    $scope.newQode.cards[cardIndex].cardReferences.splice(refIndex,1);
   };
   
   $scope.newQode = {
@@ -55,9 +62,40 @@ angular.module('app')
     if(actualCardColor === cardColors.length){actualCardColor = 1;}
     $scope.newQode.cards.push(new card(cardColors[actualCardColor]));
   };
+  
+  const testValidUrl = function(stringToTest){
+    if(stringToTest.substring(7,0) === "http://" || stringToTest.substring(8,0) === "https://" || stringToTest.substring(4,0) === "www."){
+      return true;
+    } else {
+      $rootScope.$broadcast('notification',{
+        color:'red', 
+        message:'No valid url found', 
+        title:'Oops...', 
+        glyph:'fa fa-times'
+      });
+      return false;
+    }
+  };
     
   $scope.addReference = function(i){
-    $scope.newQode.cards[i].cardReferences.push(new cardReference());
+    if(!testValidUrl($scope.newReference.url)){return;}
+    if($scope.newReference.url !== "" && $scope.newReference.name !== "") {
+      $scope.newQode.cards[i].cardReferences.push(new cardReference($scope.newReference.name, $scope.newReference.url));
+      $scope.newReference = {url:"",name:""};
+      return;
+    } else if($scope.newReference.url !== "") {
+      $scope.newQode.cards[i].cardReferences.push(new cardReference($scope.newReference.url, $scope.newReference.url));
+      $scope.newReference = {url:"",name:""};
+      return;
+    } else {
+      $rootScope.$broadcast('notification',{
+        color:'red', 
+        message:'No reference to add', 
+        title:'Oops...', 
+        glyph:'fa fa-times'
+      });
+    }
+    
   };
   
   $scope.deleteCard = function(index){

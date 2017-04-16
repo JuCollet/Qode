@@ -20,9 +20,9 @@
   
   <p>&nbsp;</p>
 </div>
-<div class="col-xs-12 col-sm-2 col-md-4">
-  <div class="card" data-color="default" ng-show="newQode.files.length > 0">
+<div class="col-xs-12 col-sm-12 col-md-4">
+  <div class="card" data-color="default" ng-show="qode.files.length > 0">
     <h4>Attached files</h4>
-    <p ng-repeat="file in newQode.files"><small><i class="fa fa-file"></i><a href="{{file.filePath}}" download>{{file.fileName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{file.fileType}} &nbsp;</small><i class="fa fa-times is-red"></i></p>
+    <p ng-repeat="file in qode.files"><small><i class="fa fa-file"></i><a href="{{file.filePath}}" download>{{file.fileName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{file.fileType}} &nbsp;</small><i class="fa fa-times is-red"></i></p>
   </div>
 </div>
