@@ -94,22 +94,6 @@ hr {
 ::-webkit-scrollbar {
   width: 0px;
 }
-/*
-::-webkit-scrollbar-track {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
- 
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(50,50,50,0.1);
-}
-::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(50,50,50,0.2); 
-}
-
-*/
 /******* LAYOUT *******/
 /* Only biggest components of the site & global layouts*/
 /* ID selectors or classes + variations with syntax l-[variation-name]*/
@@ -149,6 +133,7 @@ hr {
   cursor: pointer;
   border: 1px solid #FFF;
   border-radius: 3px;
+  background-color: transparent;
   font-size: 1.125rem;
   font-weight: 300;
   color: #FFF;

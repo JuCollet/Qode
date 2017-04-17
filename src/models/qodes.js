@@ -2,6 +2,19 @@
 
 const mongoose = require('mongoose');
 
+const cardSchema = new mongoose.Schema({
+  cardTitle: String,
+  cardText: String,
+  cardReferences: [{
+    text: String,
+    link: String
+  }],
+  color: {
+    type: String,
+    default: 'default'
+  }
+});
+
 const qodeSchema = new mongoose.Schema({
   qode : {
     type: String,
@@ -13,18 +26,7 @@ const qodeSchema = new mongoose.Schema({
   },
   subtitle: String,
   description: String,
-  cards : [{
-    cardTitle: String,
-    cardText: String,
-    cardReferences: [{
-      text: String,
-      link: String
-    }],
-    color: {
-      type: String,
-      default: 'default'
-    }
-  }],
+  cards:[cardSchema],
   files: [{
     fileName: String,
     filePath: String,
@@ -33,11 +35,12 @@ const qodeSchema = new mongoose.Schema({
   upVotes: {
     type: Number,
     default: 0
-  }
+  },
+  createdBy : String
 },
 {
   timestamps:true
-})
+});
 
 const model = mongoose.model('Qode', qodeSchema);
 

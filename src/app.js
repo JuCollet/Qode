@@ -1,13 +1,15 @@
 'use strict';
 
 const express = require('express'),
-      app = express(),
+      session = require('express-session'),
       path = require('path'),
-      bodyParser = require('body-parser').json,
+      bodyParser = require('body-parser'),
       qodeRouter = require('./routes/qodeRouter'),
+      userRouter = require('./routes/userRouter'),
       logger = require('morgan'),
       aws = require('aws-sdk'),
-      cfg = require('../cfg').awsS3;
+      cfg = require('../cfg').awsS3,
+      app = express();
 
 aws.config.update({
     accessKeyId: cfg.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
@@ -17,10 +19,19 @@ aws.config.update({
 require('./db'); // Singleton
 
 app.use(logger("dev"));
-app.use(bodyParser());
+
+app.use(session({
+  secret: "Qode session",
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/../public/dist')));
 
 app.use('/api/qodes', qodeRouter);
+app.use('/user', userRouter);
 
 // Issue with authenticating - Need to specify signature Version v4 for AWS4-HMAC-SHA256
 // http://stackoverflow.com/questions/26533245/the-authorization-mechanism-you-have-provided-is-not-supported-please-use-aws4
