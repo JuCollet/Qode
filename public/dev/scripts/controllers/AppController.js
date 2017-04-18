@@ -2,7 +2,7 @@
 
 angular.module('app')
 
-  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'appFactory', function($scope, $rootScope, $timeout, appFactory){
+  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'appFactory', 'userFactory', function($scope, $rootScope, $timeout, appFactory, userFactory){
 
     const $notification = $('notification');
     $scope.notificationColor = "";
@@ -32,6 +32,22 @@ angular.module('app')
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
     });
+    
+    $scope.logout = function(){
+     userFactory.logout.get().$promise.then(function success(){
+        $rootScope.isLogged = {
+          log:false,
+          name:''
+        };
+     },function error(){
+        $rootScope.$broadcast('notification',{
+          color:'red', 
+          message: "Can't log out", 
+          title:'Oops...', 
+          glyph:'fa fa-times'
+        });
+     });
+    };
 
     //Système de notification;
     $scope.$on('notification', function(event, args) {

@@ -52,6 +52,19 @@ userRouter.route('/login')
     }
   });
 
+userRouter.route('/logout')
+  .get(function(req,res,next){
+    if(req.session){
+      req.session.destroy(function(err){
+        if(err){next(err);}
+        else res.json({'isLogged':false})
+      });
+    } else {
+      const err = new Error("Can't log out");
+      next(err);
+    }
+  });
+
 userRouter.route('/logcheck')
   .get(function(req,res){
     if(req.session.userId){
