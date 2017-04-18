@@ -21,7 +21,7 @@ userRouter.route('/register')
       User.create(userData, function(err,user){
         if(err)throw err;
         req.session.userId = user._id;
-        res.send("new user named " + user.name +" created !")
+        res.json({'name':user.name});
       })
       
     } else {

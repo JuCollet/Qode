@@ -114,6 +114,7 @@ angular.module('app',['ui.router','ngResource'])
       },
       'contentView@root' : {
         templateUrl : 'views/register.html',
+        controller : 'UserController'
       }
     }
   });
