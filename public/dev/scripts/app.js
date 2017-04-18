@@ -101,6 +101,7 @@ angular.module('app',['ui.router','ngResource'])
       },
       'contentView@root' : {
         templateUrl : 'views/login.html',
+        controller : 'UserController'
       }
     }
   })

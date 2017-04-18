@@ -3,8 +3,9 @@
 angular.module('app')
   .factory('newQodeFactory', ['$rootScope','$resource', '$http', function($rootScope, $resource, $http){
   
-    const dbOperations = $resource("/api/qodes/:id",null,{'create':{method:'POST'},'save':{method:'PUT'}}); 
-        
+    const dbOperations = $resource("/api/qodes/:id",null,{'create':{method:'POST'},'save':{method:'PUT'}});
+    const isLogged = $resource("/user/logcheck",null,{'check':{method:'GET'}});
+    
     const uploadButtonStateChange = {
       activate : function(){
         $('#ulButton').removeClass('is-light').addClass('button-yellow');
@@ -65,6 +66,7 @@ angular.module('app')
     
     return {
       dbOperations: dbOperations,
+      isLogged: isLogged,
       getSignedRequest: getSignedRequest,
       uploadButtonStateChange: uploadButtonStateChange
     };

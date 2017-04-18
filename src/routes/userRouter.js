@@ -41,14 +41,23 @@ userRouter.route('/login')
           next(err);
         } else {
           req.session.userId = user._id;
-          res.send('Ok, you are logged in');
+          req.session.userName = user.name;
+          res.json({'name':user.name});
         }
         
       })
     } else {
       const err = new Error('Missing mail or password !');
-      err.status = 401;
       next(err);
+    }
+  });
+
+userRouter.route('/logcheck')
+  .get(function(req,res){
+    if(req.session.userId){
+      return res.json({isLogged : {'log':true,'name':req.session.userName}});
+    } else {
+      return res.json({'log':false});
     }
   });
 

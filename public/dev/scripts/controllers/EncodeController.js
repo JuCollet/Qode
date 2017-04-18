@@ -31,8 +31,20 @@ angular.module('app')
 $scope.getThisQode = function(){
   qodeFactory.checkQodeIfAvailable(selectedQode, 
     function successCb(){
-      newQodeFactory.dbOperations.create({qode:selectedQode}).$promise.then(function(){
-        $state.go('root.newQode', {qode:selectedQode});
+      // Check if user is logged in or not
+      newQodeFactory.isLogged.check().$promise.then(function(res){
+        if(res.isLogged !== undefined && res.isLogged.log === true) {
+          newQodeFactory.dbOperations.create({qode:selectedQode}).$promise.then(function(){
+            $state.go('root.newQode', {qode:selectedQode});
+          });
+        } else {
+          $rootScope.$broadcast('notification',{
+            color:'red', 
+            message:"You're not logged", 
+            title:'Oops...', 
+            glyph:'fa fa-times'
+          });
+        }
       });
     }, function errorCb(){
       $rootScope.$broadcast('notification',{
@@ -46,7 +58,7 @@ $scope.getThisQode = function(){
   
 $scope.getQodes = function(){
 
-  // mockQodes return a promise.
+  // mockQodes returns a promise.
   let getQodesAsync = qodeFactory.mockQodes(5);
 
   getQodesAsync.then(function(qodes){
