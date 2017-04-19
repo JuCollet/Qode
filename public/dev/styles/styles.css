@@ -387,7 +387,7 @@ input[type=radio]:checked ~ .check {
 .card-options {
   display: block;
   margin-left: 20px;
-  font-size: .8rem;
+  font-size: .9rem;
   color: white;
 }
 .form-input {
@@ -665,12 +665,13 @@ input:-moz-placeholder {
 }
 .is-red {
   color: #d15104;
+  border-color: #d15104;
 }
 .is-green {
   color: #9AD179;
 }
 .is-white {
-  color: white;
+  color: #FFF;
 }
 .is-white:hover {
   color: #141414;

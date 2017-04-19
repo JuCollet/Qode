@@ -10,12 +10,17 @@ angular.module('app')
     $scope.notificationMessage = "";
     $scope.notificationGlyph = "";
     
+    // Initialize tooltips
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    
     $rootScope.isLogged = {
       log: false,
       name: ""
     };
     
-    // Function that check if user is logged or not. Return a promise, due to async API connection.
+    // Function that check if user is logged or not.
     appFactory.isLogged.check().$promise.then(function(res){
       if(res.isLogged !== undefined && res.isLogged.log === true){
         $rootScope.isLogged.log = true;
@@ -26,11 +31,6 @@ angular.module('app')
       }
     }, function(err){
       if(err){throw err;}
-    });
-            
-    // Initialize tooltips
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
     });
     
     $scope.logout = function(){

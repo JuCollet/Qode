@@ -5,7 +5,21 @@ const express = require('express'),
       User = require('../models/users.js'),
       userRouter = express.Router();
 
-userRouter.route('/register')
+userRouter.route('/')
+  .get(function(req,res,next){
+    User
+      .findById(req.session.userId, '_id name favorites')
+      .populate('favorites.favId', '_id qode title subtitle description')
+      .exec(function(err, user){
+      if(err){
+        const err = new Error('User not found');
+        err.status = 404;
+        next(err);
+      } else {
+        res.json(user);
+      }
+    })
+  })
   .post(function(req, res, next){
     if(req.body.name &&
       req.body.mail &&
@@ -19,9 +33,15 @@ userRouter.route('/register')
       };
       
       User.create(userData, function(err,user){
-        if(err)throw err;
-        req.session.userId = user._id;
-        res.json({'name':user.name});
+        if(err){
+          const err = new Error('Email already registered');
+          err.status = 400;
+          next(err);
+        } else {
+          req.session.userId = user._id;
+          res.json({'name':user.name});    
+        }
+
       })
       
     } else {
@@ -29,6 +49,15 @@ userRouter.route('/register')
       err.status = 400;
       return next(err);
     }
+  })
+  .put(function(req,res,next){
+    User.findByIdAndUpdate({_id:req.session.userId},{$push:{favorites:{favId:req.body.favId}}},{safe: true, upsert: true},function(err, user){
+      if(err){
+        console.log(err);
+        next(err);
+      }
+      res.json({'status':'ok'});
+    });
   });
 
 userRouter.route('/login')

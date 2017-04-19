@@ -14,8 +14,8 @@
   </div>
 
   <small>
-    <p><span class="card-options"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;THANKS THE AUTHOR</span></p>
-    <p><span class="card-options"><i class="fa fa-heart is-red"></i>&nbsp;&nbsp;ADD TO FAVORITES</span></p>
+    <p ng-show="isLogged.log"><span class="card-options"><i class="fa fa-thumbs-up"></i><span class="is-clickable" ng-click="thanksAuthor(qode.qode)">&nbsp;&nbsp;THANKS THE AUTHOR</span></span></p>
+    <p ng-show="isLogged.log"><span class="card-options"><i class="fa fa-heart is-red"></i><span class="is-clickable" ng-click="addToFavorites(qode._id)">&nbsp;&nbsp;ADD TO FAVORITES</span></span></p>
   </small>
   
   <p>&nbsp;</p>

@@ -117,6 +117,19 @@ angular.module('app',['ui.router','ngResource'])
         controller : 'UserController'
       }
     }
+  })
+  
+    .state('root.myaccount', {
+    url:'/myaccount',
+    views : {
+      'options@root' : {
+        templateUrl : 'views/navBack.html'
+      },
+      'contentView@root' : {
+        templateUrl : 'views/myAccount.html',
+        controller : 'UserController'
+      }
+    }
   });
 
 });
