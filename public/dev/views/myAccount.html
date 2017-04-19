@@ -1,0 +1,26 @@
+<div class="col-xs-12 col-md-8">
+  <h1>Your favorites, {{user.name}}</h1>
+  <hr><br>
+  <div ng-repeat="favorite in user.favorites">
+   <span class="small-qode">{{favorite.qode}}</span>
+    <h1>{{favorite.title}}</h1>
+    <h2>{{favorite.subtitle}}</h2>
+    <p class="long-text is-multilined">{{favorite.description}}</p>
+    <div class="button button-small button-form is-enabled" ng-click="viewQode(favorite.qode)"><i class="fa fa-eye"></i></i>View Qode</div>
+    <div class="button button-small button-form is-enabled is-red"><i class="fa fa-times"></i></i>Delete from favorites</div>
+    <p>&nbsp;</p>
+  </div>
+  <p>&nbsp;</p>
+  <h1>Your Qodes</h1>
+  <hr><br>
+  <span><small ng-hide="user.myQodes && user.myQodes.length > 0">You don't created any Qode yet.</small><p>&nbsp;</p></span>
+  <div ng-repeat="qode in user.myqodes">
+   <span class="small-qode">{{qode.qode}}</span>
+    <h1>{{qode.title}}</h1>
+    <h2>{{qode.subtitle}}</h2>
+    <p class="long-text is-multilined">{{qode.description}}</p>
+    <div class="button button-small button-form is-enabled" ng-click="viewQode(qode.qode)"><i class="fa fa-eye"></i></i>View Qode</div>
+    <div class="button button-small button-form is-enabled is-red"><i class="fa fa-times"></i></i>Delete from favorites</div>
+    <p>&nbsp;</p>
+  </div>
+</div>

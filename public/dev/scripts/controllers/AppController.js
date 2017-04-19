@@ -37,7 +37,8 @@ angular.module('app')
      userFactory.logout.get().$promise.then(function success(){
         $rootScope.isLogged = {
           log:false,
-          name:''
+          name:'',
+          favorites:[]
         };
      },function error(){
         $rootScope.$broadcast('notification',{

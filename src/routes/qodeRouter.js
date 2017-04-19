@@ -3,15 +3,10 @@
 const express = require('express'),
       mongoose = require('mongoose'),
       Qodes = require('../models/qodes'),
+      User = require('../models/users'),
       qodeRouter = express.Router();
 
 qodeRouter.route('/')
-  .get(function(req,res){
-    Qodes.find({}, function(err,qodes){
-      if(err)throw err;
-      res.json(qodes);
-    })
-  })
   .post(function(req,res){
     const newQode = req.body;
     Qodes.find({qode: req.body.qode}, function(err, qode){

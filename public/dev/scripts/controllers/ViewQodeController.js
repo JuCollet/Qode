@@ -8,6 +8,8 @@ angular.module('app')
     .then((res)=>{
       $scope.qode = res[0];
     });
+  
+    
 
     $scope.thanksAuthor = function(qode){
       
@@ -17,7 +19,7 @@ angular.module('app')
     
     $scope.addToFavorites = function(qodeId){
       
-      userFactory.user.update({favId:qodeId}).$promise.then(function success(){
+      userFactory.user.put({favId:qodeId}).$promise.then(function success(){
         
       }, function error(){
         

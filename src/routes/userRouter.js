@@ -9,7 +9,7 @@ userRouter.route('/')
   .get(function(req,res,next){
     User
       .findById(req.session.userId, '_id name favorites')
-      .populate('favorites.favId', '_id qode title subtitle description')
+      .populate('favorites', '_id qode title subtitle description')
       .exec(function(err, user){
       if(err){
         const err = new Error('User not found');
@@ -25,21 +25,22 @@ userRouter.route('/')
       req.body.mail &&
       req.body.password &&
       req.body.confirmPassword){
-      
+            
       let userData = {
         name: req.body.name,
         mail: req.body.mail,
-        password: req.body.password
+        password: req.body.password,
       };
-      
+            
       User.create(userData, function(err,user){
+        console.log(err)
         if(err){
           const err = new Error('Email already registered');
           err.status = 400;
           next(err);
         } else {
           req.session.userId = user._id;
-          res.json({'name':user.name});    
+          res.json({'name':user.name,'favorites':user.favorites});
         }
 
       })
@@ -50,15 +51,6 @@ userRouter.route('/')
       return next(err);
     }
   })
-  .put(function(req,res,next){
-    User.findByIdAndUpdate({_id:req.session.userId},{$push:{favorites:{favId:req.body.favId}}},{safe: true, upsert: true},function(err, user){
-      if(err){
-        console.log(err);
-        next(err);
-      }
-      res.json({'status':'ok'});
-    });
-  });
 
 userRouter.route('/login')
   .post(function(req,res,next){
@@ -71,7 +63,7 @@ userRouter.route('/login')
         } else {
           req.session.userId = user._id;
           req.session.userName = user.name;
-          res.json({'name':user.name});
+          res.json({'name':user.name,'favorites':user.favorites});
         }
         
       })
