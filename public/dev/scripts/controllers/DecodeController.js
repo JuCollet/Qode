@@ -56,9 +56,7 @@ angular.module('app')
       } else {
         $('#status').html('&nbsp;');
       }
-     
     } // end if;
-    
   }; //end onkeyup function;
 
 }]);

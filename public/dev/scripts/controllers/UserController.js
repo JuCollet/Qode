@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('UserController', ['$rootScope', '$scope', 'userFactory', '$state', function($rootScope, $scope, userFactory, $state){
+  .controller('UserController', ['$rootScope', '$scope', '$state', 'userFactory', function($rootScope, $scope, $state, userFactory){
     
     $scope.name = "";
     $scope.mail = "";
@@ -29,8 +29,24 @@ angular.module('app')
           glyph:'fa fa-times'
         });
       });
-      
     }; // End login function
+        
+    $scope.logout = function(){
+     userFactory.logout.get().$promise.then(function success(){
+        $rootScope.isLogged = {
+          log:false,
+          name:'',
+          favorites:[]
+        };
+     },function error(){
+        $rootScope.$broadcast('notification',{
+          color:'red', 
+          message: "Can't log out", 
+          title:'Oops...', 
+          glyph:'fa fa-times'
+        });
+     });
+    }; // End logout function
     
     $scope.register = function(){
       const data = {

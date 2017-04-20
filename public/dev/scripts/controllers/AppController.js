@@ -32,25 +32,8 @@ angular.module('app')
     }, function(err){
       if(err){throw err;}
     });
-    
-    $scope.logout = function(){
-     userFactory.logout.get().$promise.then(function success(){
-        $rootScope.isLogged = {
-          log:false,
-          name:'',
-          favorites:[]
-        };
-     },function error(){
-        $rootScope.$broadcast('notification',{
-          color:'red', 
-          message: "Can't log out", 
-          title:'Oops...', 
-          glyph:'fa fa-times'
-        });
-     });
-    };
 
-    //Système de notification;
+    // Notification system;
     $scope.$on('notification', function(event, args) {
       $scope.notificationColor = args.color;
       $scope.notificationMessageTitle = args.title;
