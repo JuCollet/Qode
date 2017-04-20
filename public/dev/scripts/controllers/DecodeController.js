@@ -42,7 +42,7 @@ angular.module('app')
         checking = true;
         $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
 
-        viewQodeFactory.query({id:qode}).$promise
+        viewQodeFactory.get({id:qode}).$promise
           .then(function(){
             $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
             $timeout(function(){

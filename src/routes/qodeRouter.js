@@ -23,13 +23,26 @@ qodeRouter.route('/:id')
     Qodes.find({qode: req.params.id}, function(err,qode){
       if(err)throw err;
       if(qode.length === 1) {
-        res.json(qode);
+        return qode;
       } else {
         const err = new Error("Qode doesn't exist");
         err.status = 404;
         next(err);
       }
-    })
+    }).then(function(qode){
+      User.findById(req.session.userId, function(err, user){
+        if(err) throw err;
+        if(user){
+          if(user.favorites.indexOf(qode[0]._id) !== -1){
+            qode[0].isFavorited = true;
+          } else {
+            qode[0].isFavorited = false;
+          }
+        }
+        console.log(qode[0])
+        res.json(qode[0]);
+      });
+    });
   })
   .put(function(req,res){
     Qodes.findOneAndUpdate({qode:req.params.id},req.body, function(err,doc){

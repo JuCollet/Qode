@@ -36,7 +36,15 @@ const qodeSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  createdBy : String
+  createdBy : String,
+  isFavorited : {
+    type: Boolean,
+    default: false
+  },
+  isLiked : {
+    type: Boolean,
+    default: false
+  }
 },
 {
   timestamps:true

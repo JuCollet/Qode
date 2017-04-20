@@ -4,9 +4,9 @@ angular.module('app')
 
 .controller('ViewQodeController', ['$scope', '$stateParams', 'viewQodeFactory', 'userFactory', function($scope, $stateParams, viewQodeFactory, userFactory){
     
-    $scope.data = viewQodeFactory.query({id:$stateParams.id}).$promise
+    $scope.data = viewQodeFactory.get({id:$stateParams.id}).$promise
     .then((res)=>{
-      $scope.qode = res[0];
+      $scope.qode = res;
     });
   
     
