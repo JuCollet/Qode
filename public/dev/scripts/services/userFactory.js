@@ -7,6 +7,8 @@ angular.module('app')
     const logout = $resource("/user/logout",null,{'get':{method:'GET'}});
     const user = $resource("/user",null,{'get':{method:'GET'}, 'post':{method:'POST'}, 'put':{method:'PUT'}});
 
+    
+    
     return {
       login:login,
       logout:logout,

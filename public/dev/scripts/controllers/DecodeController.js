@@ -10,8 +10,6 @@ angular.module('app')
       qode = "",
       checking = false;
   
-  $scope.complete = false;
-
   document.onkeyup = function(e){
     
     // Check if div Qode is currently in the displayed DOM.
@@ -42,7 +40,7 @@ angular.module('app')
         checking = true;
         $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
 
-        viewQodeFactory.get({id:qode}).$promise
+        viewQodeFactory.qodes.get({id:qode}).$promise
           .then(function(){
             $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
             $timeout(function(){

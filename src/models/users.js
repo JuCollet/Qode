@@ -23,8 +23,12 @@ const userSchema = new mongoose.Schema({
   favorites : [{
       type: Schema.ObjectId,
       ref: 'Qode'
-    }]
-  },
+    }],
+  likes : [{
+    type: Schema.ObjectId,
+    ref: 'Qode'
+  }]
+  },                                   
   {
     timestamps:true
 });

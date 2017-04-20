@@ -52,9 +52,7 @@ userRouter.route('/')
   })
   .put(function(req,res,next){
     User.findByIdAndUpdate({_id:req.session.userId, 'favorites':{$ne:req.body.favId}},{$addToSet:{favorites:req.body.favId}},{safe: true, upsert: true},function(err, user){
-      if(err){
-        next(err);
-      }
+      if(err) return next(err);
       res.json({'status':'ok'});
     });
   });
@@ -85,7 +83,7 @@ userRouter.route('/logout')
   .get(function(req,res,next){
     if(req.session){
       req.session.destroy(function(err){
-        if(err){next(err);}
+        if(err) return next(err);
         else res.json({'isLogged':false})
       });
     } else {

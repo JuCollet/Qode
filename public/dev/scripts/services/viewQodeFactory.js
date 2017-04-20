@@ -3,6 +3,14 @@
 angular.module('app')
 .service('viewQodeFactory', ['$resource', function($resource){
   
-    return $resource("/api/qodes/:id",null,{'update':{method:'PUT'}});
+    const qodes = $resource("/api/qodes/:id",null,{
+      upvote:{
+        url:'/api/qodes/upvote/',
+        method:'POST'
+      }});
+  
+    return {
+      qodes:qodes
+    };
 
 }]);
