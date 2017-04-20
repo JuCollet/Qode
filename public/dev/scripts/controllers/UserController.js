@@ -14,7 +14,7 @@ angular.module('app')
         password: $scope.password
       };
       
-      userFactory.login.post(data).$promise.then(function success(res){
+      userFactory.user.login(data).$promise.then(function success(res){
         $rootScope.isLogged = {
           log:true,
           name:res.name,
@@ -32,7 +32,7 @@ angular.module('app')
     }; // End login function
         
     $scope.logout = function(){
-     userFactory.logout.get().$promise.then(function success(){
+     userFactory.user.logout().$promise.then(function success(){
         $rootScope.isLogged = {
           log:false,
           name:'',
@@ -66,7 +66,7 @@ angular.module('app')
         return;
       }
       
-      userFactory.user.post(data).$promise.then(function success(res){
+      userFactory.user.register(data).$promise.then(function success(res){
         $rootScope.isLogged = {
           log:true,
           name:res.name,

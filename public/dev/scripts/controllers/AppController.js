@@ -2,7 +2,7 @@
 
 angular.module('app')
 
-  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'appFactory', 'userFactory', function($scope, $rootScope, $timeout, appFactory, userFactory){
+  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'appFactory', function($scope, $rootScope, $timeout, appFactory){
 
     const $notification = $('notification');
     $scope.notificationColor = "";

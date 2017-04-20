@@ -16,9 +16,15 @@ angular.module('app')
     }; // end thanksAuthor function
     
     $scope.addToFavorites = function(qodeId){
-      userFactory.user.put({favId:qodeId}).$promise.then(function(){
-      $scope.qode.isFavorited = true;
+      userFactory.user.addToFavorites({favId:qodeId}).$promise.then(function(){
+        $scope.qode.isFavorited = true;
       });
     }; // end addToFavorites function
+  
+    $scope.removeFromFavorites = function(qodeId){
+      userFactory.user.removeFromFavorites({favId:qodeId}).$promise.then(function(){
+        $scope.qode.isFavorited = false;
+      })
+    };
   
 }]);

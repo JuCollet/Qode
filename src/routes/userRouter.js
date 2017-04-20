@@ -50,12 +50,14 @@ userRouter.route('/')
       return next(err);
     }
   })
-  .put(function(req,res,next){
+
+userRouter.route('/addtofavorites')
+  .post(function(req,res,next){
     User.findByIdAndUpdate({_id:req.session.userId, 'favorites':{$ne:req.body.favId}},{$addToSet:{favorites:req.body.favId}},{safe: true, upsert: true},function(err, user){
       if(err) return next(err);
       res.json({'status':'ok'});
     });
-  });
+})
 
 
 userRouter.route('/login')
