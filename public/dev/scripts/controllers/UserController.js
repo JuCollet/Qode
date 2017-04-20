@@ -98,5 +98,10 @@ angular.module('app')
     $scope.viewQode = function(qode){
       $state.go('root.qode', {id:qode});
     };
+
+    $scope.removeFromFavorites = function(qodeId,index){
+      $scope.user.favorites.splice(index,1);
+      userFactory.user.removeFromFavorites({favId:qodeId});
+    };
     
   }]);

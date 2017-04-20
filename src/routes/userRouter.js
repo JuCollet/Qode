@@ -59,6 +59,14 @@ userRouter.route('/addtofavorites')
     });
 })
 
+userRouter.route('/removefromfavorites')
+  .post(function(req,res,next){
+    User.findByIdAndUpdate({_id:req.session.userId, 'favorites':{$eq:req.body.favId}},{$pull:{favorites:req.body.favId}},{safe: true, multi: false},function(err, user){
+      if(err) return next(err);
+      res.json({'status':'ok'});
+    });
+})
+
 
 userRouter.route('/login')
   .post(function(req,res,next){

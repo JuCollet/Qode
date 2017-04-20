@@ -21,10 +21,4 @@ angular.module('app')
       });
     }; // end addToFavorites function
   
-    $scope.removeFromFavorites = function(qodeId){
-      userFactory.user.removeFromFavorites({favId:qodeId}).$promise.then(function(){
-        $scope.qode.isFavorited = false;
-      })
-    };
-  
 }]);
