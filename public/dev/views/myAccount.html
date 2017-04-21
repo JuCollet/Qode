@@ -14,14 +14,15 @@
   <p>&nbsp;</p>
   <h1>Your Qodes</h1>
   <hr><br>
-  <span ng-hide="user.myQodes && user.myQodes.length > 0">You don't created any Qode yet.<p>&nbsp;</p></span>
+  <span ng-hide="user.myqodes && user.myqodes.length > 0">You don't created any Qode yet.<p>&nbsp;</p></span>
   <div ng-repeat="qode in user.myqodes">
    <span class="small-qode">{{qode.qode}}</span>
     <h1>{{qode.title}}</h1>
     <h2>{{qode.subtitle}}</h2>
     <p class="long-text is-multilined">{{qode.description}}</p>
     <div class="button button-small button-form is-enabled" ng-click="viewQode(qode.qode)"><i class="fa fa-eye"></i>View Qode</div>
-    <div class="button button-small button-form is-enabled is-red" ng-click="viewQode(qode.qode)"><i class="fa fa-times"></i>Delete from favorites</div>
+    <div class="button button-small button-form is-enabled is-green" ng-click="editQode(qode.qode)"><i class="fa fa-pencil"></i>Edit this Qode</div>
+    <div class="button button-small button-form is-enabled is-red" ng-click="deleteQode(qode._id,$index)"><i class="fa fa-times"></i>Delete this Qode</div>
     <p>&nbsp;</p>
   </div>
 </div>

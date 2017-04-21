@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
   likes : [{
     type: Schema.ObjectId,
     ref: 'Qode'
+  }],
+  myqodes : [{
+    type: Schema.ObjectId,
+    ref: 'Qode'
   }]
   },                                   
   {

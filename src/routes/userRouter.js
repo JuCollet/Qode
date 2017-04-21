@@ -2,14 +2,16 @@
 
 const express = require('express'),
       mongoose = require('mongoose'),
-      User = require('../models/users.js'),
+      User = require('../models/users'),
+      Qode = require('../models/qodes'),
       userRouter = express.Router();
 
 userRouter.route('/')
   .get(function(req,res,next){
     User
-      .findById(req.session.userId, '_id name favorites')
+      .findById(req.session.userId, '_id name favorites myqodes')
       .populate('favorites', '_id qode title subtitle description')
+      .populate('myqodes', '_id qode title subtitle description')
       .exec(function(err, user){
       if(err){
         const err = new Error('User not found');
@@ -57,7 +59,7 @@ userRouter.route('/addtofavorites')
       if(err) return next(err);
       res.json({'status':'ok'});
     });
-})
+});
 
 userRouter.route('/removefromfavorites')
   .post(function(req,res,next){
@@ -65,8 +67,18 @@ userRouter.route('/removefromfavorites')
       if(err) return next(err);
       res.json({'status':'ok'});
     });
-})
+});
 
+userRouter.route('/deleteqode')
+  .post(function(req,res,next){
+    User.findByIdAndUpdate({_id:req.session.userId, 'myqodes':{$eq:req.body.qodeId}},{$pull:{myqodes:req.body.qodeId}},{safe: true},function(err, user){
+      if(err) return next(err);
+    });
+    Qode.findByIdAndRemove(req.body.qodeId, null, function(err, qode){
+      if(err) return next(err);
+      res.json({'status':'ok'});
+    })
+});
 
 userRouter.route('/login')
   .post(function(req,res,next){
@@ -79,7 +91,7 @@ userRouter.route('/login')
         } else {
           req.session.userId = user._id;
           req.session.userName = user.name;
-          res.json({'name':user.name,'favorites':user.favorites});
+          res.json({'name':user.name,'favorites':user.favorites, 'myqodes':user.myqodes});
         }
         
       })

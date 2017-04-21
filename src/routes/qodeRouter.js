@@ -12,10 +12,22 @@ qodeRouter.route('/')
     Qodes.find({qode: req.body.qode}, function(err, qode){
       if(err) return next(err);
       if(qode.length === 0){
-        Qodes.create(newQode);
-        res.json('Successfully Created');
+        newQode.createdBy = req.session.userId;
+        Qodes.create(newQode, function(err,qode){
+          if(err) return next(err);
+          return qode;
+        }).then(function(qode){
+          User.findByIdAndUpdate({_id:req.session.userId, 'myqodes':{$ne:qode._id}},{$addToSet:{myqodes:qode._id}},{safe: true, upsert: true},function(err, user){
+            if(err) return next(err);
+            res.json({'status':'ok'});
+          });
+        });
+      } else {
+        const err = new Error("This Qode is taken");
+        err.status = 502;
+        next(err);
       }
-    })    
+    });
   });
 
 qodeRouter.route('/:id')
@@ -39,6 +51,11 @@ qodeRouter.route('/:id')
               qode[0].isLiked = true;
             } else {
               qode[0].isLiked = false;
+            }
+            if(JSON.stringify(qode[0].createdBy) === JSON.stringify(user._id)){
+              qode[0].isMine = true;
+            } else {
+              qode[0].isMine = false;
             }
           }
           res.json(qode[0]);

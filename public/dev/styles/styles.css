@@ -669,6 +669,7 @@ input:-moz-placeholder {
 }
 .is-green {
   color: #9AD179;
+  border-color: #9AD179;
 }
 .is-white {
   color: #FFF;

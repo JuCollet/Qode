@@ -1,6 +1,7 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema;
 
 const cardSchema = new mongoose.Schema({
   cardTitle: String,
@@ -36,12 +37,19 @@ const qodeSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  createdBy : String,
+  createdBy : {
+      type: Schema.ObjectId,
+      ref: 'Qode'
+  },
   isFavorited : {
     type: Boolean,
     default: false
   },
   isLiked : {
+    type: Boolean,
+    default: false
+  },
+  isMine : {
     type: Boolean,
     default: false
   }

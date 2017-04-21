@@ -15,6 +15,10 @@ angular.module('app')
         url:'/user/removefromfavorites',
         method:'POST'
       },
+      deleteQode:{
+        url:'/user/deleteqode',
+        method:'POST'
+      },
       login:{
         url:'/user/login',
         method:'POST'

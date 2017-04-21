@@ -59,8 +59,8 @@ angular.module('app')
       if(data.password !== data.confirmPassword){
         $rootScope.$broadcast('notification',{
           color:'red', 
-          message: "Passwords doesn't match", 
-          title:'Oops', 
+          message: "doesn't match", 
+          title:'Passwords', 
           glyph:'fa fa-times'
         });
         return;
@@ -102,6 +102,15 @@ angular.module('app')
     $scope.removeFromFavorites = function(qodeId,index){
       $scope.user.favorites.splice(index,1);
       userFactory.user.removeFromFavorites({favId:qodeId});
+    };
+    
+    $scope.deleteQode = function(qodeId,index){
+      $scope.user.myqodes.splice(index,1);
+      userFactory.user.deleteQode({qodeId:qodeId});
+    };
+    
+    $scope.editQode = function(qodeId){
+      $state.go('root.newQode', {qode:qodeId});
     };
     
   }]);
