@@ -3,7 +3,8 @@
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 const welcomeMail = function(username, usermail){
-  console.log('La demande de mail est lancée '+username+' '+usermail);
+  const destinationMail = JSON.stringify(usermail);
+  const destinationName = JSON.stringify(username);
   const request = sg.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',
@@ -12,10 +13,10 @@ const welcomeMail = function(username, usermail){
         {
           to: [
             {
-              email: usermail,
+              email: destinationMail,
             },
           ],
-          subject: 'Welcome to Qode, '+username,
+          subject: 'Welcome to Qode, '+ destinationName,
         },
       ],
       from: {
@@ -24,7 +25,7 @@ const welcomeMail = function(username, usermail){
       content: [
         {
           type: 'text/plain',
-          value: "Hello "+username+" !",
+          value: "Hello "+ destinationName +" !",
         },
       ],
     },
