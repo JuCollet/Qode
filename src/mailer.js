@@ -3,6 +3,7 @@
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 const welcomeMail = function(username, usermail){
+  console.log('La demande de mail est lancée '+username+' '+usermail);
   const request = sg.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',
