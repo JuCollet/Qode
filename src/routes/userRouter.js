@@ -4,6 +4,7 @@ const express = require('express'),
       mongoose = require('mongoose'),
       User = require('../models/users'),
       Qode = require('../models/qodes'),
+      mailer = require('../mailer'),
       userRouter = express.Router();
 
 userRouter.route('/')
@@ -40,6 +41,7 @@ userRouter.route('/')
           err.status = 400;
           next(err);
         } else {
+          mailer(req.body.mail,req.body.name);
           req.session.userId = user._id;
           res.json({'name':user.name,'favorites':user.favorites});
         }
