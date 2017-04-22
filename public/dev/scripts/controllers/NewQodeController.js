@@ -42,7 +42,20 @@ angular.module('app')
     $scope.newQode.cards[cardIndex].cardReferences.splice(refIndex,1);
   };
   
-  $scope.newQode = {
+  newQodeFactory.dbOperations.edit({qode:$state.params.qode}).$promise.then(function success(qode){
+    $scope.newQode = qode;
+  }, function error(err){
+    $state.go('root.encode');
+    $rootScope.$broadcast('notification',{
+      color:'red', 
+      message:err.data.error.message, 
+      title:'Oops...', 
+      glyph:'fa fa-times'
+    });
+  });
+  
+  /*
+    $scope.newQode = {
     qode : $state.params.qode,
     title : "",
     subtitle : "",
@@ -50,6 +63,7 @@ angular.module('app')
     cards : [],
     files : []
   };
+  */
   
   $scope.confirm = false;
   

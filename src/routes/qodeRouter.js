@@ -74,6 +74,25 @@ qodeRouter.route('/:id')
     })
   });
 
+qodeRouter.route('/edit/')
+  .post(function(req,res,next){
+    Qodes.findOne({qode:req.body.qode}, function(err,qode){
+      if(err) return next(err);
+      if(qode === null) {
+        const err = new Error('Qode not found');
+        err.status = 404;
+        next(err);
+      }
+      if(JSON.stringify(qode.createdBy) === JSON.stringify(req.session.userId)){
+        res.json(qode);
+      } else {
+        const err = new Error("You're not authorized");
+        err.status = 403;
+        next(err);
+      }
+    });
+});
+
 qodeRouter.route('/upvote/')
   .post(function(req,res,next){
     Qodes.findByIdAndUpdate(req.body.toUpvote, {$inc:{upVotes:1}}, function(err,doc){

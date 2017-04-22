@@ -13,14 +13,14 @@ userRouter.route('/')
       .populate('favorites', '_id qode title subtitle description')
       .populate('myqodes', '_id qode title subtitle description')
       .exec(function(err, user){
-      if(err){
-        const err = new Error('User not found');
-        err.status = 404;
-        next(err);
-      } else {
-        res.json(user);
-      }
-    })
+        if(err){
+          const err = new Error('User not found');
+          err.status = 404;
+          next(err);
+        } else {
+          res.json(user);
+        }
+      })
   })
   .post(function(req, res, next){
     if(req.body.name &&
