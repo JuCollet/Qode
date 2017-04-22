@@ -2,7 +2,7 @@
   "name": "qode",
   "version": "1.0.0",
   "description": "Share infos & files with a code.",
-  "main": "src/app.dev.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app"
   },
