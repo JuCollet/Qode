@@ -54,17 +54,6 @@ angular.module('app')
     });
   });
   
-  /*
-    $scope.newQode = {
-    qode : $state.params.qode,
-    title : "",
-    subtitle : "",
-    description : "",
-    cards : [],
-    files : []
-  };
-  */
-  
   $scope.confirm = false;
   
   $scope.confirmToggle = function() {
@@ -122,7 +111,7 @@ angular.module('app')
   };
   
   $scope.postQode = function(){
-    if($scope.newQode.title.length < 2) {
+    if($scope.newQode.title === undefined || $scope.newQode.title.length < 2) {
       $rootScope.$broadcast('notification',{
         color:'red', 
         message:'You forgot the title', 
