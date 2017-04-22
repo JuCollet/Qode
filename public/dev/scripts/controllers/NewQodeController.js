@@ -130,7 +130,7 @@ angular.module('app')
         });
         $timeout(function(){
           $state.go('root.qode', {id:$scope.newQode.qode});
-        }, 3000);
+        }, 2250);
       });
     }
   };
