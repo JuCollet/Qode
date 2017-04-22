@@ -45,7 +45,8 @@ angular.module('app')
           shortName.push('...');
           shortName = shortName.join('');
         }
-        cb(shortName || file.name, res.url, file.type.split('/')[1].toUpperCase());
+        const fileUrl = res.config.url.split('?')[0];
+        cb(shortName || file.name, fileUrl, file.type.split('/')[1].toUpperCase());
         uploadButtonStateChange.activate();
       }, function errorCallback(){
         $rootScope.$broadcast('notification',{
