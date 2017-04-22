@@ -7,8 +7,7 @@ const express = require('express'),
       qodeRouter = require('./routes/qodeRouter'),
       userRouter = require('./routes/userRouter'),
       logger = require('morgan'),
-      aws = require('aws-sdk'),
-      cfg = require('../cfg').awsS3,
+      aws = require('aws-sdk')
       app = express();
 
 aws.config.update({

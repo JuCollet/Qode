@@ -1,7 +1,6 @@
 'use strict';
 
-const mongoose = require('mongoose'),
-      cfg = require('../cfg.js').mongodb;
+const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${cfg.user || process.env.mongo_user}:${cfg.pass || process.env.mongo_pass}@ds111461.mlab.com:11461/qode`, function(err){
