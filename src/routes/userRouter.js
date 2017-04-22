@@ -41,7 +41,7 @@ userRouter.route('/')
           err.status = 400;
           next(err);
         } else {
-          mailer(req.body.mail,req.body.name);
+          mailer(req.body.name,req.body.mail);
           req.session.userId = user._id;
           res.json({'name':user.name,'favorites':user.favorites});
         }

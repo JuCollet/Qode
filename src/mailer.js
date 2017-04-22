@@ -5,10 +5,10 @@ const helper = require('sendgrid').mail,
 
 const welcomeMail = function(username, usermail){
 
-  const from_email = new helper.Email('test@example.com'),
+  const from_email = new helper.Email('noreply@qode.be'),
         to_email = new helper.Email(usermail),
-        subject = 'Hello World from the SendGrid Node.js Library!',
-        content = new helper.Content('text/plain', 'Hello, Email!'),
+        subject = 'Hello, '+username+" ! "+ "Welcome to Qode.be",
+        content = new helper.Content('text/plain', 'Hello '+username+' !'),
         mail = new helper.Mail(from_email, subject, to_email, content);
 
   const request = sg.emptyRequest({

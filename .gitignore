@@ -1,3 +1,6 @@
 bower_components
 node_modules
 cfg.js
+src/db.dev.js
+src/app.dev.js
+src/mailer.dev.js
