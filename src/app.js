@@ -7,12 +7,12 @@ const express = require('express'),
       qodeRouter = require('./routes/qodeRouter'),
       userRouter = require('./routes/userRouter'),
       logger = require('morgan'),
-      aws = require('aws-sdk')
+      aws = require('aws-sdk'),
       app = express();
 
 aws.config.update({
-    accessKeyId: cfg.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: cfg.secretAccessKey || process.env.AWS_SECRET_ACCESS_KEY
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
 require('./db'); // Singleton
@@ -57,7 +57,7 @@ app.get('/sign-s3', (req, res) => {
     }
     const returnData = {
       signedRequest: data,
-      url: `https://${cfg.bucketName || process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`
+      url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`
     };
     res.write(JSON.stringify(returnData));
     res.end();
