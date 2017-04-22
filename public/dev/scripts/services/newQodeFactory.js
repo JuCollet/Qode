@@ -37,7 +37,7 @@ angular.module('app')
         method: 'PUT',
         url: signedRequest,
         data:file
-      }).then(function successCallback(){
+      }).then(function successCallback(res){
         let shortName;
         if(file.name.length > 25){
           shortName = file.name.split('');
@@ -45,7 +45,7 @@ angular.module('app')
           shortName.push('...');
           shortName = shortName.join('');
         }
-        cb(shortName || file.name, url, file.type.split('/')[1].toUpperCase());
+        cb(shortName || file.name, res.url, file.type.split('/')[1].toUpperCase());
         uploadButtonStateChange.activate();
       }, function errorCallback(){
         $rootScope.$broadcast('notification',{
