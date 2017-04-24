@@ -52,12 +52,12 @@
 
   <div class="card" data-color="default" ng-show="newQode.files.length > 0">
     <h4>Attached files</h4>
-    <p ng-repeat="file in newQode.files"><small><i class="fa fa-file-o"></i><a href="{{file.filePath}}" download>{{file.fileName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{file.fileType}} &nbsp;</small><i class="fa fa-times is-red is-clickable" ng-click="removeFile($index)"></i></p>
+    <p ng-repeat="file in newQode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a>&nbsp;&nbsp;</small><i class="fa fa-times is-red is-clickable" ng-click="removeFile($index)"></i></p>
   </div>
 
   <div ng-click="addNewCard()" ng-show="!confirm" class="button button-small button-form button-blue is-enabled" type="submit"><i class="fa fa-plus" aria-hidden="true"></i>Add a card</div>
   <label class="button button-small button-yellow is-enabled" ng-show="!confirm" id="ulButton" ng-disabled="false"><i class="fa fa-plus"></i><span style="display:inline-block;">Add file</span><input type="file" id="fileUpload" style="display: none;"></label>
-  <div ng-click="confirmToggle()" ng-show="!confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>Send it !</div>
+  <div ng-click="confirmToggle()" ng-show="!confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>Save it !</div>
   <div ng-click="confirmToggle()" ng-show="confirm" class="button button-small button-form button-red is-enabled" type="submit"><i class="fa fa-times" aria-hidden="true"></i>Cancel</div>  
   <div ng-click="postQode()" ng-show="confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-check" aria-hidden="true"></i>Confirm</div>
   <br><small>Free storage is limited to 5 files of 10Mo maximum.<br>Files are not encrypted, use with care !</small>

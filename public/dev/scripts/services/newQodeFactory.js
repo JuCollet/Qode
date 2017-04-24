@@ -15,7 +15,6 @@ angular.module('app')
         method:'POST'
       }
     });
-    const isLogged = $resource("/user/logcheck",null,{'check':{method:'GET'}});
     
     const uploadButtonStateChange = {
       activate : function(){
@@ -39,9 +38,9 @@ angular.module('app')
         data:file
       }).then(function successCallback(res){
         let shortName;
-        if(file.name.length > 25){
+        if(file.name.length > 40){
           shortName = file.name.split('');
-          shortName.splice(25, shortName.length-25);
+          shortName.splice(40, shortName.length-40);
           shortName.push('...');
           shortName = shortName.join('');
         }
@@ -78,7 +77,6 @@ angular.module('app')
     
     return {
       dbOperations: dbOperations,
-      isLogged: isLogged,
       getSignedRequest: getSignedRequest,
       uploadButtonStateChange: uploadButtonStateChange
     };

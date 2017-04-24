@@ -1,7 +1,7 @@
 'use strict';
 
 const helper = require('sendgrid').mail,
-      welcomemail = require('./mails.js'),
+      welcomemail = require('./assets/mails.js'),
       sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 const welcomeMail = function(username, usermail){

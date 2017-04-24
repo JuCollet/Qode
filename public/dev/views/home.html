@@ -11,8 +11,14 @@
       <div class="qode-char">&nbsp;</div>
     </div>
     <div class="qode-cta">
-      <a ng-click="getThisQode()"><div class="button button-green is-enabled"><i class="fa fa-check"></i>I take it !</div></a>
+      <a ng-click="getThisQode()"><div class="button button-green is-enabled" style="margin-right: 0px;"><i class="fa fa-check"></i>I take it !</div></a>
     </div>
-    <small ng-controller="UserController"><a href="#" ng-click="getQodes()">Refresh code</a>&nbsp; | &nbsp;<a ui-sref="root.login" ng-hide="isLogged.log"><i class="fa fa-user-circle"></i>Log in</a><span ng-show="isLogged.log"><a ui-sref="root.myaccount">My account</a>&nbsp; | &nbsp;<a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Log out</a></span></small>
+    <small ng-controller="UserController">
+      <span><a href="#" ng-click="getQodes()">Refresh code</a>&nbsp; | &nbsp;</span>
+      <span ng-hide="isLogged.log"><a ui-sref="root.login"><i class="fa fa-sign-in"></i>Log in</a>&nbsp; | &nbsp;</span>
+      <span ng-hide="isLogged.log"><a ui-sref="root.register"><i class="fa fa-user-circle"></i>Register</a></span>
+      <span ng-show="isLogged.log"><a ui-sref="root.myaccount">My account</a>&nbsp; | &nbsp;</span>
+      <span ng-show="isLogged.log"><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Log out</a></span>
+    </small>
   </div>
 </div>

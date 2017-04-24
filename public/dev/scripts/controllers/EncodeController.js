@@ -2,7 +2,7 @@
 
 angular.module('app')
 
-.controller('EncodeController', ['$rootScope','$scope','qodeFactory', 'newQodeFactory', '$state', function($rootScope, $scope, qodeFactory, newQodeFactory, $state){
+.controller('EncodeController', ['$rootScope','$scope','qodeFactory', 'newQodeFactory', 'userFactory', '$state', function($rootScope, $scope, qodeFactory, newQodeFactory, userFactory, $state){
     
   const $qodeChars = $('.qode-code')[0].children;
   let i = 0, j = 0, selectedQode;
@@ -32,7 +32,7 @@ $scope.getThisQode = function(){
   qodeFactory.checkQodeIfAvailable(selectedQode, 
     function successCb(){
       // Check if user is logged in or not
-      newQodeFactory.isLogged.check().$promise.then(function(res){
+      userFactory.user.isLogged().$promise.then(function(res){
         if(res.isLogged !== undefined && res.isLogged.log === true) {
           newQodeFactory.dbOperations.create({qode:selectedQode}).$promise.then(function(){
             $state.go('root.newQode', {qode:selectedQode});
