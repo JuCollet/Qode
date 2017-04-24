@@ -2,7 +2,7 @@
 
 angular.module('app')
 
-  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'appFactory', function($scope, $rootScope, $timeout, appFactory){
+  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'userFactory', function($scope, $rootScope, $timeout, userFactory){
 
     const $notification = $('notification');
     $scope.notificationColor = "";
@@ -21,7 +21,7 @@ angular.module('app')
     };
     
     // Function that check if user is logged or not.
-    appFactory.isLogged.check().$promise.then(function(res){
+    userFactory.user.isLogged().$promise.then(function(res){
       if(res.isLogged !== undefined && res.isLogged.log === true){
         $rootScope.isLogged.log = true;
         $rootScope.isLogged.name = res.isLogged.name;

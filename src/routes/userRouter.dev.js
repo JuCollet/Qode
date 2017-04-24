@@ -63,14 +63,6 @@ userRouter.route('/addtofavorites')
     });
 });
 
-userRouter.route('/removefromfavorites')
-  .post(function(req,res,next){
-    User.findByIdAndUpdate({_id:req.session.userId, 'favorites':{$eq:req.body.favId}},{$pull:{favorites:req.body.favId}},{safe: true, multi: false},function(err, user){
-      if(err) return next(err);
-      res.json({'status':'ok'});
-    });
-});
-
 userRouter.route('/deleteqode')
   .post(function(req,res,next){
     User.findByIdAndUpdate({_id:req.session.userId, 'myqodes':{$eq:req.body.qodeId}},{$pull:{myqodes:req.body.qodeId}},{safe: true},function(err, user){
@@ -81,6 +73,15 @@ userRouter.route('/deleteqode')
       res.json({'status':'ok'});
     })
 });
+
+userRouter.route('/islogged')
+  .get(function(req,res){
+    if(req.session.userId){
+      return res.json({isLogged : {'log':true,'name':req.session.userName}});
+    } else {
+      return res.json({'log':false});
+    }
+  });
 
 userRouter.route('/login')
   .post(function(req,res,next){
@@ -116,13 +117,12 @@ userRouter.route('/logout')
     }
   });
 
-userRouter.route('/logcheck')
-  .get(function(req,res){
-    if(req.session.userId){
-      return res.json({isLogged : {'log':true,'name':req.session.userName}});
-    } else {
-      return res.json({'log':false});
-    }
-  });
+userRouter.route('/removefromfavorites')
+  .post(function(req,res,next){
+    User.findByIdAndUpdate({_id:req.session.userId, 'favorites':{$eq:req.body.favId}},{$pull:{favorites:req.body.favId}},{safe: true, multi: false},function(err, user){
+      if(err) return next(err);
+      res.json({'status':'ok'});
+    });
+});
 
 module.exports = userRouter;
