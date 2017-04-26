@@ -8,6 +8,10 @@ angular.module('app')
     $scope.password = "";
     $scope.confirmPassword = "";
     
+    $scope.passwordValidation = function(){
+      return $scope.password === $scope.confirmPassword;
+    };
+    
     $scope.login = function(){
       const data = {
         mail: $scope.mail,
@@ -90,10 +94,12 @@ angular.module('app')
       });
     }; // End register function
     
-    $scope.data = userFactory.user.get().$promise
-    .then((res)=>{
-      $scope.user = res;
-    });
+    if($rootScope.isLogged.log === true){
+      $scope.data = userFactory.user.get().$promise
+        .then((res)=>{
+          $scope.user = res;
+      });
+    }
     
     $scope.viewQode = function(qode){
       $state.go('root.qode', {id:qode});

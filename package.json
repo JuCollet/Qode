@@ -4,7 +4,7 @@
   "description": "Share infos & files with a code.",
   "main": "src/app.dev.js",
   "scripts": {
-    "start": "node src/app"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "gulp-uglify": "^2.1.0",
     "gulp-usemin": "^0.3.28",
     "gulp-watch": "^4.3.11",
+    "http-serve": "^1.0.1",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1"
   },
@@ -51,6 +52,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "jsonwebtoken": "^7.4.0",
     "mongoose": "^4.9.3",
     "morgan": "^1.8.1",
     "sendgrid": "^5.0.0"

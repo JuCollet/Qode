@@ -38,9 +38,10 @@ angular.module('app')
         data:file
       }).then(function successCallback(res){
         let shortName;
-        if(file.name.length > 40){
+        const nameLength = 20;
+        if(file.name.length > nameLength){
           shortName = file.name.split('');
-          shortName.splice(40, shortName.length-40);
+          shortName.splice(nameLength, shortName.length-nameLength);
           shortName.push('...');
           shortName = shortName.join('');
         }

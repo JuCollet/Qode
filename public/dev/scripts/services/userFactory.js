@@ -6,11 +6,11 @@ angular.module('app')
     const user = $resource("/user", null, {
       addToFavorites:{
         url:'/user/addtofavorites',
-        method:'POST'
+        method:'PUT'
       },
       deleteQode:{
-        url:'/user/deleteqode',
-        method:'POST'
+        url:'/user/deleteqode/:qodeId',
+        method:'DELETE'
       },
       isLogged:{
         url:'/user/islogged',
@@ -29,7 +29,7 @@ angular.module('app')
       },
       removeFromFavorites:{
         url:'/user/removefromfavorites',
-        method:'POST'
+        method:'PUT'
       }
     });
     

@@ -67,9 +67,6 @@ angular.module('app',['ui.router','ngResource'])
   .state('root.newQode', {
     url:'/new/:qode',
     views : {
-      'options@root' : {
-        templateUrl : 'views/navBack.html'
-      },
       'contentView@root' : {
         templateUrl : 'views/newQode.html',
         controller : 'NewQodeController'

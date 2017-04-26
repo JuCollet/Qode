@@ -11,7 +11,7 @@
     <input type="text" class="card-input card-input-bold" ng-model="card.cardTitle" placeholder="Title"></input>
     <textarea type="text" class="card-textarea" ng-model="card.cardText" rows="5" placeholder="Content"></textarea>
     <hr>
-    <span ng-repeat="reference in card.cardReferences"><p><small><a href="{{reference.link}}" target="blank">{{reference.text}}&nbsp;&nbsp;</a><i class="fa fa-times is-red is-clickable" ng-click="removeReference($parent.$index,$index)"></i></small></p></span>
+    <p><small ng-repeat="reference in card.cardReferences" class="is-white"><a href="{{reference.link}}" target="blank">{{reference.text}}&nbsp;&nbsp;</a><i class="fa fa-times is-red is-clickable" ng-click="removeReference($parent.$index,$index)"></i>&nbsp;&nbsp;</small></p>
     <input type="text" class="card-input card-input-link card-input-link-40" placeholder="link" ng-model="newReference.url"></input>
     <input type="text" class="card-input card-input-link card-input-link-25" placeholder="link name" ng-model="newReference.name"></input>
     <div class="button button-small button-form is-enabled card-input-button" type="submit" ng-click="addReference($index)"><i class="fa fa-plus"></i>Add</div>

@@ -259,7 +259,7 @@ hr {
 
 .card {
 	position:relative;
-  padding: 20px 20px 15px 20px;
+  padding: 20px 20px 5px 20px;
   margin-bottom: 2.5vw;
 	margin-top: 2vw;
 
@@ -414,7 +414,7 @@ hr {
 
 .card-color-selector {
 	display: block;
-	padding-bottom: 25px;
+	padding-bottom: 35px;
 }
 
 .card-color-selector li {
@@ -562,6 +562,10 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
   letter-spacing: 0px;
 }
 
+.has-feedback .fa {
+  padding-top:10px;
+}
+
 .long-text {
   line-height: 1.4em;
   letter-spacing: .5px;
@@ -694,6 +698,11 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
   background-size: cover;
 }
 
+.hr-preview{
+	margin-top: 0px;
+	margin-bottom: .7em;
+}
+
 .preview-small-qode {
   display: inline-block;
   margin-bottom: 1vw;
@@ -722,7 +731,7 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
 	overflow-y: auto;
 	
 	h1 {
-		margin-bottom: .65em;
+		margin-bottom: .6em;
 		font-size: 1.5em;
 	}
 	
@@ -737,7 +746,7 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
 	}
 	
 	p {
-		margin-bottom: 1.4em;
+		margin-bottom: 1em;
 		font-size: .9em;
 	}
 	
@@ -750,7 +759,7 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
 .qode-preview-card {
   padding: .8vw .8vw 0 .8vw;
 	margin-top: .65vw;
-  margin-bottom: 1.25vw;
+  margin-bottom: 7px;
 	
 	border-radius: 2px;
 }
@@ -807,7 +816,6 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
 #footer > .footer-col:nth-child(4){background-color:@blue}
 #footer > .footer-col:nth-child(5){background-color:@purple}
 
-
 /******* STATES *******/
 /* Classes with the syntax "is-[specificity]", E.G. ".is-active" */
 /* Indicate a JavaScript depedency */
@@ -863,6 +871,14 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
 	color:#FFF;	
 }
 
-.is-white:hover {
-	color:@darkGrey;
+.is-input-form-error {
+  border-color:@red;
+}
+
+.is-input-form-valid {
+  border-color:@green;
+}
+
+.is-input-form-selected {
+	border-color:#FFF;
 }
