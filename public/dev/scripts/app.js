@@ -56,10 +56,6 @@ angular.module('app',['ui.router','ngResource'])
     views : {
       'contentView@root' : {
         template : '<h1>Decode small</h1>'
-      }, 
-      'options@root' : {
-        templateUrl : 'views/navSwitch.html',
-        controller  : 'NavController'
       }
     }
   })
@@ -129,6 +125,9 @@ angular.module('app',['ui.router','ngResource'])
   .state('root.recoveryInfo', {
     url:'/recoveryinfo',
     views : {
+      'options@root' : {
+        templateUrl : 'views/navBack.html'
+      },
       'contentView@root' : {
         templateUrl : 'views/recoveryInfo.html',
         controller : 'UserController'

@@ -10,6 +10,8 @@ angular.module('app')
     $scope.notificationMessage = "";
     $scope.notificationGlyph = "";
     
+    $scope.backButtonDestination = "root.encode";
+    
     // Initialize tooltips
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
@@ -19,7 +21,7 @@ angular.module('app')
       log: false,
       name: ""
     };
-    
+        
     // Function that check if user is logged or not.
     userFactory.user.isLogged().$promise.then(function(res){
       if(res.isLogged !== undefined && res.isLogged.log === true){
@@ -31,6 +33,20 @@ angular.module('app')
       }
     }, function(err){
       if(err){throw err;}
+    });
+    
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from) {
+      if(from.name !== null && from.name !== undefined){
+        if(from.name === 'root.myaccount'){
+          $scope.backButtonDestination = 'root.myaccount';
+        } else if(from.name === 'root.login') {
+          $scope.backButtonDestination = 'root.login';
+        } else if(from.name === 'root.decode') {
+          $scope.backButtonDestination = 'root.decode({encode:"decode"})';
+        } else {
+          $scope.backButtonDestination = 'root.encode';
+        }
+      }
     });
 
     // Notification system;

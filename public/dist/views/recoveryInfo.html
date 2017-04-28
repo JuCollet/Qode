@@ -3,13 +3,13 @@
   <h2>No problem !</h2>
   <p>&nbsp;</p>
   <form name="recoveryInfo" novalidate>
+    
     <div class="form-group has-feedback">
       <input type="email" ng-model="mail" name="mail" class="form-input" placeholder="Your e-mail address ..." required ng-class="{'is-input-form-selected': recoveryInfo.mail.$invalid && !recoveryInfo.mail.$pristine, 'is-input-form-valid':recoveryInfo.mail.$valid}"></input>
       <h2><i class="fa fa-check form-control-feedback is-green" ng-show="recoveryInfo.mail.$valid"></i></h2>
     </div>
   
-    <button type="submit" class="button button-small button-form is-enabled" ng-disabled="recoveryInfo.$invalid" ng-class="{'is-light': recoveryInfo.$invalid}" ng-click="recovery()"><i class="fa fa-refresh" aria-hidden="true"></i>Reset my password</button></br>
-  
+    <button type="submit" class="button button-small button-form is-enabled" ng-disabled="recoveryInfo.$invalid" ng-class="{'is-light': recoveryInfo.$invalid}" ng-click="recovery()">Reset my password</button></br>
+    <small>We'll send you an email with a link to restore your password. <br>This link is valid for 1 hour !</small>
 </form>
-<small>We'll send you an email with a link to restore your password. <br>This link is valid for 1 hour !</small>
 </div>
