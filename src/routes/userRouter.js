@@ -8,8 +8,15 @@ const express = require('express'),
       mailer = require('../mailer'),
       jwt = require('jsonwebtoken'),
       bcrypt = require('bcrypt'),
-      userRouter = express.Router(),
-      baseUrl = "https://qode.herokuapp.com/";
+      userRouter = express.Router();
+
+try {
+  var cfg = require('../cfg').baseUrl;
+} catch(e) {
+  console.error(e);
+}
+
+const baseUrl = cfg.dev || "https://qode.herokuapp.com/";
 
 userRouter.route('/')
   .get(function(req,res,next){

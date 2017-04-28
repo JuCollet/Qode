@@ -2,8 +2,15 @@
 
 const helper = require('sendgrid').mail,
       mails = require('./assets/mails.js'),
-      sg = require('sendgrid')(process.env.SENDGRID_API_KEY),
-      baseUrl = "https://qode.herokuapp.com/";
+      sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+
+try {
+  var cfg = require('../cfg').baseUrl;
+} catch(e) {
+  console.error(e);
+}
+
+const baseUrl = cfg.dev || "https://qode.herokuapp.com/";
 
 const welcomeMail = function(username, usermail){
 
