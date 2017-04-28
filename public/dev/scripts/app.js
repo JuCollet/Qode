@@ -116,6 +116,26 @@ angular.module('app',['ui.router','ngResource'])
     }
   })
   
+  .state('root.recovery', {
+    url:'/recovery',
+    views : {
+      'contentView@root' : {
+        templateUrl : 'views/recovery.html',
+        controller : 'UserController'
+      }
+    }
+  })
+  
+  .state('root.recoveryInfo', {
+    url:'/recoveryinfo',
+    views : {
+      'contentView@root' : {
+        templateUrl : 'views/recoveryInfo.html',
+        controller : 'UserController'
+      }
+    }
+  })
+  
     .state('root.myaccount', {
     url:'/myaccount',
     views : {

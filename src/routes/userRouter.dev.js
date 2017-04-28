@@ -4,8 +4,12 @@ const express = require('express'),
       mongoose = require('mongoose'),
       User = require('../models/users'),
       Qode = require('../models/qodes'),
+      Recovery = require('../models/recovery'),
       mailer = require('../mailer.dev'),
-      userRouter = express.Router();
+      jwt = require('jsonwebtoken'),
+      bcrypt = require('bcrypt'),
+      userRouter = express.Router(),
+      baseUrl = "http://qode-jucollet469715.codeanyapp.com:5000/";
 
 userRouter.route('/')
   .get(function(req,res,next){
@@ -46,7 +50,7 @@ userRouter.route('/')
             err.status = 400;
             next(err);
           } else {
-            mailer(req.body.name,req.body.mail);
+            mailer.welcomeMail(req.body.name,req.body.mail);
             req.session.userId = user._id;
             res.json({'name':user.name,'favorites':user.favorites});
           }
@@ -56,7 +60,19 @@ userRouter.route('/')
       err.status = 400;
       return next(err);
     }
+  })
+.put(function(req,res,next){
+  if(req.session.userId && req.body.newPassword){
+    bcrypt.hash(req.body.newPassword, 10, function(err, hash){
+      if(err)throw err;
+      const password = hash;
+      User.findByIdAndUpdate(req.session.userId, { $set: { password:password}}, function(err){
+        if(err) return next(err);
+        res.json({'status':'ok'});
+      })
   });
+  }
+})
 
 userRouter.route('/login')
   .post(function(req,res,next){
@@ -100,6 +116,42 @@ userRouter.route('/islogged')
     } else {
       return res.json({isLogged : {'log':false}});
     }
+  });
+
+userRouter.route('/passwordrecovery')
+  .post(function(req,res,next){
+    User.findOne({mail:req.body.mail},null,function(err, user){
+      if(err) return next(err);
+      if(user === null || user === undefined){
+        const err = new Error('User not found');
+        err.status = 404;
+        return next(err);
+      }
+      const recoveryToken = jwt.sign({mail:req.body.mail}, 'shhhhh', { expiresIn: '1h' });
+      Recovery.create({'recoveryToken':recoveryToken});
+      mailer.recoveryMail(req.body.mail,recoveryToken);
+      res.json({'encoded':recoveryToken});
+    });
+  });
+
+userRouter.route('/passwordrecovery/:token')
+  .get(function(req,res,next){
+    Recovery.findOneAndRemove({recoveryToken:req.params.token},null,function(err,token){
+      if(err) return next(err);
+      if(token !== null && token !== undefined){
+        jwt.verify(req.params.token, 'shhhhh', function(err, decoded) {
+          if(err) return next(err);
+          User.findOne({mail:decoded.mail},null,function(err,user){
+            if(err) return next(err);
+            req.session.userId = user._id;
+            req.session.userName = user.name;
+            res.redirect(baseUrl+'#!/recovery');
+          });
+        });
+      } else {
+        res.redirect(baseUrl);
+      }
+    });
   });
 
 userRouter.route('/addtofavorites')

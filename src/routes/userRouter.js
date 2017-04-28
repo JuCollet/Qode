@@ -102,6 +102,15 @@ userRouter.route('/islogged')
     }
   });
 
+userRouter.route('/passwordrecovery')
+  .get(function(req,res){
+    if(req.session.userId){
+      return res.json({isLogged : {'log':true,'name':req.session.userName}});
+    } else {
+      return res.json({isLogged : {'log':false}});
+    }
+  });
+
 userRouter.route('/addtofavorites')
   .put(function(req,res,next){
     User.findByIdAndUpdate({_id:req.session.userId, 'favorites':{$ne:req.body.favId}},{$addToSet:{favorites:req.body.favId}},{safe: true, upsert: true},function(err){

@@ -24,8 +24,15 @@ angular.module('app')
         url:'/user/logout',
         method:'GET'
       },
+      recovery : {
+        url:'/user/passwordrecovery',
+        method: 'POST'
+      },
       register:{
         method:'POST'
+      },
+      reset:{
+        method:'PUT'
       },
       removeFromFavorites:{
         url:'/user/removefromfavorites',

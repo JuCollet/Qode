@@ -119,4 +119,35 @@ angular.module('app')
       $state.go('root.newQode', {qode:qodeId});
     };
     
+    $scope.recovery = function(){
+      userFactory.user.recovery({mail:$scope.mail}).$promise.then(function(){
+        $rootScope.$broadcast('notification',{
+          color:'green', 
+          message: "Check your emails.", 
+          title:'Alright !', 
+          glyph:'fa fa-check'
+        });
+        $state.go('root.encode');
+      },function(err){
+        $rootScope.$broadcast('notification',{
+          color:'red', 
+          message: err.data.error.message, 
+          title:'Oops..', 
+          glyph:'fa fa-times'
+        });
+      });
+    };
+    
+    $scope.resetPassword = function(){
+      userFactory.user.reset({newPassword:$scope.confirmPassword}).$promise.then(function(){
+        $rootScope.$broadcast('notification',{
+          color:'green', 
+          message: "Password reset", 
+          title:'Alright !', 
+          glyph:'fa fa-check'
+        });
+        $state.go('root.encode');
+      });
+    };
+    
   }]);
