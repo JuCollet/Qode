@@ -11,6 +11,7 @@ angular.module('app')
   
     $scope.thanksAuthor = function(qode){
       viewQodeFactory.qodes.upvote({toUpvote:qode}).$promise.then(function(){
+        $scope.qode.upVotes++;
         $scope.qode.isLiked = true;
       });
     }; // end thanksAuthor function
