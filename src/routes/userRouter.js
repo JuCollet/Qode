@@ -11,7 +11,7 @@ const express = require('express'),
       userRouter = express.Router();
 
 try {
-  var cfg = require('../cfg').baseUrl;
+  var cfg = require('../../cfg').baseUrl;
 } catch(e) {
   console.error(e);
 }
