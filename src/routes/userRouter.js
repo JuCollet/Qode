@@ -10,14 +10,6 @@ const express = require('express'),
       bcrypt = require('bcrypt'),
       userRouter = express.Router();
 
-try {
-  var cfg = require('../../cfg').baseUrl;
-} catch(e) {
-  console.error(e);
-}
-
-const baseUrl = cfg.dev || "https://qode.herokuapp.com/";
-
 userRouter.route('/')
   .get(function(req,res,next){
     if(req.session.userId == null){
@@ -152,11 +144,11 @@ userRouter.route('/passwordrecovery/:token')
             if(err) return next(err);
             req.session.userId = user._id;
             req.session.userName = user.name;
-            res.redirect(baseUrl+'#!/recovery');
+            res.redirect(process.env.baseUrl+'#!/recovery');
           });
         });
       } else {
-        res.redirect(baseUrl);
+        res.redirect(process.env.baseUrl);
       }
     });
   });

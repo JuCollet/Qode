@@ -1,8 +1,11 @@
 'use strict';
 
 const helper = require('sendgrid').mail,
+      cfg = require('../cfg'),
       mails = require('./assets/mails.js'),
-      sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+      sg = require('sendgrid')(cfg.sendgrid.apikey),
+      baseUrl = "http://qode-jucollet469715.codeanyapp.com:5000/";
+
 
 const welcomeMail = function(username, usermail){
 
@@ -27,7 +30,7 @@ const recoveryMail = function(usermail, recoveryToken){
   const from_email = new helper.Email('noreply@qode.be'),
         to_email = new helper.Email(usermail),
         subject = "Lost your password ?",
-        content = new helper.Content('text/html', mails.recoveryMail.part1+process.env.baseUrl+'user/passwordrecovery/'+recoveryToken+mails.recoveryMail.part2),
+        content = new helper.Content('text/html', mails.recoveryMail.part1+baseUrl+'user/passwordrecovery/'+recoveryToken+mails.recoveryMail.part2),
         mail = new helper.Mail(from_email, subject, to_email, content);
 
   const request = sg.emptyRequest({

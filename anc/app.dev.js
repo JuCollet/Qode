@@ -5,17 +5,23 @@ const express = require('express'),
       path = require('path'),
       bodyParser = require('body-parser'),
       qodeRouter = require('./routes/qodeRouter'),
-      userRouter = require('./routes/userRouter'),
+      userRouter = require('./routes/userRouter.dev'),
       logger = require('morgan'),
       aws = require('aws-sdk'),
       app = express();
 
+try {
+  var cfg = require('../cfg').awsS3;
+} catch(e) {
+  console.error(e);
+}
+
 aws.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    accessKeyId: cfg.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: cfg.secretAccessKey || process.env.AWS_SECRET_ACCESS_KEY
 });
 
-require('./db'); // Singleton
+require('./db.dev'); // Singleton
 
 app.use(logger("dev"));
 
@@ -43,7 +49,7 @@ app.get('/sign-s3', (req, res) => {
   const fileName = req.query['file-name'];
   const fileType = req.query['file-type'];
   const s3Params = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: 'qodefiles',
     Key: fileName,
     Expires: 60,
     ContentType: fileType,
@@ -57,7 +63,7 @@ app.get('/sign-s3', (req, res) => {
     }
     const returnData = {
       signedRequest: data,
-      url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`
+      url: `https://${cfg.bucketName || process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`
     };
     res.write(JSON.stringify(returnData));
     res.end();
