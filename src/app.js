@@ -21,7 +21,7 @@ aws.config.update({
     secretAccessKey: cfg.secretAccessKey || process.env.AWS_SECRET_ACCESS_KEY
 });
 
-require('./db.dev'); // Singleton
+require('./db'); // Singleton
 
 app.use(logger("dev"));
 
