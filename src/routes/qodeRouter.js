@@ -66,7 +66,7 @@ qodeRouter.route('/:id')
         next(err);
       }
     });
-  })
+    })
   .put(function(req,res,next){
     User.findById(req.session.userId, function(err,user){
       if(err) return next(err);
@@ -101,15 +101,14 @@ qodeRouter.route('/edit/')
         next(err);
       }
     });
-});
+  });
 
 qodeRouter.route('/upvote/')
   .post(function(req,res,next){
-    Qodes.findByIdAndUpdate(req.body.toUpvote, {$inc:{upVotes:1}}, function(err,doc){
+    Qodes.findByIdAndUpdate(req.body.toUpvote, {$inc:{upVotes:1}}, function(err){
       if(err) return next(err);
-      return doc
     });
-    User.findByIdAndUpdate({_id:req.session.userId, 'likes':{$ne:req.body.toUpvote}},{$addToSet:{likes:req.body.toUpvote}},{safe: true, upsert: true},function(err, user){
+    User.findByIdAndUpdate({_id:req.session.userId, 'likes':{$ne:req.body.toUpvote}},{$addToSet:{likes:req.body.toUpvote}},{safe: true, upsert: true},function(err){
       if(err) return next(err);
       res.json({'status':'ok'});
     });

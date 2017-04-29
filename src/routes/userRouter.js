@@ -51,7 +51,7 @@ userRouter.route('/')
           } else {
             mailer.welcomeMail(req.body.name,req.body.mail);
             req.session.userId = user._id;
-            res.json({'name':user.name,'favorites':user.favorites});
+            res.json({'name':user.name});
           }
         });
     } else {
@@ -84,7 +84,7 @@ userRouter.route('/login')
         } else {
           req.session.userId = user._id;
           req.session.userName = user.name;
-          res.json({'name':user.name,'favorites':user.favorites, 'myqodes':user.myqodes});
+          res.json({'name':user.name});
         }
       })
     } else {
@@ -99,7 +99,7 @@ userRouter.route('/logout')
     if(req.session){
       req.session.destroy(function(err){
         if(err) return next(err);
-        else res.json({'isLogged':false})
+        else return res.json({'isLogged':false})
       });
     } else {
       const err = new Error("Not logged");
@@ -129,7 +129,7 @@ userRouter.route('/passwordrecovery')
       const recoveryToken = jwt.sign({mail:req.body.mail}, 'shhhhh', { expiresIn: '1h' });
       Recovery.create({'recoveryToken':recoveryToken});
       mailer.recoveryMail(req.body.mail,recoveryToken);
-      res.json({'encoded':recoveryToken});
+      res.json({'status':'ok'});
     });
   });
 

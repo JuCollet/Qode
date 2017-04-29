@@ -39,7 +39,7 @@ const qodeSchema = new mongoose.Schema({
   },
   createdBy : {
       type: Schema.ObjectId,
-      ref: 'Qode'
+      ref: 'User'
   },
   isFavorited : {
     type: Boolean,
