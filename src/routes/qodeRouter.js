@@ -68,10 +68,20 @@ qodeRouter.route('/:id')
     });
   })
   .put(function(req,res,next){
-    Qodes.findOneAndUpdate({qode:req.params.id},req.body, function(err,doc){
+    User.findById(req.session.userId, function(err,user){
       if(err) return next(err);
-      res.json({response : "Your qode is saved !"});
-    })
+      console.log(user.myqodes.indexOf(req.params.id))
+      if(user.myqodes.indexOf(req.params.id) !== -1){
+        Qodes.findOneAndUpdate({_id:req.params.id},req.body, function(err){
+          if(err) return next(err);
+          res.json({response : "Your qode is saved !"});
+        });
+      } else {
+        const err = new Error("You're not authorized");
+        err.status = 401;
+        next(err);
+      }
+    });
   });
 
 qodeRouter.route('/edit/')
