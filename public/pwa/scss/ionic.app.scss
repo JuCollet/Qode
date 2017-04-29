@@ -15,6 +15,48 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$dark:                            #1A1A1A !default;
+
+$font-family-base: "Source Sans Pro", "Helvetica Neue", "Roboto", sans-serif;
+$font-family-ios-base: $font-family-base;
+$font-family-md-base: $font-family-base;
+$font-family-wp-base: $font-family-base;
+
+.logo {
+  margin: 30px 0px 15px 30px;
+}
+
+.menu {
+  background-color: #1A1A1A !important;
+}
+
+.item, .item-complex, .item-content {
+  border:0 !important;
+  padding-left: 15px !important;
+
+  background-color: #1A1A1A !important;
+
+  color:#FFFFFF !important;
+}
+
+.item-border-custom {
+  border-bottom: 1px solid #000 !important;
+}
+
+.pane, .view {
+  background-color: #1A1A1A !important;
+}
+
+.bar-header {
+  border-bottom-width: 0px !important;
+}
+
+.is-red {
+  color:red;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900');
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
