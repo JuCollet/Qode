@@ -15,4 +15,4 @@ const jumpnext = function(nextid){
       document.decode.char5.focus();
       break;
   }
-}
+};

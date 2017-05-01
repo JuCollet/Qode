@@ -1,0 +1,43 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+
+    <ion-content>
+      <img src="../img/logo2x.png" height="40px" class="logo">
+      <p>&nbsp;</p>
+      <ion-list>
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/search">
+          <span>&nbsp;<i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;DECODE</span>
+        </ion-item>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/favorites">
+          <span>&nbsp;<i class="fa fa-heart is-red"></i>&nbsp;&nbsp;&nbsp;MY FAVORITES</span>
+        </ion-item>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/myqodes">
+          <span>&nbsp;<i class="fa fa-terminal"></i>&nbsp;&nbsp;&nbsp;MY QODES</span>
+        </ion-item>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/login">
+          <span>&nbsp;<i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;LOG IN</span>
+        </ion-item>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/register">
+          <span>&nbsp;<i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;REGISTER</span>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

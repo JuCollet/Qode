@@ -35,14 +35,15 @@ app.use(device.capture());
 
 app.get('/', function(req,res){
   if(req.device.type === 'phone'){
-    res.sendFile(path.join(__dirname, '/../public/pwa/www/index.html'));
+    res.sendFile(path.join(__dirname, '/../public/dist/mobile/index.html'));
   } else {
-    res.sendFile(path.join(__dirname, '/../public/dist/index.html'));
+    res.sendFile(path.join(__dirname, '/../public/dist/desktop/index.html'));
   }
 });
 
-app.use(express.static(path.join(__dirname, '/../public/dist')));
-app.use(express.static(path.join(__dirname, '/../public/pwa/www')));
+app.use(express.static(path.join(__dirname, '/../public/dist/mobile')));
+app.use(express.static(path.join(__dirname, '/../public/dist/desktop')));
+
 
 app.use('/api/qodes', qodeRouter);
 app.use('/user', userRouter);
@@ -86,7 +87,7 @@ app.use(function(req,res,next){
   next(err);
 });
 
-// Error handler : passing 'err' as first parameter 
+// Error handler : passing 'err' as first parameter
 // to let know Express that it's an error handler;
 app.use(function(err,req,res,next){
   res.status(err.status || 500);

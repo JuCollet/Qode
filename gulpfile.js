@@ -31,22 +31,23 @@ gulp.task('usemin', ['jshint','less'], function(){
   return gulp.src('./public/dev/**/*.html')
   .pipe(usemin({
     css:[minifycss(),rev()],
-    js:[babel({presets:['es2015']}),ngAnnotate(),uglify(),rev()]
+    js:[babel({presets:['es2015']}),ngAnnotate(),uglify(),rev()],
+    libjs:[rev()]
   }))
-  .pipe(gulp.dest('./public/dist/'));
+  .pipe(gulp.dest('./public/dist/desktop'));
 });
 
 gulp.task('imagemin', function(){
   return gulp.src('./public/dev/images/**/*')
   .pipe(cache(imagemin({optimizationLevel:3,progressive:true,interlaced:true})))
-  .pipe(gulp.dest('./public/dist/images'))
+  .pipe(gulp.dest('./public/dist/desktop/images'))
 });
 
 gulp.task('copyfonts', function(){
   gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-  .pipe(gulp.dest('./public/dist/fonts'));
+  .pipe(gulp.dest('./public/dist/desktop/fonts'));
   gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
-  .pipe(gulp.dest('./public/dist/fonts'));
+  .pipe(gulp.dest('./public/dist/desktop/fonts'));
 })
 
 gulp.task('clean', function(){
@@ -78,7 +79,43 @@ gulp.task('browser-sync', ['default'], function () {
 
 });
 
+// DEFAULT GULP TASK
 
 gulp.task('default', ['clean'], function() {
-  gulp.start('usemin','imagemin','copyfonts')
+  gulp.start('usemin','imagemin','copyfonts', 'mobile')
 });
+
+// MOBILE
+
+gulp.task('mobile', function(){
+  gulp.start('usemin-mobile', 'imagemin-mobile', 'copyfonts-mobile')
+});
+
+gulp.task('jshint-mobile', function(){
+  return gulp.src('./public/pwa/www/js/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
+});
+
+gulp.task('usemin-mobile', ['jshint-mobile'], function(){
+  return gulp.src('./public/pwa/www/**/*.html')
+  .pipe(usemin({
+    css:[minifycss(),rev()],
+    js:[babel({presets:['es2015']}),ngAnnotate(),uglify(),rev()],
+    libjs:[ngAnnotate(),uglify(),rev()]
+  }))
+  .pipe(gulp.dest('./public/dist/mobile'));
+});
+
+gulp.task('imagemin-mobile', function(){
+  return gulp.src('./public/pwa/www/img/**/*')
+  .pipe(cache(imagemin({optimizationLevel:3,progressive:true,interlaced:true})))
+  .pipe(gulp.dest('./public/dist/mobile/img'))
+});
+
+gulp.task('copyfonts-mobile', function(){
+  gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+  .pipe(gulp.dest('./public/dist/mobile/fonts'));
+  gulp.src('./public/pwa/www/lib/ionic/fonts/**/*.{ttf,woff,eof,svg}*')
+  .pipe(gulp.dest('./public/dist/mobile/lib/ionic/fonts'));
+})
