@@ -15,51 +15,281 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
-$dark:                            #1A1A1A !default;
+$assertive:                       #F3803B !default;
+$energized:                       #E8C033 !default;
+$balanced:                        #9AD179 !default;
+$calm:                            #6FD1D7 !default;
+$royal:                           #8EA8F5 !default;
 
-$font-family-base: "Source Sans Pro", "Helvetica Neue", "Roboto", sans-serif;
-$font-family-ios-base: $font-family-base;
-$font-family-md-base: $font-family-base;
-$font-family-wp-base: $font-family-base;
+$dark:                            #141414 !default;
+$mediumDark:                      #202020 !default;
+$lightGrey:                       #666666 !default;
+$red:                             #D15104 !default;
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900");
+$font-family-sans-serif: 'Source Sans Pro', "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+
+
+// CONTENT
+
+h1 {
+  font-weight: 900 !important;
+}
+
+.is-red {
+  color: $red;
+}
+
+.has-red-background {
+  background-color: $red !important;
+}
+
+$base-background-color: $dark;
+$base-color: #FFF;
+
+
+// NAVBAR
+
+.bar-dark {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+}
+
+.bar-dark .button.button-clear {
+  color: #666 !important;
+}
+
+.bar.bar-dark .title {
+  color: #666 !important;
+}
+
+
+// MENU-CONTENT
+
+$menu-bg: $mediumDark !important;
 
 .logo {
   margin: 30px 0px 15px 30px;
 }
 
-.menu {
-  background-color: #1A1A1A !important;
+.custom-menu-item .item-content {
+  padding-left: 35px !important;
+  background-color: $mediumDark !important;
+  color: #FFF;
 }
 
-.item, .item-complex, .item-content {
-  border:0 !important;
-  padding-left: 15px !important;
-
-  background-color: #1A1A1A !important;
-
-  color:#FFFFFF !important;
+.menu-hr {
+  margin-left: 32px;
+  margin-right: 32px;
+  border-style: solid;
+  border-color: #191919;
+  border-width: 1px;
 }
 
-.item-border-custom {
-  border-bottom: 1px solid #000 !important;
+
+// SEARCH
+
+#search {
+  position: absolute;
+  display: block;
+  height: 350px;
+  width: 100%;
+  top:0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  text-align: center;
+
+  img {
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  h4 {
+    margin-bottom: 30px;
+
+    color: $lightGrey;
+    font-size: 20px;
+  }
+
+  input {
+    display: inline-block;
+    width: 50px;
+    height: 70px;
+    margin: 0px 4px 10px 4px;
+    padding: 0;
+
+    border-radius: 3px;
+
+    background-color: $mediumDark;
+
+    color: #FFF;
+    font-size: 45px;
+    font-weight: 900;
+    text-align: center;
+  }
+
 }
 
-.pane, .view {
-  background-color: #1A1A1A !important;
+
+// FAVORITES & MY QODES
+
+.small-qode {
+  display: inline-block;
+  padding:1px 4px;
+  margin-bottom: 5px;
+
+  border: 2px solid #FFFFFF;
+
+  font-size: 14px;
+  font-weight: 900;
 }
 
-.bar-header {
-  border-bottom-width: 0px !important;
+.list {
+  h1 {
+    margin-top:0;
+    margin-bottom: 5px;
+
+    font-size: 24px;
+  }
+
+  h2 {
+    color: $lightGrey;
+  }
+
+  p {
+    color: #FFFFFF !important;
+  }
+
+  .subdued {
+    padding-top: 5px;
+    color: $lightGrey !important;
+  }
+
 }
 
-.is-red {
-  color:red;
+
+// QODE VIEW
+
+.qode-view {
+  padding:25px;
+
+  h1 {
+    margin-top:0;
+    margin-bottom: 5px;
+  }
+
+  h3 {
+    color: $lightGrey;
+  }
+
+  p {
+    margin-bottom: 15px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #FFFFFF;
+  }
+
+  i {
+    margin-right: 5px;
+    font-size: 12px;
+  }
+
+  .qode-card {
+    margin-bottom: 15px;
+    padding:15px 15px 5px 15px;
+
+    border-radius: 4px;
+
+    background-color: $assertive;
+
+    h1 {
+      font-size: 20px;
+    }
+
+  }
+
+  .qode-option {
+    display:block;
+    margin-bottom: 10px;
+    margin-left: 15px;
+  }
+
 }
 
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900');
+
+// LOGIN
+
+.form-page {
+  position: absolute;
+  display: block;
+  height: 350px;
+  width: 100%;
+  top:0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  text-align: center;
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    width: 70%;
+    height: 40px;
+    padding: 0;
+
+    border-radius: 4px;
+
+    background-color: $mediumDark;
+
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    text-align: center;
+  }
+  input[type=password] {
+    letter-spacing: 10px;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 5px 10px;
+
+    border: 1px solid #FFFFFF;
+    border-radius: 4px;
+
+    background-color: transparent;
+
+    color: #FFFFFF;
+    font-size: 16px;
+  }
+
+  .subdued {
+    margin-top: 30px !important;
+    color:$lightGrey;
+  }
+
+}
+
+
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-

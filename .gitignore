@@ -4,3 +4,6 @@ cfg.js
 src/db.dev.js
 src/app.dev.js
 src/mailer.dev.js
+public/pwa/node_modules/
+public/pwa/platforms/
+public/pwa/plugins/

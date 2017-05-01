@@ -13,17 +13,29 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
+
     <ion-content>
+      <img src="../img/logo2x.png" height="40px" class="logo">
+      <p>&nbsp;</p>
       <ion-list>
-        <img src="../img/logo2x.png" height="40px" class="logo">
-        <ion-item menu-close href="#/app/search">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/search">
+          <span>&nbsp;<i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;DECODE</span>
+        </ion-item>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/favorites">
           <span>&nbsp;<i class="fa fa-heart is-red"></i>&nbsp;&nbsp;&nbsp;MY FAVORITES</span>
         </ion-item>
-        <ion-item menu-close href="#/app/search" class="item-custom">
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/myqodes">
           <span>&nbsp;<i class="fa fa-terminal"></i>&nbsp;&nbsp;&nbsp;MY QODES</span>
         </ion-item>
-        <ion-item menu-close href="#/app/browse" class="item-custom">
-          <span>&nbsp;<i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;LOG IN</span>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/login">
+          <span>&nbsp;<i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;LOG IN</span>
+        </ion-item>
+        <hr class="menu-hr">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/register">
+          <span>&nbsp;<i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;REGISTER</span>
         </ion-item>
       </ion-list>
     </ion-content>

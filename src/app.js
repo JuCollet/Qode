@@ -3,6 +3,7 @@
 const express = require('express'),
       session = require('express-session'),
       path = require('path'),
+      device = require('express-device'),
       bodyParser = require('body-parser'),
       qodeRouter = require('./routes/qodeRouter'),
       userRouter = require('./routes/userRouter'),
@@ -27,7 +28,21 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Device detection - Desktop or mobile
+
+app.use(device.capture());
+
+app.get('/', function(req,res){
+  if(req.device.type === 'phone'){
+    res.sendFile(path.join(__dirname, '/../public/pwa/www/index.html'));
+  } else {
+    res.sendFile(path.join(__dirname, '/../public/dist/index.html'));
+  }
+});
+
 app.use(express.static(path.join(__dirname, '/../public/dist')));
+app.use(express.static(path.join(__dirname, '/../public/pwa/www')));
 
 app.use('/api/qodes', qodeRouter);
 app.use('/user', userRouter);
