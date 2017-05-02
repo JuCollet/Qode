@@ -26,6 +26,9 @@ h1 {
 .is-red {
   color: #D15104; }
 
+.is-green {
+  color: #9AD179; }
+
 .has-red-background {
   background-color: #D15104 !important; }
 

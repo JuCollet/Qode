@@ -7,8 +7,7 @@ angular.module('app')
   const $qodeChars = $('.qode-code')[0].children,
         alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
   let pos = 0,
-      qode = "",
-      checking = false;
+      qode = "";
   
   document.onkeyup = function(e){
     
@@ -37,7 +36,6 @@ angular.module('app')
         $($qodeChars[pos]).html("&nbsp;");
       }
       if(qode.length === 5 && checking === false){
-        checking = true;
         $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
 
         viewQodeFactory.qodes.get({id:qode}).$promise
@@ -46,10 +44,8 @@ angular.module('app')
             $timeout(function(){
               $state.go('root.qode', {id:qode});
             },500);
-            checking = false;
           }, function(err){
             $('#status').html(`<i class="fa fa-times is-red"></i>&nbsp;&nbsp;${err.statusText} :(`);
-            checking = false;
           });
       } else {
         $('#status').html('&nbsp;');

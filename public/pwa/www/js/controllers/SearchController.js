@@ -18,7 +18,10 @@ angular.module('mobile')
      char5.value = "";
   };
   
+  let checking = false;
+  
   $scope.jumpnext = function(nextid){
+    $('#status').html('&nbsp;');
     switch(nextid){
       case 1:
         char2.focus();
@@ -39,15 +42,19 @@ angular.module('mobile')
            char4.value !== "" &&
            char5.value !== "") {
              
+             $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
+             
              const qode = char1.value+char2.value+char3.value+char4.value+char5.value;
              
              qodeFactory.getQode(qode).then(function(res){
               document.activeElement.blur();
+              $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
               reset();
               $timeout(function(){
                $state.go('app.qodeview', {id:qode});
               }, 500);
-             },function(){
+             },function(err){
+               $('#status').html(`<i class="fa fa-times is-red"></i>&nbsp;&nbsp;${err.statusText} :(`);
                document.activeElement.blur();
                reset();
              });

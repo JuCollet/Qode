@@ -70,7 +70,6 @@ qodeRouter.route('/:id')
   .put(function(req,res,next){
     User.findById(req.session.userId, function(err,user){
       if(err) return next(err);
-      console.log(user.myqodes.indexOf(req.params.id))
       if(user.myqodes.indexOf(req.params.id) !== -1){
         Qodes.findOneAndUpdate({_id:req.params.id},req.body, function(err){
           if(err) return next(err);
@@ -112,7 +111,7 @@ qodeRouter.route('/upvote/')
       if(err) return next(err);
       res.json({'status':'ok'});
     });
-  })
+  });
 
 qodeRouter.route('/check/')
   .post(function(req,res,next){
