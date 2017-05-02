@@ -1,36 +1,16 @@
 <ion-view view-title="">
   <ion-content>
     <div class="qode-view">
-      <span class="small-qode">FK345</span>
-      <h1>Any Qode title</h1>
-      <h3>With subtitle</h3>
-      <p>
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
-      </p>
+      <span class="small-qode">{{qode.qode}}</span>
+      <h1>{{qode.title}}</h1>
+      <h3>{{qode.subtitle}}</h3>
+      <p>{{qode.description}}</p>
 
-      <div class="qode-card">
-        <h1>Card title</h1>
-        <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p class="subdued">
-          <a href="#"><i class="fa fa-link"></i>LINK 1</a>
-        </p>
-      </div>
-
-      <div class="qode-card">
-        <h1>Card title</h1>
-        <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p class="subdued">
-          <a href="#"><i class="fa fa-link"></i>LINK 1</a>
+      <div class="qode-card" ng-repeat="card in qode.cards">
+        <h1>{{card.cardTitle}}</h1>
+        <p>{{card.cardText}}</p>
+        <p class="subdued" ng-show="card.cardReferences.length > 0">
+          <span ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}"><i class="fa fa-link"></i>{{reference.text}}</a>&nbsp;&nbsp;</span>
         </p>
       </div>
 

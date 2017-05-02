@@ -22,7 +22,7 @@ angular.module('mobile',['ionic'])
     views: {
       'menuContent': {
         templateUrl: 'templates/search.html',
-        controller: 'QodeController'
+        controller: 'SearchController'
       }
     }
   })
@@ -55,10 +55,11 @@ angular.module('mobile',['ionic'])
     })
 
   .state('app.qodeview', {
-      url: '/qodeview',
+      url: '/qodeview/:id',
       views: {
         'menuContent': {
-          templateUrl: 'templates/qodeview.html'
+          templateUrl: 'templates/qodeview.html',
+          controller: 'QodeViewController'
         }
       }
     })

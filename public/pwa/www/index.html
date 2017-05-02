@@ -25,7 +25,7 @@
 
   </head>
 
-  <body ng-app="mobile" class="platform-browser" ng-controller="MobileController">
+  <body ng-app="mobile" class="platform-browser" ng-controller="AppController">
   <ion-nav-view></ion-nav-view>
     
     
@@ -42,10 +42,11 @@
 
   <!-- build:js scripts/main.js -->
   <script src="js/app.js"></script>
-  <script src="js/factories.js"></script>
-  <script src="js/qodeFactory.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/QodeController.js"></script>
+  <script src="js/services/userFactory.js"></script>
+  <script src="js/services/qodeFactory.js"></script>
+  <script src="js/controllers/AppController.js"></script>
+  <script src="js/controllers/QodeViewController.js"></script>
+  <script src="js/controllers/SearchController.js"></script>
   <!-- endbuild -->
     
     

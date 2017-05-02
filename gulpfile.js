@@ -15,6 +15,35 @@ const gulp = require('gulp'),
       browserSync = require('browser-sync'),
       watch = require('gulp-watch');
 
+
+// Build Desktop app
+
+gulp.task('desktop', function() {
+  gulp.start('usemin','imagemin','copyfonts')
+});
+
+// Build Mobile app
+
+gulp.task('mobile', function(){
+  gulp.start('usemin-mobile', 'imagemin-mobile', 'copyfonts-mobile')
+});
+
+// Build Desktop & Mobile apps
+
+gulp.task('default', ['clean'], function() {
+  gulp.start('usemin','imagemin','copyfonts', 'mobile')
+});
+
+// Delete old builds
+
+gulp.task('clean', function(){
+  return del(['./public/dist']);
+});
+
+
+// Desktop Gulp configuration
+
+
 gulp.task('jshint', function(){
   return gulp.src('./public/dev/scripts/**/*.js')
     .pipe(jshint())
@@ -50,46 +79,9 @@ gulp.task('copyfonts', function(){
   .pipe(gulp.dest('./public/dist/desktop/fonts'));
 })
 
-gulp.task('clean', function(){
-  return del(['./public/dist']);
-});
 
-gulp.task('watch', ['browser-sync'], function() {
-  gulp.watch('{./public/dev/scripts/**/*.js,./public/dev/styles/**/*.css,./public/dev/styles/**/*.less,./public/dev/**/*.html}', ['usemin']);
-  gulp.watch('./public/dev/images/**/*', ['imagemin']);
-});
+// Mobile Gulp configuration
 
-gulp.task('browser-sync', ['default'], function () {
-   const files = [
-      './public/dev/**/*.html',
-      './public/dev/styles/**/*.css',
-      './public/dev/images/**/*.png',
-      './public/dev/scripts/**/*.js',
-      './public/dist/**/*'
-   ];
-
-   browserSync.init(files, {
-      server: {
-         baseDir: "./public/dist",
-         index: "index.html"
-      }
-   });
-
-   gulp.watch(['./public/dist/**']).on('change', browserSync.reload);
-
-});
-
-// DEFAULT GULP TASK
-
-gulp.task('default', ['clean'], function() {
-  gulp.start('usemin','imagemin','copyfonts', 'mobile')
-});
-
-// MOBILE
-
-gulp.task('mobile', function(){
-  gulp.start('usemin-mobile', 'imagemin-mobile', 'copyfonts-mobile')
-});
 
 gulp.task('jshint-mobile', function(){
   return gulp.src('./public/pwa/www/js/**/*.js')
@@ -115,7 +107,37 @@ gulp.task('imagemin-mobile', function(){
 
 gulp.task('copyfonts-mobile', function(){
   gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-  .pipe(gulp.dest('./public/dist/mobile/fonts'));
+  .pipe(gulp.dest('./public/dist/mobile/styles/fonts'));
   gulp.src('./public/pwa/www/lib/ionic/fonts/**/*.{ttf,woff,eof,svg}*')
-  .pipe(gulp.dest('./public/dist/mobile/lib/ionic/fonts'));
+  .pipe(gulp.dest('./public/dist/mobile/styles/fonts'));
 })
+
+
+
+
+/////// NOT USED ANYMORE /////
+
+gulp.task('watch', ['browser-sync'], function() {
+  gulp.watch('{./public/dev/scripts/**/*.js,./public/dev/styles/**/*.css,./public/dev/styles/**/*.less,./public/dev/**/*.html}', ['usemin']);
+  gulp.watch('./public/dev/images/**/*', ['imagemin']);
+});
+
+gulp.task('browser-sync', ['default'], function () {
+   const files = [
+      './public/dev/**/*.html',
+      './public/dev/styles/**/*.css',
+      './public/dev/images/**/*.png',
+      './public/dev/scripts/**/*.js',
+      './public/dist/**/*'
+   ];
+
+   browserSync.init(files, {
+      server: {
+         baseDir: "./public/dist",
+         index: "index.html"
+      }
+   });
+
+   gulp.watch(['./public/dist/**']).on('change', browserSync.reload);
+
+});

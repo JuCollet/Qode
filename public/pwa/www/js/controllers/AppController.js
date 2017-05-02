@@ -2,7 +2,7 @@
 
 angular.module('mobile')
 
-.controller('MobileController', ['$scope', '$rootScope', 'userFactory', 'qodeFactory', function($scope, $rootScope, userFactory, qodeFactory) {
+.controller('AppController', ['$scope', '$rootScope', 'userFactory', 'qodeFactory', function($scope, $rootScope, userFactory, qodeFactory) {
 
   $rootScope.logged = {
     log: false,

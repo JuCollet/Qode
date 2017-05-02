@@ -33,6 +33,10 @@ $font-family-sans-serif: 'Source Sans Pro', "Helvetica Neue", "Roboto", "Segoe U
 
 // CONTENT
 
+html {
+  background-color: $dark;
+}
+
 h1 {
   font-weight: 900 !important;
 }
@@ -144,7 +148,7 @@ $menu-bg: $mediumDark !important;
 .small-qode {
   display: inline-block;
   padding:1px 4px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 
   border: 2px solid #FFFFFF;
 
@@ -290,6 +294,7 @@ $menu-bg: $mediumDark !important;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "./fonts" !default;
-
+ 
+ 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
