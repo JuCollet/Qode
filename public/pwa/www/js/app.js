@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('mobile', ['ionic'])
+angular.module('mobile',['ionic'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -21,7 +21,8 @@ angular.module('mobile', ['ionic'])
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/search.html',
+        controller: 'QodeController'
       }
     }
   })

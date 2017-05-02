@@ -102,7 +102,7 @@ gulp.task('usemin-mobile', ['jshint-mobile'], function(){
   .pipe(usemin({
     css:[minifycss(),rev()],
     js:[babel({presets:['es2015']}),ngAnnotate(),uglify(),rev()],
-    libjs:[ngAnnotate(),uglify(),rev()]
+    libjs:[rev()]
   }))
   .pipe(gulp.dest('./public/dist/mobile'));
 });

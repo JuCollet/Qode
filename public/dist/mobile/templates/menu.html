@@ -21,20 +21,20 @@
         <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/search">
           <span>&nbsp;<i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;DECODE</span>
         </ion-item>
-        <hr class="menu-hr">
-        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/favorites">
+        <hr class="menu-hr" ng-show="isLogged.log">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/favorites" ng-show="isLogged.log">
           <span>&nbsp;<i class="fa fa-heart is-red"></i>&nbsp;&nbsp;&nbsp;MY FAVORITES</span>
         </ion-item>
-        <hr class="menu-hr">
-        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/myqodes">
+        <hr class="menu-hr" ng-show="isLogged.log">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/myqodes" ng-show="isLogged.log">
           <span>&nbsp;<i class="fa fa-terminal"></i>&nbsp;&nbsp;&nbsp;MY QODES</span>
         </ion-item>
-        <hr class="menu-hr">
-        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/login">
+        <hr class="menu-hr" ng-hide="isLogged.log">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/login" ng-hide="isLogged.log">
           <span>&nbsp;<i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;LOG IN</span>
         </ion-item>
-        <hr class="menu-hr">
-        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/register">
+        <hr class="menu-hr" ng-hide="isLogged.log">
+        <ion-item class="custom-menu-item item-borderless" menu-close href="#/app/register" ng-hide="isLogged.log">
           <span>&nbsp;<i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;&nbsp;REGISTER</span>
         </ion-item>
       </ion-list>
