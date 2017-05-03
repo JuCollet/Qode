@@ -2,9 +2,9 @@
     <div class="form-page">
       <h1>Log in</h1>
       <form name="login">
-        <input type="text" name="mail" placeholder="What's your e-mail address ?"/>
-        <input type="text" name="name" placeholder="Your password ?"/>
-        <button class="form-button" type="submit">LOGIN</button>
+        <input type="text" name="mail" ng-model="mail" placeholder="What's your e-mail address ?" autocapitalize="off"/>
+        <input type="password" name="name" ng-model="password" placeholder="Your password ?"/>
+        <button class="form-button" type="submit" ng-click="doLogin()">LOGIN</button>
       </form>
       <p class="subdued">Forgot your password ?</p>
     </div>

@@ -19,6 +19,5 @@ angular.module('mobile')
   },function(err){
     if(err){throw err;}
   });
-
     
 }]);

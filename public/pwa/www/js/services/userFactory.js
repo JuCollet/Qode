@@ -7,7 +7,7 @@ angular.module('mobile')
             addToFavorites = function(){return $http.put('/user/addtofavorites');},
             deleteQode = function(){return $http.delete('/user/deleteqode/:qodeId');},
             isLogged = function(){return $http.get('/user/isLogged');},
-            login = function(){return $http.post('/user/login');},
+            login = function(user){return $http.post('/user/login',user);},
             logout = function(){return $http.get('/user/logout');},
             recovery = function(){return $http.post('/user/passwordrecovery');},
             register = function(){return $http.post('/user');},

@@ -18,13 +18,13 @@ const gulp = require('gulp'),
 
 // Build Desktop app
 
-gulp.task('desktop', function() {
+gulp.task('desktop', ['clean-desktop'], function() {
   gulp.start('usemin','imagemin','copyfonts')
 });
 
 // Build Mobile app
 
-gulp.task('mobile', function(){
+gulp.task('mobile', ['clean-mobile'], function(){
   gulp.start('usemin-mobile', 'imagemin-mobile', 'copyfonts-mobile')
 });
 
@@ -38,6 +38,14 @@ gulp.task('default', ['clean'], function() {
 
 gulp.task('clean', function(){
   return del(['./public/dist']);
+});
+
+gulp.task('clean-desktop', function(){
+  return del(['./public/dist/desktop']);
+});
+
+gulp.task('clean-mobile', function(){
+  return del(['./public/dist/mobile']);
 });
 
 

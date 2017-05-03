@@ -14,7 +14,7 @@ angular.module('mobile',['ionic'])
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: ''
+    controller: 'MenuController'
   })
 
   .state('app.search', {
@@ -40,7 +40,8 @@ angular.module('mobile',['ionic'])
       url: '/login',
       views: {
         'menuContent': {
-          templateUrl: 'templates/login.html'
+          templateUrl: 'templates/login.html',
+          controller: 'LoginController'
         }
       }
     })

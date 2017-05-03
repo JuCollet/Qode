@@ -17,9 +17,6 @@ $dark:                            #444 !default;
 */
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900");
-html {
-  background-color: #141414; }
-
 h1 {
   font-weight: 900 !important; }
 
@@ -32,6 +29,38 @@ h1 {
 .has-red-background {
   background-color: #D15104 !important; }
 
+.popup {
+  opacity: .8 !important;
+  border-radius: 3px !important;
+  background-color: #D15104 !important; }
+
+.popup-head {
+  padding: 10px 10px !important;
+  margin-top: 15px !important;
+  border: 0 !important; }
+
+.popup-title {
+  font-size: 30px !important;
+  font-weight: 900 !important; }
+
+.popup-body {
+  padding: 0px 0px 30px 0px !important;
+  font-size: 20px !important;
+  text-align: center !important; }
+
+.popup-buttons {
+  display: none !important; }
+
+/*
+.popup-sub-title 
+
+.popup-buttons.row 
+
+.popup-buttons .button {
+
+
+
+*/
 .bar-dark {
   background-color: transparent !important;
   background-image: none !important;
@@ -121,7 +150,7 @@ h1 {
   .qode-view h3 {
     color: #666666; }
   .qode-view p {
-    margin-bottom: 15px; }
+    margin-bottom: 10px; }
   .qode-view a {
     text-decoration: none;
     color: #FFFFFF; }
@@ -131,10 +160,21 @@ h1 {
   .qode-view .qode-card {
     margin-bottom: 15px;
     padding: 15px 15px 5px 15px;
-    border-radius: 4px;
-    background-color: #F3803B; }
+    border-radius: 4px; }
     .qode-view .qode-card h1 {
       font-size: 20px; }
+  .qode-view .qode-card[data-color="default"] {
+    border: 2px solid #666666; }
+  .qode-view .qode-card[data-color="orange"] {
+    background-color: #F3803B; }
+  .qode-view .qode-card[data-color="yellow"] {
+    background-color: #E8C033; }
+  .qode-view .qode-card[data-color="green"] {
+    background-color: #9AD179; }
+  .qode-view .qode-card[data-color="blue"] {
+    background-color: #6FD1D7; }
+  .qode-view .qode-card[data-color="purple"] {
+    background-color: #8EA8F5; }
   .qode-view .qode-option {
     display: block;
     margin-bottom: 10px;

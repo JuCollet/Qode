@@ -49,9 +49,10 @@ angular.module('mobile')
              qodeFactory.getQode(qode).then(function(res){
               document.activeElement.blur();
               $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
-              reset();
               $timeout(function(){
-               $state.go('app.qodeview', {id:qode});
+                reset();
+                $('#status').html('&nbsp;');
+                $state.go('app.qodeview', {id:qode});
               }, 500);
              },function(err){
                $('#status').html(`<i class="fa fa-times is-red"></i>&nbsp;&nbsp;${err.statusText} :(`);

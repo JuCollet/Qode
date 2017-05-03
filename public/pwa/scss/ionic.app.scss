@@ -26,16 +26,19 @@ $mediumDark:                      #202020 !default;
 $lightGrey:                       #666666 !default;
 $red:                             #D15104 !default;
 
+$orange: #F3803B;
+$yellow: #E8C033;
+$green: #9AD179;
+$blue: #6FD1D7;
+$purple: #8EA8F5;
+
+
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900");
 $font-family-sans-serif: 'Source Sans Pro', "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
 
 
 // CONTENT
-
-html {
-  background-color: $dark;
-}
 
 h1 {
   font-weight: 900 !important;
@@ -46,7 +49,7 @@ h1 {
 }
 
 .is-green {
-  color: $balanced;
+  color: $green;
 }
 
 .has-red-background {
@@ -56,6 +59,51 @@ h1 {
 $base-background-color: $dark;
 $base-color: #FFF;
 
+
+// POPUP
+
+
+.popup {
+  opacity: .8 !important;
+
+  border-radius: 3px !important;
+
+  background-color: $red !important;
+}
+
+.popup-head {
+  padding: 10px 10px !important;
+  margin-top: 15px !important;
+
+  border: 0 !important;
+}
+
+.popup-title {
+  font-size: 30px !important;
+  font-weight: 900 !important;
+}
+
+.popup-body {
+  padding: 0px 0px 30px 0px !important;
+  font-size: 20px !important;
+  text-align: center !important;
+}
+
+
+.popup-buttons {
+  display: none !important;
+}
+
+/*
+.popup-sub-title 
+
+.popup-buttons.row 
+
+.popup-buttons .button {
+
+
+
+*/
 
 // NAVBAR
 
@@ -199,7 +247,7 @@ $menu-bg: $mediumDark !important;
   }
 
   p {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   a {
@@ -218,12 +266,34 @@ $menu-bg: $mediumDark !important;
 
     border-radius: 4px;
 
-    background-color: $assertive;
-
     h1 {
       font-size: 20px;
     }
 
+  }
+  
+  .qode-card[data-color="default"] {
+    border: 2px solid $lightGrey;
+  }
+  
+  .qode-card[data-color="orange"] {
+    background-color: $orange;
+  }
+  
+  .qode-card[data-color="yellow"] {
+    background-color: $yellow;
+  }
+  
+  .qode-card[data-color="green"] {
+    background-color: $green;
+  }
+  
+  .qode-card[data-color="blue"] {
+    background-color: $blue;
+  }
+  
+  .qode-card[data-color="purple"] {
+    background-color: $purple;
   }
 
   .qode-option {

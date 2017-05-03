@@ -6,7 +6,7 @@
       <h3>{{qode.subtitle}}</h3>
       <p>{{qode.description}}</p>
 
-      <div class="qode-card" ng-repeat="card in qode.cards">
+      <div class="qode-card" ng-repeat="card in qode.cards" data-color="{{card.color}}">
         <h1>{{card.cardTitle}}</h1>
         <p>{{card.cardText}}</p>
         <p class="subdued" ng-show="card.cardReferences.length > 0">
