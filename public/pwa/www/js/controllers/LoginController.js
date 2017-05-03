@@ -3,13 +3,13 @@
 angular.module('mobile')
 .controller('LoginController', ['$scope', '$rootScope', '$state', '$ionicPopup', '$timeout', 'userFactory', '$ionicHistory', function($scope, $rootScope, $state, $ionicPopup, $timeout, userFactory, $ionicHistory){
     
-    $scope.mail = "";
-    $scope.password = "";
     
+    // Didn't used ng-model for form inputs because it didn't updated values with mobile form auto-completion (ios)
+    // So when user/password where auto-filled, the ng-models where empty when the doLogin function was triggered.
     $scope.doLogin = function(){
         const user = {
-            mail: $scope.mail,
-            password: $scope.password
+            mail: document.login.mail.value,
+            password: document.login.password.value
         };
         
         userFactory.login(user).then(function(res){
