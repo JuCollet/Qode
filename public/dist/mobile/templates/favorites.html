@@ -1,24 +1,18 @@
 <ion-view view-title="My favorites">
   <ion-content>
+    <span class="empty" ng-show="qode.favorites.length < 1">No favorite yet...</span>
     <ion-list>
-      <ion-item class="item-dark" href="#/app/qodeview" can-swipe="true">
-        <span class="small-qode">FK345</span>
-        <h1>Any Qode title</h1>
-        <h2>With subtitle</h2>
-        <p>Gluten-free yuccie helvetica woke, tbh keffiyeh poutine wolf gochujang. 8-bit flannel DIY craft beer, cornhole chicharrones mustache vape unicorn skateboard flexitarian bushwick semiotics. XOXO banh mi yr, yuccie subway tile readymade williamsburg cold-pressed leggings fap art party cliche pork belly actually.</p>
+      
+      <ion-item class="item-dark" ng-repeat="qode in qode.favorites" href="#/app/qodeview/{{qode.qode}}" can-swipe="true">
+        <span class="small-qode">{{qode.qode}}</span>
+        <h1>{{qode.title}}</h1>
+        <h2>{{qode.subtitle}}</h2>
+        <p>{{qode.description}}</p>
         <ion-option-button class="button-assertive has-red-background" ng-click="edit(facility)">
           Remove
         </ion-option-button>
       </ion-item>
-      <ion-item class="item-dark" href="#/app/qodeview" can-swipe="true">
-        <span class="small-qode">FK345</span>
-        <h1>Any Qode title</h1>
-        <h2>With subtitle</h2>
-        <p>Gluten-free yuccie helvetica woke, tbh keffiyeh poutine wolf gochujang. 8-bit flannel DIY craft beer, cornhole chicharrones mustache vape unicorn skateboard flexitarian bushwick semiotics. XOXO banh mi yr, yuccie subway tile readymade williamsburg cold-pressed leggings fap art party cliche pork belly actually.</p>
-        <ion-option-button class="button-assertive has-red-background" ng-click="edit(facility)">
-          Remove
-        </ion-option-button>
-      </ion-item>
+    
     </ion-list>
   </ion-content>
 </ion-view>

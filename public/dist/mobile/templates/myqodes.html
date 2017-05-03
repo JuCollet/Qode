@@ -1,26 +1,19 @@
 <ion-view view-title="My Qodes">
   <ion-content>
+    <span class="empty" ng-show="qode.myqodes.length < 1">No Qode yet...</span>
     <ion-list>
-      <ion-item class="item-dark" href="#/app/qodeview" can-swipe="true">
-        <span class="small-qode">FK345</span>
-        <h1>Any Qode title</h1>
-        <h2>With subtitle</h2>
-        <p>Gluten-free yuccie helvetica woke, tbh keffiyeh poutine wolf gochujang. 8-bit flannel DIY craft beer, cornhole chicharrones mustache vape unicorn skateboard flexitarian bushwick semiotics. XOXO banh mi yr, yuccie subway tile readymade williamsburg cold-pressed leggings fap art party cliche pork belly actually.</p>
-        <p class="subdued"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;1 LIKE&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true"></i>&nbsp;&nbsp;1 FAVORITED</p>
+      
+      <ion-item class="item-dark" ng-repeat="qode in qode.myqodes" href="#/app/qodeview/{{qode.qode}}" can-swipe="true">
+        <span class="small-qode">{{qode.qode}}</span>
+        <h1>{{qode.title}}</h1>
+        <h2>{{qode.subtitle}}</h2>
+        <p>{{qode.description}}</p>
+        <p class="subdued"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;{{qode.upVotes}} LIKE<span ng-show="qode.upVotes > 1">S</span></p>
         <ion-option-button class="button-assertive has-red-background" ng-click="edit(facility)">
-          Delete
+          Remove
         </ion-option-button>
       </ion-item>
-      <ion-item class="item-dark" href="#/app/qodeview" can-swipe="true">
-        <span class="small-qode">FK345</span>
-        <h1>Any Qode title</h1>
-        <h2>With subtitle</h2>
-        <p>Gluten-free yuccie helvetica woke, tbh keffiyeh poutine wolf gochujang. 8-bit flannel DIY craft beer, cornhole chicharrones mustache vape unicorn skateboard flexitarian bushwick semiotics. XOXO banh mi yr, yuccie subway tile readymade williamsburg cold-pressed leggings fap art party cliche pork belly actually.</p>
-        <p class="subdued"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;1 LIKE&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true"></i>&nbsp;&nbsp;1 FAVORITED</p>
-        <ion-option-button class="button-assertive has-red-background" ng-click="edit(facility)">
-          Delete
-        </ion-option-button>
-      </ion-item>
+      
     </ion-list>
   </ion-content>
 </ion-view>

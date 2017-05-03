@@ -22,7 +22,9 @@ angular.module('mobile')
                 disableBack: true
             });
             $state.go('app.search');
-            $ionicLoading.hide();
+            $timeout(function(){
+                $ionicLoading.hide();
+            },250);
         },function(){
             $ionicLoading.hide();
             const alertPopup = $ionicPopup.alert({

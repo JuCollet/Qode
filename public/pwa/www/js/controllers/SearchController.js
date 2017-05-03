@@ -44,7 +44,7 @@ angular.module('mobile')
              
              $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
              
-             const qode = char1.value+char2.value+char3.value+char4.value+char5.value;
+             const qode = (char1.value+char2.value+char3.value+char4.value+char5.value).toUpperCase();
              
              qodeFactory.getQode(qode).then(function(res){
               document.activeElement.blur();

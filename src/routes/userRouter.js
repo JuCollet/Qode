@@ -20,7 +20,7 @@ userRouter.route('/')
     User
       .findById(req.session.userId, '_id name favorites myqodes')
       .populate('favorites', '_id qode title subtitle description')
-      .populate('myqodes', '_id qode title subtitle description')
+      .populate('myqodes', '_id qode title subtitle description upVotes')
       .exec(function(err, user){
         if(err){
           const err = new Error('User not found');

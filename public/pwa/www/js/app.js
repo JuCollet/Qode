@@ -28,10 +28,12 @@ angular.module('mobile',['ionic'])
   })
 
   .state('app.favorites', {
+      cache: false,
       url: '/favorites',
       views: {
         'menuContent': {
-          templateUrl: 'templates/favorites.html'
+          templateUrl: 'templates/favorites.html',
+          controller: 'FavoritesController'
         }
       }
     })
@@ -47,10 +49,13 @@ angular.module('mobile',['ionic'])
     })
 
   .state('app.myqodes', {
+      cache: false,
       url: '/myqodes',
       views: {
         'menuContent': {
-          templateUrl: 'templates/myqodes.html'
+          templateUrl: 'templates/myqodes.html',
+          controller: 'FavoritesController'
+
         }
       }
     })

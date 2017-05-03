@@ -14,8 +14,10 @@
         </p>
       </div>
 
-      <span class="qode-option"><i class="fa fa-thumbs-up"></i>THANKS THE AUTHOR</span>
-      <span class="qode-option"><i class="fa fa-heart is-red"></i>ADD TO FAVORITES</span>
+      <span class="qode-option" ng-show="logged.log && qode.isLiked === false && qode.isMine === false"><i class="fa fa-thumbs-up"></i>LIKE THIS QODE</span>
+      <span class="qode-option is-light" ng-show="logged.log && qode.isLiked === true || qode.isMine === true"><i class="fa fa-thumbs-up"></i>{{qode.upVotes}} LIKE<span ng-show="qode.upVotes>1">S</span></span>
+      <span class="qode-option" ng-show="logged.log && qode.isFavorited === false && qode.isMine === false"><i class="fa fa-heart is-red"></i>ADD TO FAVORITES</span>
+      <span class="qode-option is-light" ng-show="logged.log && qode.isFavorited === true && qode.isMine === false"><i class="fa fa-heart is-red"></i>IN YOUR FAVORITES</span>
 
     </div>
 
