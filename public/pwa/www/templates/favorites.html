@@ -8,7 +8,7 @@
         <h1>{{qode.title}}</h1>
         <h2>{{qode.subtitle}}</h2>
         <p>{{qode.description}}</p>
-        <ion-option-button class="button-assertive has-red-background" ng-click="edit(facility)">
+        <ion-option-button class="button-assertive has-red-background" ng-click="removeFromFavorites($index,qode._id)">
           Remove
         </ion-option-button>
       </ion-item>

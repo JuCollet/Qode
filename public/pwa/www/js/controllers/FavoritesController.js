@@ -25,9 +25,10 @@ angular.module('mobile')
             }, 2500);
         });
     });
-
-
-
-
+    
+    $scope.removeFromFavorites = function(index,id){
+        $scope.qode.favorites.splice(index,1);
+        userFactory.removeFromFavorites(id);
+    }
 
 }]);

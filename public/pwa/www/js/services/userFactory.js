@@ -10,9 +10,9 @@ angular.module('mobile')
             login = function(user){return $http.post('/user/login',user);},
             logout = function(){return $http.get('/user/logout');},
             recovery = function(){return $http.post('/user/passwordrecovery');},
-            register = function(){return $http.post('/user');},
+            register = function(data){return $http.post('/user',data);},
             reset = function(){return $http.put('/user');},
-            removeFromFavorites = function(){return $http.put('/user/removefromfavorites');};
+            removeFromFavorites = function(id){return $http.put('/user/removefromfavorites',{favId:id});};
     
     return {
       getUser : getUser,

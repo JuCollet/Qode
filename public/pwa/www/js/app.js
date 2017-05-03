@@ -74,7 +74,8 @@ angular.module('mobile',['ionic'])
       url: '/register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/register.html'
+          templateUrl: 'templates/register.html',
+          controller: 'RegisterController'
         }
       }
     });
