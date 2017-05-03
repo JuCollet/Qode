@@ -17,6 +17,11 @@ angular.module('mobile')
             });
             $timeout(function() {
                 alertPopup.close();
+                //Disable back button for the next view, which is here the homepage.
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
+                $state.go('app.search');
             }, 2500);
         });
     });

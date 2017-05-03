@@ -10,7 +10,7 @@
         <h1>{{card.cardTitle}}</h1>
         <p>{{card.cardText}}</p>
         <p class="subdued" ng-show="card.cardReferences.length > 0">
-          <span ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}"><i class="fa fa-link"></i>{{reference.text}}</a>&nbsp;&nbsp;</span>
+          <span ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}" target="_blank"><i class="fa fa-link"></i>{{reference.text}}</a>&nbsp;&nbsp;</span>
         </p>
       </div>
 
