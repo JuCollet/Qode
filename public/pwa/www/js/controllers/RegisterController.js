@@ -33,21 +33,27 @@ angular.module('mobile')
         userFactory.register(data).then(function(res){
             $rootScope.logged = {
                 log : true,
-                name : res.name
+                name : res.data.name
             };
             //Disable back button for the next view, which is here the homepage.
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
             $ionicLoading.hide();
-            $state.go('app.search');
+            $state.go('app.welcome');
         },function(err){
             $ionicLoading.hide();
 
             const alertPopup = $ionicPopup.alert({
              title: 'Oops..',
-             template: err.statusText
+             template: err.data.error.message
             });
+            
+            $scope.name="";
+            $scope.mail="";
+            $scope.password="";
+            $scope.confirmPassword="";
+            
             $timeout(function() {
                 alertPopup.close();
                 //Disable back button for the next view, which is here the homepage.

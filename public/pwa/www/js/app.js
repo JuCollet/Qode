@@ -78,6 +78,15 @@ angular.module('mobile',['ionic'])
           controller: 'RegisterController'
         }
       }
+    })
+    
+  .state('app.welcome', {
+      url: '/welcome',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/welcome.html'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

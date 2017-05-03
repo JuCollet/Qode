@@ -47,6 +47,7 @@ userRouter.route('/')
           if(err){
             const err = new Error('Email already registered');
             err.status = 400;
+            err.statusText = "Email already registered";
             next(err);
           } else {
             mailer.welcomeMail(req.body.name,req.body.mail);
