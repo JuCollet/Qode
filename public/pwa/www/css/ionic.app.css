@@ -29,6 +29,9 @@ h1 {
 .has-red-background {
   background-color: #D15104 !important; }
 
+.loading {
+  background-color: transparent !important; }
+
 .popup {
   opacity: .8 !important;
   border-radius: 3px !important;
