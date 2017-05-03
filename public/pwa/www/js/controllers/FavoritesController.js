@@ -29,6 +29,12 @@ angular.module('mobile')
     $scope.removeFromFavorites = function(index,id){
         $scope.qode.favorites.splice(index,1);
         userFactory.removeFromFavorites(id);
-    }
+    };
+    
+    $scope.deleteQode = function(index,id){
+        $scope.qode.myqodes.splice(index,1);
+        userFactory.deleteQode(id);
+    };    
+    
 
 }]);

@@ -9,7 +9,7 @@
         <h2>{{qode.subtitle}}</h2>
         <p>{{qode.description}}</p>
         <p class="subdued"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;{{qode.upVotes}} LIKE<span ng-show="qode.upVotes > 1">S</span></p>
-        <ion-option-button class="button-assertive has-red-background" ng-click="edit(facility)">
+        <ion-option-button class="button-assertive has-red-background" ng-click="deleteQode($index,qode._id)">
           Remove
         </ion-option-button>
       </ion-item>

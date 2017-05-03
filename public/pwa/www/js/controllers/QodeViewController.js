@@ -23,7 +23,35 @@ angular.module('mobile')
           });
         
     });
+    
+    $scope.likeQode = function(qodeId){
+        qodeFactory.upVote(qodeId).then(function(){
+            $scope.qode.upVotes++;
+            $scope.qode.isLiked = true;
+        },function(err){
+            const alertPopup = $ionicPopup.alert({
+             title: 'Oops..',
+             template: err.statusText
+            });
+            $timeout(function() {
+                alertPopup.close();
+            }, 2500);
+        });
+    };
 
+    $scope.addToFavorites = function(qodeId){
+        qodeFactory.addToFavorites(qodeId).then(function(){
+            $scope.qode.isFavorited = true;
+        },function(err){
+            const alertPopup = $ionicPopup.alert({
+             title: 'Oops..',
+             template: err.statusText
+            });
+            $timeout(function() {
+                alertPopup.close();
+            }, 2500);
+        });
+    };
 
     
 }]);

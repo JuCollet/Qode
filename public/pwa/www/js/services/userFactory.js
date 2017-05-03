@@ -5,7 +5,7 @@ angular.module('mobile')
     
       const getUser = function(){return $http.get('/user');},
             addToFavorites = function(){return $http.put('/user/addtofavorites');},
-            deleteQode = function(){return $http.delete('/user/deleteqode/:qodeId');},
+            deleteQode = function(qodeId){return $http.delete('/user/deleteqode/'+qodeId);},
             isLogged = function(){return $http.get('/user/isLogged');},
             login = function(user){return $http.post('/user/login',user);},
             logout = function(){return $http.get('/user/logout');},
