@@ -1,0 +1,21 @@
+<div class="qode-preview">
+  <div class="qode-preview-content">
+    <span class="preview-small-qode">{{newQode.qode}}</span>
+    <h1>{{newQode.title}}</h1>
+    <h2>{{newQode.subtitle}}</h2>
+    <p class="preview-content is-multilined">{{newQode.description}}</p>
+    <div class="card qode-preview-card" data-color="{{card.color}}" ng-repeat="card in newQode.cards">
+      <h4>{{card.cardTitle}}</h4>
+      <p class="preview-card-text is-multilined">{{card.cardText}}</p>
+      <hr class="is-light hr-preview" ng-show="card.cardReferences.length > 0">
+      <small ng-repeat="reference in card.cardReferences"><p class="preview-card-text">{{reference.text}}</p></small>
+      <hr class="is-light" ng-show="card.files.length > 0">
+      <small ng-repeat="file in card.files"><p><a href="{{file.path}}" class="is-white"><i class="fa fa-cloud-download" ></i>{{file.name}}</a> | {{file.type}}</p></small>
+    </div>
+    <div class="card qode-preview-card" data-color="default" ng-show="newQode.files.length > 0">
+      <h4>Attached files</h4>
+      <p ng-repeat="file in newQode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a></small></p>
+    </div>
+  </div>
+</div>
+<small class="is-centered"><i class="fa fa-eye" aria-hidden="true"></i>Preview</small>

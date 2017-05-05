@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="AppController">
+<html lang="en" ng-app="app" ng-controller="AppController as app">
 <head>
 
   <meta charset="utf-8">
@@ -43,7 +43,12 @@
   
   <script src="scripts/librairies-6fd3cdc99c.js"></script>
   
-  <script src="scripts/main-6e249a99f7.js"></script>
+  <script src="scripts/main-97fe0ffb9c.js"></script>
+  
+  <script>
+    // Initialize tooltips
+    $(function () {$('[data-toggle="tooltip"]').tooltip();});
+  </script>
 
 </body>
 </html>
