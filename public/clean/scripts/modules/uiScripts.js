@@ -4,9 +4,7 @@
 
 const uiScripts = (function(){
   
-    let i = 0, j = 0;
-
-    var displayQodes = function(qodes){  // Function that display Qodes in 5 divs included in a .qode-chars class parent div;
+    var displayQodes = function(qodes, i = 0, j = 0){  // Function that display Qodes in 5 divs included in a .qode-chars class parent div;
 
       const $qodeChars = $('.qode-code')[0].children;
       setTimeout(function(){
@@ -14,12 +12,12 @@ const uiScripts = (function(){
           if(j<qodes[0].length){
             $($qodeChars[i]).text(qodes[j][i]);
             j++;
-            displayQodes(qodes);
+            displayQodes(qodes, i, j);
             return;
           } else {
             j = 0;
             i++;
-            displayQodes(qodes);
+            displayQodes(qodes, i, j);
             return;
           }
         } else {

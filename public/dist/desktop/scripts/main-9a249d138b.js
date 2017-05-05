@@ -1,40 +1,3 @@
-/*global $*/
-
-'use strict';
-
-var uiScripts = function () {
-
-  var i = 0,
-      j = 0;
-
-  var displayQodes = function displayQodes(qodes) {
-    // Function that display Qodes in 5 divs included in a .qode-chars class parent div;
-
-    var $qodeChars = $('.qode-code')[0].children;
-    setTimeout(function () {
-      if (i < qodes.length) {
-        if (j < qodes[0].length) {
-          $($qodeChars[i]).text(qodes[j][i]);
-          j++;
-          displayQodes(qodes);
-          return;
-        } else {
-          j = 0;
-          i++;
-          displayQodes(qodes);
-          return;
-        }
-      } else {
-        i = 0;
-        return;
-      }
-    }, 25);
-  };
-
-  return {
-    displayQodes: displayQodes
-  };
-}();
 'use strict';
 
 angular.module('app', ['ui.router', 'ngResource']).config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
@@ -64,13 +27,13 @@ angular.module('app', ['ui.router', 'ngResource']).config(["$stateProvider", "$u
         controller: 'GetQodeController as qode'
       }
     }
-  }).state('root.decode', {
-    url: '/decode',
+  }).state('root.search', {
+    url: '/search',
     params: { encode: null },
     views: {
       'contentView@root': {
-        templateUrl: 'views/decode.html',
-        controller: 'DecodeController'
+        templateUrl: 'views/searchQode.html',
+        controller: 'SearchQodeController as qode'
       },
       'options@root': {
         templateUrl: 'views/navSwitch.html',
@@ -162,6 +125,42 @@ angular.module('app', ['ui.router', 'ngResource']).config(["$stateProvider", "$u
   });
 }]);
 
+/*global $*/
+
+'use strict';
+
+var uiScripts = function () {
+
+  var displayQodes = function displayQodes(qodes) {
+    var i = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var j = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    // Function that display Qodes in 5 divs included in a .qode-chars class parent div;
+
+    var $qodeChars = $('.qode-code')[0].children;
+    setTimeout(function () {
+      if (i < qodes.length) {
+        if (j < qodes[0].length) {
+          $($qodeChars[i]).text(qodes[j][i]);
+          j++;
+          displayQodes(qodes, i, j);
+          return;
+        } else {
+          j = 0;
+          i++;
+          displayQodes(qodes, i, j);
+          return;
+        }
+      } else {
+        i = 0;
+        return;
+      }
+    }, 25);
+  };
+
+  return {
+    displayQodes: displayQodes
+  };
+}();
 /*global $, angular*/
 
 (function () {
@@ -526,11 +525,11 @@ angular.module('app').controller('NavController', ['$scope', '$rootScope', '$sta
 
   'use strict';
 
-  GetQodeController.$inject = ["$rootScope", "$scope", "qodeFactory", "newQodeFactory", "userFactory", "$state"];
+  GetQodeController.$inject = ["$rootScope", "qodeFactory", "newQodeFactory", "userFactory", "$state"];
   angular.module('app').controller('GetQodeController', GetQodeController);
 
   /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
-  function GetQodeController($rootScope, $scope, qodeFactory, newQodeFactory, userFactory, $state) {
+  function GetQodeController($rootScope, qodeFactory, newQodeFactory, userFactory, $state) {
 
     var vm = this;
     var selectedQode = void 0;
@@ -765,62 +764,84 @@ angular.module('app').controller('NewQodeController', ['$rootScope', '$scope', '
     }
   });
 }]);
-'use strict';
+/*global $, angular, uiScripts*/
 
-angular.module('app').controller('DecodeController', ['$scope', 'viewQodeFactory', '$timeout', '$state', function ($scope, viewQodeFactory, $timeout, $state) {
+(function () {
 
-  var $qodeChars = $('.qode-code')[0].children,
-      alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  var pos = 0,
-      qode = "",
-      checking = false;
+  'use strict';
 
-  document.onkeyup = function (e) {
+  angular.module('app').controller('SearchQodeController', SearchQodeController);
 
-    // Check if div Qode is currently in the displayed DOM.
-    // Otherwise, this will be triggered everywhere in the site. 
-    if (document.getElementById('qodeDecode') !== null) {
+  /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
+  function SearchQodeController() {}
 
-      if (pos < 2 && alphabet.indexOf(e.key.toLowerCase()) !== -1) {
-        $($qodeChars[pos]).text(e.key);
-        if (pos < 5) {
-          qode += e.key.toUpperCase();
-          pos++;
-        }
-      } else if (pos > 1 && parseInt(e.key) >= 0 && parseInt(e.key) <= 9) {
-        $($qodeChars[pos]).text(e.key);
-        if (pos <= 4) {
-          qode += e.key;
-          pos++;
-        }
-      }
-      if (e.key === "Backspace") {
-        if (pos > 0) {
-          pos--;
-          qode = qode.slice(0, pos);
-        }
-        $($qodeChars[pos]).html("&nbsp;");
-      }
-      if (qode.length === 5 && checking === false) {
-        checking = true;
-        $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
-
-        viewQodeFactory.qodes.get({ id: qode }).$promise.then(function () {
-          $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
-          $timeout(function () {
-            $state.go('root.qode', { id: qode });
-          }, 500);
-          checking = false;
-        }, function (err) {
-          $('#status').html('<i class="fa fa-times is-red"></i>&nbsp;&nbsp;' + err.statusText + ' :(');
-          checking = false;
-        });
-      } else {
+  /*
+    
+    const char1 = document.decode.char1,
+          char2 = document.decode.char2,
+          char3 = document.decode.char3,
+          char4 = document.decode.char4,
+          char5 = document.decode.char5;
+          
+      const reset = function(){
+         char1.value = "";
+         char2.value = "";
+         char3.value = "";
+         char4.value = "";
+         char5.value = "";
+      };
+      
+      let checking = false;
+      
+      $scope.jumpnext = function(nextid){
         $('#status').html('&nbsp;');
-      }
-    } // end if;
-  }; //end onkeyup function;
-}]);
+        switch(nextid){
+          case 1:
+            char2.focus();
+            break;
+          case 2:
+            char3.focus();
+            break;
+          case 3:
+            char4.focus();
+            break;
+          case 4:
+            char5.focus();
+            break;
+          case 5:
+            if(char1.value !== "" &&
+               char2.value !== "" &&
+               char3.value !== "" &&
+               char4.value !== "" &&
+               char5.value !== "") {
+                 
+                 $('#status').html('<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Searching...');
+                 
+                 const qode = (char1.value+char2.value+char3.value+char4.value+char5.value).toUpperCase();
+                 
+                 qodeFactory.getQode(qode).then(function(res){
+                  document.activeElement.blur();
+                  $('#status').html('<i class="fa fa-check is-green"></i>&nbsp;&nbsp;Found');
+                  $timeout(function(){
+                    reset();
+                    $('#status').html('&nbsp;');
+                    $state.go('app.qodeview', {id:qode});
+                  }, 500);
+                 },function(err){
+                   $('#status').html(`<i class="fa fa-times is-red"></i>&nbsp;&nbsp;${err.statusText} :(`);
+                   document.activeElement.blur();
+                   reset();
+                 });
+               } else {
+                  reset();
+                  document.activeElement.blur();
+               }
+        }
+      };
+   */
+
+  // End SearchQodeController;
+})();
 'use strict';
 
 angular.module('app').controller('ViewQodeController', ['$scope', '$stateParams', 'viewQodeFactory', 'userFactory', function ($scope, $stateParams, viewQodeFactory, userFactory) {

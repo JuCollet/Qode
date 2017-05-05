@@ -35,13 +35,13 @@ angular.module('app',['ui.router','ngResource'])
     }
   })
   
-  .state('root.decode', {
-    url:'/decode',
+  .state('root.search', {
+    url:'/search',
     params : {encode:null},
     views : {
       'contentView@root' : {
-        templateUrl : 'views/decode.html',
-        controller : 'DecodeController'
+        templateUrl : 'views/searchQode.html',
+        controller : 'SearchQodeController as qode'
       }, 
       'options@root' : {
         templateUrl : 'views/navSwitch.html',

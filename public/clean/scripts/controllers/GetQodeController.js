@@ -9,7 +9,7 @@
     .controller('GetQodeController', GetQodeController);
     
     /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
-    function GetQodeController($rootScope, $scope, qodeFactory, newQodeFactory, userFactory, $state){
+    function GetQodeController($rootScope, qodeFactory, newQodeFactory, userFactory, $state){
       
       const vm = this;
       let selectedQode;
