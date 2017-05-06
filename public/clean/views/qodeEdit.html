@@ -1,0 +1,70 @@
+<div class="col-xs-12 col-sm-10 col-md-8">
+  <span class="small-qode">{{edit.newQode.qode}}</span>
+  <form>
+    <input type="text" class="form-input" placeholder="Page title" ng-model="edit.newQode.title"></input>
+    <input type="text" class="form-input" placeholder="Page subtitle" ng-model="edit.newQode.subtitle"></input>
+    <textarea class="form-textarea" rows="7" placeholder="Description" ng-model="edit.newQode.description"></textarea>
+  </form>
+
+  <div class="card" id="card{{$index}}" data-color="{{card.color}}" ng-repeat="card in edit.newQode.cards">
+    <div class="card-delete"><div class="card-delete-button" ng-click="edit.deleteCard($index)"><i class="fa fa-times"></i></div></div>
+    <input type="text" class="card-input card-input-bold" ng-model="card.cardTitle" placeholder="Title"></input>
+    <textarea type="text" class="card-textarea" ng-model="card.cardText" rows="5" placeholder="Content"></textarea>
+    <hr>
+    <p><small ng-repeat="reference in card.cardReferences" class="is-white"><a href="{{reference.link}}" target="blank">{{reference.text}}&nbsp;&nbsp;</a><i class="fa fa-times is-red is-clickable" ng-click="edit.removeReference($parent.$index,$index)"></i>&nbsp;&nbsp;</small></p>
+    <input type="text" class="card-input card-input-link card-input-link-40" placeholder="link" ng-model="edit.newReference.url"></input>
+    <input type="text" class="card-input card-input-link card-input-link-25" placeholder="link name" ng-model="edit.newReference.name"></input>
+    <div class="button button-small button-form is-enabled card-input-button" type="submit" ng-click="edit.addReference($index)"><i class="fa fa-plus"></i>Add</div>
+
+    <ul class="card-color-selector">
+      <li>
+        <input type="radio" id="default{{$index}}" ng-model="card.color" value="default" name="card{{$index}}Color">
+        <label for="default{{$index}}"></label>
+        <div class="check default"></div>
+      </li>
+      <li>
+        <input type="radio" id="orange{{$index}}" ng-model="card.color" value="orange" name="card{{$index}}Color">
+        <label for="orange{{$index}}"></label>
+        <div class="check orange"></div>
+      </li>
+      <li>
+        <input type="radio" id="yellow{{$index}}" ng-model="card.color" value="yellow" name="card{{$index}}Color">
+        <label for="yellow{{$index}}"></label>
+        <div class="check yellow"></div>
+      </li>
+      <li>
+        <input type="radio" id="green{{$index}}" ng-model="card.color" value="green" name="card{{$index}}Color">
+        <label for="green{{$index}}"></label>
+        <div class="check green"></div>
+      </li>
+      <li>
+        <input type="radio" id="blue{{$index}}" ng-model="card.color" value="blue" name="card{{$index}}Color">
+        <label for="blue{{$index}}"></label>
+        <div class="check blue"></div>
+      </li>
+      <li>
+        <input type="radio" id="purple{{$index}}" ng-model="card.color" value="purple" name="card{{$index}}Color">
+        <label for="purple{{$index}}"></label>
+        <div class="check purple"></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card" data-color="default" ng-show="edit.newQode.files.length > 0">
+    <h4>Attached files</h4>
+    <p ng-repeat="file in edit.newQode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a>&nbsp;&nbsp;</small><i class="fa fa-times is-red is-clickable" ng-click="edit.removeFile($index)"></i></p>
+  </div>
+
+  <div ng-click="edit.addNewCard()" ng-show="!edit.confirm" class="button button-small button-form button-blue is-enabled" type="submit"><i class="fa fa-plus" aria-hidden="true"></i>Add a card</div>
+  <label class="button button-small button-yellow is-enabled" ng-show="!edit.confirm" id="ulButton" ng-disabled="false"><i class="fa fa-plus"></i><span style="display:inline-block;">Add file</span><input type="file" id="fileUpload" style="display: none;"></label>
+  <div ng-click="edit.confirmToggle()" ng-show="!edit.confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>Save it !</div>
+  <div ng-click="edit.confirmToggle()" ng-show="edit.confirm" class="button button-small button-form button-red is-enabled" type="submit"><i class="fa fa-times" aria-hidden="true"></i>Cancel</div>  
+  <div ng-click="edit.postQode()" ng-show="edit.confirm" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-check" aria-hidden="true"></i>Confirm</div>
+  <br><small>Free storage is limited to 5 files of 10Mo maximum.<br>Files are not encrypted, use with care !</small>
+  <p>&nbsp;</p>
+
+</div>
+
+<div class="hidden-xs hidden-sm col-md-4">
+  <div ui-view="newQodePreview">
+</div>

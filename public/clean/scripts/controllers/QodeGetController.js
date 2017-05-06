@@ -1,4 +1,4 @@
-/*global $, angular, uiScripts*/
+/*global $, angular, uiModule*/
 
 (function(){
   
@@ -6,10 +6,10 @@
 
   angular.module('app')
   
-    .controller('GetQodeController', GetQodeController);
+    .controller('QodeGetController', QodeGetController);
     
     /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
-    function GetQodeController($rootScope, qodeFactory, newQodeFactory, userFactory, $state){
+    function QodeGetController($rootScope, qodeFactory, userFactory, $state){
       
       const vm = this;
       let selectedQode;
@@ -23,7 +23,7 @@
 
         getQodesAsync.then(function qodeIsAvailable(qodes){
           selectedQode = qodes[qodes.length-1];
-          uiScripts.displayQodes(qodes);
+          uiModule.displayQodes(qodes);
         }, function qodeIsNotAvailable(){
           vm.refresh();
         });
@@ -32,13 +32,13 @@
 
       function getThis(){
         
-        qodeFactory.checkIfAvailable(selectedQode, 
+        qodeFactory.doCheckIfAvailable(selectedQode, 
           function successCb(){
             // Check if user is logged in or not
             userFactory.isLogged().then(function(res){
-              if(res.isLogged !== undefined && res.isLogged.log === true) {
-                newQodeFactory.dbOperations.create({qode:selectedQode}).$promise.then(function(){
-                  $state.go('root.newQode', {qode:selectedQode});
+              if(res.data.isLogged !== undefined && res.data.isLogged.log === true) {
+                qodeFactory.createQode(selectedQode).then(function(){
+                  $state.go('root.editqode', {qode:selectedQode});
                 });
               } else {
                 $rootScope.$broadcast('notification',{

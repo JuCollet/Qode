@@ -634,14 +634,26 @@ textarea:-moz-placeholder,input:-moz-placeholder { /* Firefox 18- */
   float: left;
   width: 18%;
   margin: 0% 1% 0% 1%;
+  padding: 0;
 
   border: .5vw solid white;
   border-radius: 4px;
+  
+  background-color: transparent;
 
   color: white;
   font-weight: 600;
   font-size: 8vw;
+  text-align: center;
   text-transform: uppercase;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 
 @media (max-width: @screen-sm-min) {

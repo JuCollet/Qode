@@ -12,6 +12,9 @@
     function qodeFactory($http, $q){
     
       var getQode = function(qode){return $http.get('/api/qodes/'+qode);},
+          getQodeToEdit = function(qode){return $http.post('/api/qodes/edit/',{qode:qode});},
+          saveQode = function(qodeId, data){return $http.put('/api/qodes/'+qodeId, data);},
+          createQode = function(qode){return $http.post('/api/qodes/', {qode:qode});},
           upVote = function(qodeId){return $http.post('/api/qodes/upvote/', {toUpvote:qodeId});},
           checkIfAvailable = function(qode){return $http.post('/api/qodes/check/', {qode:qode});},
           addToFavorites = function(qodeId){return $http.put('/user/addtofavorites/', {favId:qodeId});},
@@ -61,6 +64,9 @@
 
       return {
         getQode : getQode,
+        getQodeToEdit : getQodeToEdit,
+        createQode : createQode,
+        saveQode : saveQode,
         upVote : upVote,
         addToFavorites : addToFavorites,
         doCheckIfAvailable : doCheckIfAvailable,

@@ -1,0 +1,30 @@
+<div class="col-xs-12 col-md-8">
+  <h1>Your favorites, {{user.infos.name}}</h1>
+  <hr><br>
+  <span ng-hide="user.infos.favorites && user.infos.favorites.length > 0">You don't favorited any Qode yet.<p>&nbsp;</p></span>
+  <div ng-repeat="favorite in user.infos.favorites">
+   <span class="small-qode">{{favorite.qode}}</span>
+    <h1>{{favorite.title}}</h1>
+    <h2>{{favorite.subtitle}}</h2>
+    <p class="long-text is-multilined">{{favorite.description}}</p>
+    <div class="button button-small button-form is-enabled" ng-click="user.viewQode(favorite.qode)"><i class="fa fa-eye"></i></i>View Qode</div>
+    <div class="button button-small button-form is-enabled is-red" ng-click="user.removeFromFavorites(favorite._id,$index)"><i class="fa fa-times"></i></i>Delete from favorites</div>
+    <p>&nbsp;</p>
+  </div>
+  <p>&nbsp;</p>
+  <h1>Your Qodes</h1>
+  <hr><br>
+  <span ng-hide="user.infos.myqodes && user.infos.myqodes.length > 0">You don't created any Qode yet.<p>&nbsp;</p></span>
+  <div ng-repeat="qode in user.infos.myqodes" ng-init="show$index = true">
+   <span class="small-qode">{{qode.qode}}</span>
+    <h1>{{qode.title}}</h1>
+    <h2>{{qode.subtitle}}</h2>
+    <p class="long-text is-multilined">{{qode.description}}</p>
+    <div class="button button-small button-form is-enabled" ng-click="user.viewQode(qode.qode)"><i class="fa fa-eye"></i>View Qode</div>
+    <div class="button button-small button-form is-enabled" ng-click="user.editQode(qode.qode)"><i class="fa fa-pencil"></i>Edit this Qode</div>
+    <div class="button button-small button-form is-enabled is-red" ng-show="show$index" ng-click="show$index = !show$index"><i class="fa fa-times"></i>Delete this Qode</div>
+    <div ng-click="show$index = !show$index" ng-show="!show$index" class="button button-small button-form button-red is-enabled" type="submit"><i class="fa fa-times" aria-hidden="true"></i>Cancel</div>  
+    <div ng-click="user.deleteQode(qode._id,$index)" ng-show="!show$index" class="button button-small button-form button-green is-enabled" type="submit"><i class="fa fa-check" aria-hidden="true"></i>Confirm</div>
+    <p>&nbsp;</p>
+  </div>
+</div>

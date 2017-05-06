@@ -1,152 +1,193 @@
-'use strict';
+/*global $, angular, uiModule*/
 
-angular.module('app')
-  .controller('UserController', ['$rootScope', '$scope', '$state', 'userFactory', function($rootScope, $scope, $state, userFactory){
+(function(){
+  
+  'use strict';
+
+  angular.module('app')
+  
+    .controller('UserController', UserController);
     
-    $scope.name = "";
-    $scope.mail = "";
-    $scope.password = "";
-    $scope.confirmPassword = "";
-    
-    $scope.passwordValidation = function(){
-      return $scope.password === $scope.confirmPassword;
-    };
-    
-    $scope.login = function(){
-      const user = {
-        mail: $scope.mail,
-        password: $scope.password
+    /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
+    function UserController($rootScope, $state, userFactory){
+      
+      const vm = this;
+      
+      var getUserInfos; // Retrieve user data if he's logged in;
+      
+      vm.passwordValidation = passwordValidation; // Check if the password & password confirmation match;
+      vm.login = login; // Login the user;
+      vm.logout = logout; // Logout the user;
+      vm.register = register; // Register the user;
+      vm.viewQode = viewQode; // Go to the viewQode page to see selected Qode;
+      vm.removeFromFavorites = removeFromFavorites; // Remove a Qode from the favorites array of the user;
+      vm.deleteQode = deleteQode; // Delete a Qode form the database;
+      vm.editQode = editQode; // Go to the editQode page to edit the selected Qode;
+      vm.recovery = recovery; // Ask the server to send a recovery e-mail to reset password;
+      vm.resetPassword = resetPassword; // Update the user password;
+      
+      vm.infos = {
+        name : "",
+        mail : "",
+        password : "",
+        confirmPassword : ""
       };
       
-      userFactory.login(user).then(function success(res){
-        $rootScope.isLogged = {
-          log:true,
-          name:res.name,
-          favorites:res.favorites
-        };
-        $state.go('root.encode', {encode:'encode'});
-      }, function error(err){
-        $rootScope.$broadcast('notification',{
-          color:'red', 
-          message: err.data.error.message, 
-          title:'Oops...', 
-          glyph:'fa fa-times'
-        });
-      });
-    }; // End login function
-        
-    $scope.logout = function(){
-     userFactory.logout().then(function success(){
-        $rootScope.isLogged = {
-          log:false,
-          name:'',
-          favorites:[]
-        };
-     },function error(){
-        $rootScope.$broadcast('notification',{
-          color:'red', 
-          message: "Can't log out", 
-          title:'Oops...', 
-          glyph:'fa fa-times'
-        });
-     });
-    }; // End logout function
-    
-    $scope.register = function(){
-      const user = {
-        name: $scope.name,
-        mail: $scope.mail,
-        password : $scope.password,
-        confirmPassword : $scope.confirmPassword
-      };
       
-      if(user.password !== user.confirmPassword){
-        $rootScope.$broadcast('notification',{
-          color:'red', 
-          message: "doesn't match", 
-          title:'Passwords', 
-          glyph:'fa fa-times'
-        });
-        return;
+      (function getUserInfos(){
+        if($rootScope.currentUser.isLogged === true){
+          userFactory.getUser().then(function(res){
+            vm.infos = res.data;
+          });
+        }
+      }());
+      
+      
+      function passwordValidation(){
+        return vm.infos.password === vm.infos.confirmPassword;
       }
       
-      userFactory.register(user).then(function success(res){
-        $rootScope.isLogged = {
-          log:true,
-          name:res.name,
-          favorites:res.favorites
+      
+      function login(){
+        
+        const user = {
+          mail: vm.infos.mail,
+          password: vm.infos.password
         };
-        $rootScope.$broadcast('notification',{
-          color:'green', 
-          message: "You're in, "+res.name, 
-          title:'Welcome', 
-          glyph:'fa fa-check'
-        });
-        $state.go('root.encode', {encode:'encode'});
-      }, function error(err){
+        
+        userFactory.login(user).then(function success(res){
+          $rootScope.currentUser = {
+            isLogged:true,
+            name:res.data.name,
+          };
+          $state.go('root.getqode', {encode:'encode'});
+        }, function error(err){
           $rootScope.$broadcast('notification',{
             color:'red', 
             message: err.data.error.message, 
             title:'Oops...', 
             glyph:'fa fa-times'
           });
+        });
         
-      });
-    }; // End register function
-    
-    if($rootScope.currentUser.isLogged === true){
-      $scope.data = userFactory.getUser().then(function(res){
-        $scope.user = res;
-      });
-    }
-    
-    $scope.viewQode = function(qode){
-      $state.go('root.qode', {id:qode});
-    };
+      } // End login function;
+      
+      
+      function logout(){
+        userFactory.logout().then(function success(){
+          $rootScope.currentUser = {
+            isLogged:false,
+            name:''
+          };
+        },function error(){
+          $rootScope.$broadcast('notification',{
+            color:'red', 
+            message: "Please try again", 
+            title:'Oops...', 
+            glyph:'fa fa-times'
+          });
+        });
+      } // End logout function;
 
-    $scope.removeFromFavorites = function(qodeId,index){
-      $scope.user.favorites.splice(index,1);
-      userFactory.user.removeFromFavorites({favId:qodeId});
-    };
-    
-    $scope.deleteQode = function(qodeId,index){
-      $scope.user.myqodes.splice(index,1);
-      userFactory.user.deleteQode({qodeId:qodeId});
-    };
-    
-    $scope.editQode = function(qodeId){
-      $state.go('root.newQode', {qode:qodeId});
-    };
-    
-    $scope.recovery = function(){
-      userFactory.recovery($scope.mail).then(function(){
-        $rootScope.$broadcast('notification',{
-          color:'green', 
-          message: "Check your emails.", 
-          title:'Alright !', 
-          glyph:'fa fa-check'
+
+      function register(){
+        
+        const user = {
+          name: vm.infos.name,
+          mail: vm.infos.mail,
+          password : vm.infos.password,
+          confirmPassword : vm.infos.confirmPassword
+        };
+        
+        if(!passwordValidation()){
+          $rootScope.$broadcast('notification',{
+            color:'red', 
+            message: "doesn't match", 
+            title:'Passwords', 
+            glyph:'fa fa-times'
+          });
+          return;
+        }
+        
+        userFactory.register(user).then(function success(res){
+          $rootScope.currentUser = {
+            isLogged:true,
+            name:res.data.name
+          };
+          $rootScope.$broadcast('notification',{
+            color:'green', 
+            message: "You're in, "+res.data.name, 
+            title:'Welcome', 
+            glyph:'fa fa-check'
+          });
+          $state.go('root.getqode', {encode:'encode'});
+        }, function error(err){
+            $rootScope.$broadcast('notification',{
+              color:'red', 
+              message: err.data.error.message, 
+              title:'Oops...', 
+              glyph:'fa fa-times'
+            });
         });
-        $state.go('root.encode');
-      },function(err){
-        $rootScope.$broadcast('notification',{
-          color:'red', 
-          message: err.data.error.message, 
-          title:'Oops..', 
-          glyph:'fa fa-times'
+        
+      } // End register function;
+      
+      
+      function viewQode(qode){
+        $state.go('root.viewqode', {qode:qode});
+      }
+      
+      
+      function removeFromFavorites(qodeId,index){
+        vm.infos.favorites.splice(index,1);
+        userFactory.removeFromFavorites(qodeId);
+      }
+      
+      
+      function deleteQode(qodeId,index){
+        vm.infos.myqodes.splice(index,1);
+        userFactory.deleteQode(qodeId);
+      }
+      
+      
+      function editQode(qodeId){
+        $state.go('root.editqode', {qode:qodeId});
+      }
+      
+      
+      function recovery(){
+        userFactory.recovery(vm.infos.mail).then(function(){
+          $rootScope.$broadcast('notification',{
+            color:'green', 
+            message: "Check your emails.", 
+            title:'Alright !', 
+            glyph:'fa fa-check'
+          });
+          $state.go('root.getqode');
+        },function(err){
+          $rootScope.$broadcast('notification',{
+            color:'red', 
+            message: err.data.error.message, 
+            title:'Oops..', 
+            glyph:'fa fa-times'
+          });
         });
-      });
-    };
-    
-    $scope.resetPassword = function(){
-      userFactory.user.reset($scope.confirmPassword).then(function(){
-        $rootScope.$broadcast('notification',{
-          color:'green', 
-          message: "Password reset", 
-          title:'Alright !', 
-          glyph:'fa fa-check'
+      } // End recovery function;
+      
+      
+      function resetPassword(){
+        userFactory.reset(vm.infos.confirmPassword).then(function(){
+          $rootScope.$broadcast('notification',{
+            color:'green', 
+            message: "Password reset", 
+            title:'Alright !', 
+            glyph:'fa fa-check'
+          });
+          $state.go('root.getqode');
         });
-        $state.go('root.encode');
-      });
-    };
+      } // End reset password function;
+
+    } // End UserController
     
-  }]);
+    
+}());

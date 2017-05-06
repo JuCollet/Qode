@@ -9,7 +9,7 @@
     .controller('AppController', AppController);
     
     /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
-    function AppController($rootScope, $timeout, userFactory){
+    function AppController($rootScope, $scope, $timeout, userFactory){
       
       var vm = this;
       var checkCurrentUser; // Check if user is logged or not;
@@ -17,7 +17,7 @@
       var notificationListener; // Listen for notifications to be displayed;
       
       vm.$notification = $('notification');
-      vm.backButtonDestination = "root.encode";
+      vm.backButtonDestination = "root.getqode";
       vm.notification = {
         color:"",
         messageTitle:"",
@@ -32,9 +32,9 @@
       
       checkCurrentUser = (function(){
         userFactory.isLogged().then(function(res){
-          if(res.isLogged !== undefined && res.isLogged.log === true){
+          if(res.data.isLogged !== undefined && res.data.isLogged.log === true){
             $rootScope.currentUser.isLogged = true;
-            $rootScope.currentUser.name = res.isLogged.name;
+            $rootScope.currentUser.name = res.data.isLogged.name;
           } else {
             $rootScope.currentUser.isLogged = false;
             $rootScope.currentUser.name = "";
@@ -51,10 +51,10 @@
               vm.backButtonDestination = 'root.myaccount';
             } else if(from.name === 'root.login') {
               vm.backButtonDestination = 'root.login';
-            } else if(from.name === 'root.decode') {
-              vm.backButtonDestination = 'root.decode({encode:"decode"})';
+            } else if(from.name === 'root.search') {
+              vm.backButtonDestination = 'root.search({encode:"decode"})';
             } else {
-              vm.backButtonDestination = 'root.encode';
+              vm.backButtonDestination = 'root.getqode';
             }
           }
         });
@@ -71,7 +71,7 @@
           // so the $scope is correctly updated before the notification pane is shown;
           // This is the new evlSync method (angular > 1.2) explained here :
           // https://www.bennadel.com/blog/2605-scope-evalasync-vs-timeout-in-angularjs.htm
-          vm.$applyAsync(function(){
+          $scope.$applyAsync(function(){
             $('body > div').addClass('is-blurred');
             vm.$notification.fadeIn(250).delay(1500).fadeOut(500);
           });

@@ -68,7 +68,7 @@ gulp.task('usemin', ['jshint','less'], function(){
   return gulp.src('./public/clean/**/*.html')
   .pipe(usemin({
     css:[minifycss(),rev()],
-    js:[babel({presets:['es2015']}),ngAnnotate(),rev()], // to add for prod : uglify()
+    js:[babel({presets:['es2015']}),ngAnnotate(),uglify(),rev()], 
     libjs:[rev()]
   }))
   .pipe(gulp.dest('./public/dist/desktop'));

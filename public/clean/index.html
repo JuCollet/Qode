@@ -55,24 +55,22 @@
   
   <!-- build:js scripts/main.js -->
   <script src="scripts/app.js"></script>
-  <script src="scripts/modules/uiScripts.js"></script>
+  <script src="scripts/modules/uiModule.js"></script>
+  <script src="scripts/modules/uploadModule.js"></script>
   <script src="scripts/services/qodeFactory.js"></script>
-  <script src="scripts/services/viewQodeFactory.js"></script>
-  <script src="scripts/services/newQodeFactory.js"></script>
   <script src="scripts/services/userFactory.js"></script>
   <script src="scripts/controllers/AppController.js"></script>
   <script src="scripts/controllers/NavController.js"></script>
-  <script src="scripts/controllers/GetQodeController.js"></script>
-  <script src="scripts/controllers/NewQodeController.js"></script>
-  <script src="scripts/controllers/SearchQodeController.js"></script>
-  <script src="scripts/controllers/ViewQodeController.js"></script>
+  <script src="scripts/controllers/QodeEditController.js"></script>
+  <script src="scripts/controllers/QodeGetController.js"></script>
+  <script src="scripts/controllers/QodeSearchController.js"></script>
+  <script src="scripts/controllers/QodeViewController.js"></script>
   <script src="scripts/controllers/UserController.js"></script>
   <script src="scripts/directives.js"></script>
   <!-- endbuild -->
   
   <script>
-    // Initialize tooltips
-    $(function () {$('[data-toggle="tooltip"]').tooltip();});
+    $(function () {$('[data-toggle="tooltip"]').tooltip();}); // Initialize tooltips
   </script>
 
 </body>

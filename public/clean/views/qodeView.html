@@ -1,10 +1,10 @@
 <div class="col-xs-12 col-sm-10 col-md-8">
-  <span class="small-qode">{{qode.qode}}</span>
-  <h1>{{qode.title}}</h1>
-  <h2>{{qode.subtitle}}</h2>
-  <p class="long-text is-multilined">{{qode.description}}</p>
+  <span class="small-qode">{{view.qode.qode}}</span>
+  <h1>{{view.qode.title}}</h1>
+  <h2>{{view.qode.subtitle}}</h2>
+  <p class="long-text is-multilined">{{view.qode.description}}</p>
 
-  <div class="card" data-color="{{card.color}}" ng-repeat="card in qode.cards">
+  <div class="card" data-color="{{card.color}}" ng-repeat="card in view.qode.cards">
     <h4>{{card.cardTitle}}</h4>
     <p class="long-text is-multilined">{{card.cardText}}</p>
     <hr class="is-light" ng-show="card.cardReferences.length > 0">
@@ -12,15 +12,15 @@
     <hr class="is-light" ng-show="card.files.length > 0">
     <small ng-repeat="file in card.files"><p><a href="{{file.path}}" class="is-white"><i class="fa fa-cloud-download" ></i>{{file.name}}</a> | {{file.type}}</p></small>
   </div>
-  <div class="card" data-color="default" ng-show="qode.files.length > 0">
+  <div class="card" data-color="default" ng-show="view.qode.files.length > 0">
     <h4>Attached files</h4>
-    <p ng-repeat="file in qode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a></small></p>
+    <p ng-repeat="file in view.qode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a></small></p>
   </div>
   <small>
-    <p ng-show="isLogged.log && qode.isLiked === false && qode.isMine === false"><span class="card-options"><i class="fa fa-thumbs-up"></i><span class="is-clickable" ng-click="thanksAuthor(qode._id)">&nbsp;&nbsp;THANKS THE AUTHOR</span></span></p>
-    <p ng-show="isLogged.log && qode.isLiked === true || qode.isMine === true"><span class="card-options is-light"><i class="fa fa-thumbs-up"></i><span>&nbsp;&nbsp;{{qode.upVotes}} LIKE<span ng-show="qode.upVotes>1">S</span></span></span></p>
-    <p ng-show="isLogged.log && qode.isFavorited === false && qode.isMine === false"><span class="card-options"><i class="fa fa-heart is-red"></i><span class="is-clickable" ng-click="addToFavorites(qode._id)">&nbsp;&nbsp;ADD TO FAVORITES</span></span></p>
-    <p ng-show="isLogged.log && qode.isFavorited === true && qode.isMine === false"><span class="card-options is-light"><i class="fa fa-heart is-red"></i><span>&nbsp;&nbsp;IN YOUR FAVORITES</span></span></p>
+    <p ng-show="currentUser.isLogged && view.qode.isLiked === false && view.qode.isMine === false"><span class="card-options"><i class="fa fa-thumbs-up"></i><span class="is-clickable" ng-click="view.likeThis(view.qode._id)">&nbsp;&nbsp;THANKS THE AUTHOR</span></span></p>
+    <p ng-show="currentUser.isLogged && view.qode.isLiked === true || view.qode.isMine === true"><span class="card-options is-light"><i class="fa fa-thumbs-up"></i><span>&nbsp;&nbsp;{{view.qode.upVotes}} LIKE<span ng-show="view.qode.upVotes>1">S</span></span></span></p>
+    <p ng-show="currentUser.isLogged && view.qode.isFavorited === false && view.qode.isMine === false"><span class="card-options"><i class="fa fa-heart is-red"></i><span class="is-clickable" ng-click="view.addToFavorites(view.qode._id)">&nbsp;&nbsp;ADD TO FAVORITES</span></span></p>
+    <p ng-show="currentUser.isLogged && view.qode.isFavorited === true && view.qode.isMine === false"><span class="card-options is-light"><i class="fa fa-heart is-red"></i><span>&nbsp;&nbsp;IN YOUR FAVORITES</span></span></p>
   </small>
   <p>&nbsp;</p>
 </div>

@@ -12,7 +12,7 @@
     function userFactory($http){
       
       const getUser = function(){return $http.get('/user');},
-            addToFavorites = function(){return $http.put('/user/addtofavorites');},
+            addToFavorites = function(qodeId){return $http.put('/user/addtofavorites', {favId:qodeId});},
             deleteQode = function(qodeId){return $http.delete('/user/deleteqode/'+qodeId);},
             isLogged = function(){return $http.get('/user/isLogged');},
             login = function(user){return $http.post('/user/login',user);},
