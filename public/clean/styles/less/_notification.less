@@ -1,0 +1,39 @@
+.notification {
+    position: fixed;
+    padding: 1vw 1vw 1.2vw 1vw;
+    width: 20vw;
+    height: 14vw;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 999;
+    
+    border-radius: 5px;
+    
+    text-align: center;
+    color: #FFF;
+    
+    box-shadow: 3px 3px 12px rgba(0,0,0,0.4);
+}
+
+.notification-glyph {
+    display: block;
+    font-size: 4.5vw;
+}
+
+.notification-message {
+    display:block;
+    
+    font-size:1.7vw;
+    font-weight:300;
+}
+
+.notification[data-color="red"] {
+    background-color:#f23a3a;
+}
+
+.notification[data-color="green"] {
+    background-color:#39f177;
+}

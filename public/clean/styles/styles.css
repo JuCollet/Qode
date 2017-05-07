@@ -63,7 +63,7 @@ h2 {
   font-weight: 400;
 }
 h3 {
-  color: #494949;
+  color: #606060;
   font-size: 1.5em;
   font-weight: 400;
 }
@@ -125,6 +125,58 @@ hr {
 .nav-logo {
   margin-bottom: 30px;
 }
+.switch {
+  width: 60px;
+  height: 30px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  border-radius: 30px;
+  border: 3px solid white;
+  cursor: pointer;
+  box-shadow: -1px 2px 3px 2px rgba(0, 0, 0, 0.3) inset;
+}
+.switch-cursor {
+  height: 16px;
+  width: 16px;
+  margin-top: 4px;
+  margin-left: 4px;
+  border-radius: 16px;
+  background-color: #6FD1D7;
+}
+.notification {
+  position: fixed;
+  padding: 1vw 1vw 1.2vw 1vw;
+  width: 20vw;
+  height: 14vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 999;
+  border-radius: 5px;
+  text-align: center;
+  color: #FFF;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
+}
+.notification-glyph {
+  display: block;
+  font-size: 4.5vw;
+}
+.notification-message {
+  display: block;
+  font-size: 1.7vw;
+  font-weight: 300;
+}
+.notification[data-color="red"] {
+  background-color: #f23a3a;
+}
+.notification[data-color="green"] {
+  background-color: #39f177;
+}
 .button {
   display: inline-block;
   margin-bottom: 1.125em;
@@ -155,22 +207,22 @@ hr {
   font-size: .9em;
 }
 .button.is-enabled:hover {
-  background-color: #FFF;
   border-color: transparent;
-  color: #494949;
+  background-color: #FFF;
+  color: #606060;
 }
 .button-green {
-  background-color: #9AD179;
   border: 1px solid #9AD179;
+  background-color: #9AD179;
 }
 .button.button-green.is-enabled:hover {
-  background-color: #6fbd41;
   border: 1px solid #6fbd41;
+  background-color: #6fbd41;
   color: #FFF;
 }
 .button-blue {
-  background-color: #6FD1D7;
   border: 1px solid #6FD1D7;
+  background-color: #6FD1D7;
 }
 .button.button-blue.is-enabled:hover {
   background-color: #36bbc3;
@@ -198,7 +250,7 @@ hr {
 .card {
   position: relative;
   padding: 20px 20px 5px 20px;
-  margin-bottom: 2.5vw;
+  margin-bottom: 15px;
   margin-top: 2vw;
   border-radius: 4px;
   text-align: left;
@@ -225,57 +277,6 @@ hr {
 .card[data-color="purple"] {
   background-color: #8EA8F5;
   border: 2px solid #8EA8F5;
-}
-.card-delete {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  top: -50px;
-  right: -50px;
-  border-radius: 100%;
-  opacity: 0;
-  transition: opacity 0.15s ease-in;
-  -webkit-transition: opacity 0.15s ease-in;
-  animation-name: card-delete-create-show;
-  animation-duration: 5s;
-  animation-iteration-count: 1;
-}
-@keyframes card-delete-create-show {
-  0% {
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.card-delete:hover {
-  opacity: 1;
-}
-.card-delete-button {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 35px;
-  left: 35px;
-  padding-top: 6px;
-  border-radius: 100%;
-  background-color: #494949;
-  text-align: center;
-  color: #777777;
-  box-shadow: 1px 1px 1px 3px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-.card-delete-button:hover {
-  color: white;
-}
-.card-delete i {
-  font-size: 18px;
 }
 .card-input {
   display: block;
@@ -367,7 +368,7 @@ input[type=radio]:checked ~ .check {
   box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.3) inset;
 }
 .card-color-selector li .check.default {
-  background-color: #494949;
+  background-color: #606060;
 }
 .card-color-selector li .check.orange {
   background-color: #F3803B;
@@ -384,10 +385,60 @@ input[type=radio]:checked ~ .check {
 .card-color-selector li .check.purple {
   background-color: #8EA8F5;
 }
+.card-delete {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: -50px;
+  right: -50px;
+  border-radius: 100%;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+  -webkit-transition: opacity 0.15s ease-in;
+  animation-name: card-delete-create-show;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+}
+@keyframes card-delete-create-show {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.card-delete:hover {
+  opacity: 1;
+}
+.card-delete-button {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 35px;
+  left: 35px;
+  padding-top: 6px;
+  border-radius: 100%;
+  background-color: #606060;
+  text-align: center;
+  color: #777777;
+  box-shadow: 1px 1px 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.card-delete-button:hover {
+  color: white;
+}
+.card-delete i {
+  font-size: 18px;
+}
 .card-options {
   display: block;
   margin-left: 20px;
-  font-size: .9rem;
   color: white;
 }
 .form-input {
@@ -425,33 +476,94 @@ input[type=radio]:checked ~ .check {
 textarea::-webkit-input-placeholder,
 input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #494949;
+  color: #606060;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 textarea::-moz-placeholder,
 input::-moz-placeholder {
   /* Firefox 19+ */
-  color: #494949;
+  color: #606060;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 textarea:-ms-input-placeholder,
 input:-ms-input-placeholder {
   /* IE 10+ */
-  color: #494949;
+  color: #606060;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 textarea:-moz-placeholder,
 input:-moz-placeholder {
   /* Firefox 18- */
-  color: #494949;
+  color: #606060;
   opacity: 0.8;
   letter-spacing: 0px;
 }
 .has-feedback .fa {
   padding-top: 10px;
+}
+.qode-preview {
+  width: 20vw;
+  height: 40vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1vw;
+  background-image: url('../images/iphoneWireframe.png');
+  background-size: cover;
+}
+.hr-preview {
+  margin-top: 0px;
+  margin-bottom: .7em;
+}
+.preview-small-qode {
+  display: inline-block;
+  margin-bottom: 1vw;
+  padding: .15vw .15vw .1vw .3vw;
+  font-weight: 900;
+  font-size: .7vw;
+  letter-spacing: .1vw;
+  color: #FFF;
+  border: .2vw solid #FFF;
+}
+.qode-preview-content {
+  position: relative;
+  display: block;
+  top: 5vw;
+  left: 1.3vw;
+  width: 17.4vw;
+  height: 30.05vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-top: 1.5vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.qode-preview-content h1 {
+  margin-bottom: .6em;
+  font-size: 1.5em;
+}
+.qode-preview-content h2 {
+  margin-bottom: .65em;
+  font-size: 1.15em;
+}
+.qode-preview-content h4 {
+  margin-bottom: .3em;
+  font-size: .9em;
+}
+.qode-preview-content p {
+  margin-bottom: 1em;
+  font-size: .9em;
+}
+.qode-preview-content .preview-card-text {
+  font-size: .75em;
+}
+.qode-preview-card {
+  padding: .8vw .8vw 0 .8vw;
+  margin-top: .65vw;
+  margin-bottom: 7px;
+  border-radius: 2px;
 }
 .long-text {
   line-height: 1.4em;
@@ -532,119 +644,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .qode-cta {
   margin-bottom: 8vh;
-}
-.switch {
-  width: 60px;
-  height: 30px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 12px;
-  border-radius: 30px;
-  border: 3px solid white;
-  cursor: pointer;
-  box-shadow: -1px 2px 3px 2px rgba(0, 0, 0, 0.3) inset;
-}
-.switch-cursor {
-  height: 16px;
-  width: 16px;
-  margin-top: 4px;
-  margin-left: 4px;
-  border-radius: 16px;
-  background-color: #6FD1D7;
-}
-.qode-preview {
-  width: 20vw;
-  height: 40vw;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1vw;
-  background-image: url('../images/iphoneWireframe.png');
-  background-size: cover;
-}
-.hr-preview {
-  margin-top: 0px;
-  margin-bottom: .7em;
-}
-.preview-small-qode {
-  display: inline-block;
-  margin-bottom: 1vw;
-  padding: .15vw .15vw .1vw .3vw;
-  font-weight: 900;
-  font-size: .7vw;
-  letter-spacing: .1vw;
-  color: #FFF;
-  border: .2vw solid #FFF;
-}
-.qode-preview-content {
-  position: relative;
-  display: block;
-  top: 5vw;
-  left: 1.3vw;
-  width: 17.4vw;
-  height: 30.05vw;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-top: 1.5vw;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.qode-preview-content h1 {
-  margin-bottom: .6em;
-  font-size: 1.5em;
-}
-.qode-preview-content h2 {
-  margin-bottom: .65em;
-  font-size: 1.15em;
-}
-.qode-preview-content h4 {
-  margin-bottom: .3em;
-  font-size: .9em;
-}
-.qode-preview-content p {
-  margin-bottom: 1em;
-  font-size: .9em;
-}
-.qode-preview-content .preview-card-text {
-  font-size: .75em;
-}
-.qode-preview-card {
-  padding: .8vw .8vw 0 .8vw;
-  margin-top: .65vw;
-  margin-bottom: 7px;
-  border-radius: 2px;
-}
-.notification {
-  position: fixed;
-  padding: 1vw 1vw 1.2vw 1vw;
-  width: 20vw;
-  height: 14vw;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 999;
-  border-radius: 5px;
-  text-align: center;
-  color: #FFF;
-  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
-}
-.notification-glyph {
-  display: block;
-  font-size: 4.5vw;
-}
-.notification-message {
-  display: block;
-  font-size: 1.7vw;
-  font-weight: 300;
-}
-.notification[data-color="red"] {
-  background-color: #f23a3a;
-}
-.notification[data-color="green"] {
-  background-color: #39f177;
 }
 .footer-col {
   width: 20%;

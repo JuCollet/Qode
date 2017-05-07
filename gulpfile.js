@@ -59,7 +59,7 @@ gulp.task('jshint', function(){
 });
 
 gulp.task('less', function(){
-  return gulp.src('./public/clean/styles/less/*.less')
+  return gulp.src('./public/clean/styles/less/styles.less')
   .pipe(less())
   .pipe(gulp.dest('./public/clean/styles/'))
 });
