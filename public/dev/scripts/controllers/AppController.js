@@ -1,71 +1,84 @@
-'use strict';
+/*global $, angular*/
 
-angular.module('app')
+(function(){
+  
+  'use strict';
 
-  .controller('AppController', ['$scope', '$rootScope', '$timeout', 'userFactory', function($scope, $rootScope, $timeout, userFactory){
-
-    const $notification = $('notification');
-    $scope.notificationColor = "";
-    $scope.notificationMessageTitle = "";
-    $scope.notificationMessage = "";
-    $scope.notificationGlyph = "";
+  angular.module('app')
+  
+    .controller('AppController', AppController);
     
-    $scope.backButtonDestination = "root.encode";
-    
-    // Initialize tooltips
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-    
-    $rootScope.isLogged = {
-      log: false,
-      name: ""
-    };
-        
-    // Function that check if user is logged or not.
-    userFactory.user.isLogged().$promise.then(function(res){
-      if(res.isLogged !== undefined && res.isLogged.log === true){
-        $rootScope.isLogged.log = true;
-        $rootScope.isLogged.name = res.isLogged.name;
-      } else {
-        $rootScope.isLogged.log = false;
-        $rootScope.isLogged.name = "";
-      }
-    }, function(err){
-      if(err){throw err;}
-    });
-    
-    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from) {
-      if(from.name !== null && from.name !== undefined){
-        if(from.name === 'root.myaccount'){
-          $scope.backButtonDestination = 'root.myaccount';
-        } else if(from.name === 'root.login') {
-          $scope.backButtonDestination = 'root.login';
-        } else if(from.name === 'root.decode') {
-          $scope.backButtonDestination = 'root.decode({encode:"decode"})';
-        } else {
-          $scope.backButtonDestination = 'root.encode';
-        }
-      }
-    });
+    /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
+    function AppController($rootScope, $scope, $timeout, userFactory){
+      
+      var vm = this;
+      var checkCurrentUser; // Check if user is logged or not;
+      var backButtonRedirection; // Change back button destination depending on where the user came from;
+      var notificationListener; // Listen for notifications to be displayed;
+      
+      vm.$notification = $('notification');
+      vm.backButtonDestination = "root.getqode";
+      vm.notification = {
+        color:"",
+        messageTitle:"",
+        message:"",
+        glyph:""
+      };
+      
+      $rootScope.currentUser = {
+        isLogged:false,
+        name:""
+      };
+      
+      checkCurrentUser = (function(){
+        userFactory.isLogged().then(function(res){
+          if(res.data.isLogged !== undefined && res.data.isLogged.log === true){
+            $rootScope.currentUser.isLogged = true;
+            $rootScope.currentUser.name = res.data.isLogged.name;
+          } else {
+            $rootScope.currentUser.isLogged = false;
+            $rootScope.currentUser.name = "";
+          }
+        }, function(err){
+          if(err){throw err;}
+        });        
+      }());
 
-    // Notification system;
-    $scope.$on('notification', function(event, args) {
-      $scope.notificationColor = args.color;
-      $scope.notificationMessageTitle = args.title;
-      $scope.notificationMessage = args.message;
-      $scope.notificationGlyph = args.glyph;
-      // Set JQuery method in angular $applyAsync method to put in $digest queue, 
-      // so the $scope is correctly updated before the notification pane is shown;
-      // This is the new evlSync method (angular > 1.2) explained here :
-      // https://www.bennadel.com/blog/2605-scope-evalasync-vs-timeout-in-angularjs.htm
-      $scope.$applyAsync(function(){
-        $('body > div').addClass('is-blurred');
-        $notification.fadeIn(250).delay(1500).fadeOut(500);
-      });
-      $timeout(function(){
-        $('body > div').removeClass('is-blurred');
-      }, 2250);
-    });
-
-}]);
+      backButtonRedirection = (function(){
+        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from) {
+          if(from.name !== null && from.name !== undefined){
+            if(from.name === 'root.myaccount'){
+              vm.backButtonDestination = 'root.myaccount';
+            } else if(from.name === 'root.login') {
+              vm.backButtonDestination = 'root.login';
+            } else if(from.name === 'root.search') {
+              vm.backButtonDestination = 'root.search({encode:"decode"})';
+            } else {
+              vm.backButtonDestination = 'root.getqode';
+            }
+          }
+        });
+      }());
+      
+      notificationListener = (function(){
+        $rootScope.$on('notification', function(event, args) {
+          vm.notification.color = args.color;
+          vm.notification.messageTitle = args.title;
+          vm.notification.message = args.message;
+          vm.notification.glyph = args.glyph;
+          
+          // Set JQuery method in angular $applyAsync method to put in $digest queue, 
+          // so the $scope is correctly updated before the notification pane is shown;
+          // This is the new evlSync method (angular > 1.2) explained here :
+          // https://www.bennadel.com/blog/2605-scope-evalasync-vs-timeout-in-angularjs.htm
+          $scope.$applyAsync(function(){
+            $('body > div').addClass('is-blurred');
+            vm.$notification.fadeIn(250).delay(1500).fadeOut(500);
+          });
+          $timeout(function(){
+            $('body > div').removeClass('is-blurred');
+          }, 2250);
+        });
+      }());
+    }
+}());

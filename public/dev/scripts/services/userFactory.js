@@ -1,47 +1,40 @@
-'use strict';
+/*global $, angular*/
 
-angular.module('app')
-  .factory('userFactory', ['$resource', function($resource){
+(function(){
+  
+  'use strict';
+
+  angular.module('app')
     
-    const user = $resource("/user", null, {
-      addToFavorites:{
-        url:'/user/addtofavorites',
-        method:'PUT'
-      },
-      deleteQode:{
-        url:'/user/deleteqode/:qodeId',
-        method:'DELETE'
-      },
-      isLogged:{
-        url:'/user/islogged',
-        method:'GET'
-      },
-      login:{
-        url:'/user/login',
-        method:'POST'
-      },
-      logout:{
-        url:'/user/logout',
-        method:'GET'
-      },
-      recovery : {
-        url:'/user/passwordrecovery',
-        method: 'POST'
-      },
-      register:{
-        method:'POST'
-      },
-      reset:{
-        method:'PUT'
-      },
-      removeFromFavorites:{
-        url:'/user/removefromfavorites',
-        method:'PUT'
-      }
-    });
-    
-    return {
-      user: user
-    };
-    
-  }]);
+    .factory('userFactory', userFactory);
+  
+    /* @ngInject */ // Used with Ng-Annotate in Gulp, this inject dependencies automatically;
+    function userFactory($http){
+      
+      const getUser = function(){return $http.get('/user');},
+            addToFavorites = function(qodeId){return $http.put('/user/addtofavorites', {favId:qodeId});},
+            deleteQode = function(qodeId){return $http.delete('/user/deleteqode/'+qodeId);},
+            isLogged = function(){return $http.get('/user/isLogged');},
+            login = function(user){return $http.post('/user/login',user);},
+            logout = function(){return $http.get('/user/logout');},
+            recovery = function(mail){return $http.post('/user/passwordrecovery', {mail:mail});},
+            register = function(user){return $http.post('/user', user);},
+            reset = function(newPassword){return $http.put('/user', {newPassword:newPassword});},
+            removeFromFavorites = function(qodeId){return $http.put('/user/removefromfavorites',{favId:qodeId});};
+      
+      return {
+        getUser : getUser,
+        addToFavorites : addToFavorites,
+        deleteQode : deleteQode,
+        isLogged : isLogged,
+        login : login,
+        logout : logout,
+        recovery : recovery,
+        register : register,
+        reset : reset,
+        removeFromFavorites : removeFromFavorites
+      };
+  
+    }
+
+}());

@@ -53,19 +53,19 @@ gulp.task('clean-mobile', function(){
 
 
 gulp.task('jshint', function(){
-  return gulp.src('./public/clean/scripts/**/*.js')
+  return gulp.src('./public/dev/scripts/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
 
 gulp.task('less', function(){
-  return gulp.src('./public/clean/styles/less/styles.less')
+  return gulp.src('./public/dev/styles/less/styles.less')
   .pipe(less())
-  .pipe(gulp.dest('./public/clean/styles/'))
+  .pipe(gulp.dest('./public/dev/styles/'))
 });
 
 gulp.task('usemin', ['jshint','less'], function(){
-  return gulp.src('./public/clean/**/*.html')
+  return gulp.src('./public/dev/**/*.html')
   .pipe(usemin({
     css:[minifycss(),rev()],
     js:[babel({presets:['es2015']}),ngAnnotate(),uglify(),rev()], 
@@ -75,7 +75,7 @@ gulp.task('usemin', ['jshint','less'], function(){
 });
 
 gulp.task('imagemin', function(){
-  return gulp.src('./public/clean/images/**/*')
+  return gulp.src('./public/dev/images/**/*')
   .pipe(cache(imagemin({optimizationLevel:3,progressive:true,interlaced:true})))
   .pipe(gulp.dest('./public/dist/desktop/images'))
 });

@@ -4,7 +4,7 @@ angular.module('app',['ui.router','ngResource'])
 
 .config(function($stateProvider,$urlRouterProvider){
 
-  $urlRouterProvider.otherwise('/encode');
+  $urlRouterProvider.otherwise('/getqode');
 
   $stateProvider
 
@@ -20,68 +20,58 @@ angular.module('app',['ui.router','ngResource'])
     }
   })
 
-  .state('root.encode', {
-    url:'/encode',
+  .state('root.getqode', {
+    url:'/getqode',
     params : {encode:null},
     views : {
       'options@root' : {
         templateUrl : 'views/navSwitch.html',
-        controller  : 'NavController'
+        controller  : 'NavController as nav'
       },
       'contentView@root' : {
-        templateUrl : 'views/home.html',
-        controller : 'EncodeController'
+        templateUrl : 'views/qodeGet.html',
+        controller : 'QodeGetController as qode'
       }
     }
   })
   
-  .state('root.decode', {
-    url:'/decode',
+  .state('root.search', {
+    url:'/search',
     params : {encode:null},
     views : {
-      'contentView@root' : {
-        templateUrl : 'views/decode.html',
-        controller : 'DecodeController'
-      }, 
       'options@root' : {
         templateUrl : 'views/navSwitch.html',
-        controller  : 'NavController'
-      }
-    }
-  })
-  
-  .state('root.decodexs', {
-    url:'/decodexs',
-    params : {encode:null},    
-    views : {
+        controller  : 'NavController as nav'
+      },
       'contentView@root' : {
-        template : '<h1>Decode small</h1>'
+        templateUrl : 'views/qodeSearch.html',
+        controller : 'QodeSearchController as qode'
       }
     }
   })
 
-  .state('root.newQode', {
+  .state('root.editqode', {
     url:'/new/:qode',
     views : {
       'contentView@root' : {
-        templateUrl : 'views/newQode.html',
-        controller : 'NewQodeController'
+        templateUrl : 'views/qodeEdit.html',
+        controller : 'QodeEditController as edit'
       },
-      'newQodePreview@root.newQode' : {
+      'newQodePreview@root.editqode' : {
         templateUrl : 'views/qodePreview.html'
       }
     }
   })
 
-  .state('root.qode', {
-    url:'/qode/:id',
+  .state('root.viewqode', {
+    url:'/qode/:qode',
     views : {
       'options@root' : {
         templateUrl : 'views/navBack.html'
       },
       'contentView@root' : {
         templateUrl : 'views/qodeView.html',
-        controller : 'ViewQodeController'
+        controller : 'QodeViewController as view'
       }
     }
   })
@@ -93,8 +83,8 @@ angular.module('app',['ui.router','ngResource'])
         templateUrl : 'views/navBack.html'
       },
       'contentView@root' : {
-        templateUrl : 'views/login.html',
-        controller : 'UserController'
+        templateUrl : 'views/userLogin.html',
+        controller : 'UserController as user'
       }
     }
   })
@@ -106,8 +96,8 @@ angular.module('app',['ui.router','ngResource'])
         templateUrl : 'views/navBack.html'
       },
       'contentView@root' : {
-        templateUrl : 'views/register.html',
-        controller : 'UserController'
+        templateUrl : 'views/userRegister.html',
+        controller : 'UserController as user'
       }
     }
   })
@@ -116,21 +106,21 @@ angular.module('app',['ui.router','ngResource'])
     url:'/recovery',
     views : {
       'contentView@root' : {
-        templateUrl : 'views/recovery.html',
-        controller : 'UserController'
+        templateUrl : 'views/userRecovery.html',
+        controller : 'UserController as user'
       }
     }
   })
   
-  .state('root.recoveryInfo', {
-    url:'/recoveryinfo',
+  .state('root.recoveryrequest', {
+    url:'/recoveryrequest',
     views : {
       'options@root' : {
         templateUrl : 'views/navBack.html'
       },
       'contentView@root' : {
-        templateUrl : 'views/recoveryInfo.html',
-        controller : 'UserController'
+        templateUrl : 'views/userRecoveryRequest.html',
+        controller : 'UserController as user'
       }
     }
   })
@@ -142,8 +132,8 @@ angular.module('app',['ui.router','ngResource'])
         templateUrl : 'views/navBack.html'
       },
       'contentView@root' : {
-        templateUrl : 'views/myAccount.html',
-        controller : 'UserController'
+        templateUrl : 'views/userAccount.html',
+        controller : 'UserController as user'
       }
     }
   });
