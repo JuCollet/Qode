@@ -10,12 +10,14 @@
       <div class="qode-char">&nbsp;</div>
       <div class="qode-char">&nbsp;</div>
     </div>
-    <div class="qode-cta">
+    <div class="qode-cta" ng-show="currentUser.isLogged">
       <a ng-click="qode.getThis()"><div class="button button-green is-enabled" style="margin-right: 0px;"><i class="fa fa-check"></i>I take it !</div></a>
+    </div>
+    <div class="qode-cta" ng-hide="currentUser.isLogged">
+      <a ui-sref="root.login"><div class="button button-blue is-enabled" style="margin-right: 0px;"><i class="fa fa-sign-in"></i>Log in</div></a>
     </div>
     <small ng-controller="UserController as user">
       <span><a href="#" ng-click="qode.refresh()">Refresh code</a>&nbsp; | &nbsp;</span>
-      <span ng-hide="currentUser.isLogged"><a ui-sref="root.login"><i class="fa fa-sign-in"></i>Log in</a>&nbsp; | &nbsp;</span>
       <span ng-hide="currentUser.isLogged"><a ui-sref="root.register"><i class="fa fa-user-circle"></i>Register</a></span>
       <span ng-show="currentUser.isLogged"><a ui-sref="root.myaccount">My account</a>&nbsp; | &nbsp;</span>
       <span ng-show="currentUser.isLogged"><a href="#" ng-click="user.logout()"><i class="fa fa-sign-out"></i>Log out</a></span>
