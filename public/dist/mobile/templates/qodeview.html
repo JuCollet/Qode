@@ -13,6 +13,11 @@
           <span ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}" target="_blank"><i class="fa fa-link"></i>{{reference.text}}</a>&nbsp;&nbsp;</span>
         </p>
       </div>
+      
+      <div class="qode-card" ng-show="qode.files.length > 0" data-color="default">
+        <h1>Attached files</h1>
+        <p ng-repeat="file in qode.files"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}">{{file.fileName}}</a></small></p>
+      </div>
 
       <span class="qode-option" ng-show="logged.log && qode.isLiked === false && qode.isMine === false" ng-click="likeQode(qode._id)"><i class="fa fa-thumbs-up"></i>LIKE THIS QODE</span>
       <span class="qode-option is-light" ng-show="logged.log && qode.isLiked === true || qode.isMine === true"><i class="fa fa-thumbs-up"></i>{{qode.upVotes}} LIKE<span ng-show="qode.upVotes>1">S</span></span>

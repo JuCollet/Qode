@@ -221,6 +221,15 @@ h1 {
     display: block;
     margin-bottom: 10px;
     margin-left: 15px; }
+  .qode-view .file-type {
+    position: relative;
+    padding: 2px 4px;
+    margin-right: 8px;
+    top: -2px;
+    border: 2px solid #FFF;
+    font-size: .55em;
+    font-weight: 400;
+    color: #FFF; }
 
 .form-page {
   position: absolute;
