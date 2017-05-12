@@ -89,15 +89,13 @@
         vm.newQode.cards.push(new card(cardColors[actualCardColor]));
       }
       
-      function addReference(i){
-        if(!uiModule.testValidUrl(vm.newReference.url, $rootScope)){return;}
-        if(vm.newReference.url !== "" && vm.newReference.name !== "") {
-          vm.newQode.cards[i].cardReferences.push(new cardReference(vm.newReference.name, vm.newReference.url));
-          vm.newReference = {url:"",name:""};
+      function addReference(i,link,text){
+        if(!uiModule.testValidUrl(link, $rootScope)){return;}
+        if(link !== "" && text !== "") {
+          vm.newQode.cards[i].cardReferences.push(new cardReference(text, link));
           return;
         } else if(vm.newReference.url !== "") {
-          vm.newQode.cards[i].cardReferences.push(new cardReference(vm.newReference.url, vm.newReference.url));
-          vm.newReference = {url:"",name:""};
+          vm.newQode.cards[i].cardReferences.push(new cardReference(text, link));
           return;
         } else {
           $rootScope.$broadcast('notification',{
