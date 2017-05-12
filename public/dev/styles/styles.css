@@ -441,6 +441,19 @@ input[type=radio]:checked ~ .check {
   margin-left: 20px;
   color: white;
 }
+.card-reference {
+  display: inline-block;
+}
+.card-reference a,
+.card-reference a:hover,
+.card-reference a:visited,
+.card-reference a:active {
+  color: white;
+  text-decoration: none;
+}
+.card-reference i {
+  font-size: .8em;
+}
 .form-input {
   display: block;
   margin-bottom: 1rem;

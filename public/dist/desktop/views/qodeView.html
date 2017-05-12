@@ -8,7 +8,9 @@
     <h4>{{card.cardTitle}}</h4>
     <p class="long-text is-multilined">{{card.cardText}}</p>
     <hr class="is-light" ng-show="card.cardReferences.length > 0">
-    <small ng-repeat="reference in card.cardReferences"><a href="{{reference.link}}" class="is-white"><p>{{reference.text}}</a></p></small>
+    <p>
+      <span class="card-reference" ng-repeat="reference in card.cardReferences"><i class="fa fa-link"></i><a href="{{reference.link}}" target="_blank" class="is-white">&nbsp;{{reference.text}}&nbsp;&nbsp;&nbsp;</a></span>
+    </p>
     <hr class="is-light" ng-show="card.files.length > 0">
     <small ng-repeat="file in card.files"><p><a href="{{file.path}}" class="is-white"><i class="fa fa-cloud-download" ></i>{{file.name}}</a> | {{file.type}}</p></small>
   </div>
