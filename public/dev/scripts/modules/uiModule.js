@@ -132,8 +132,7 @@ const uiModule = (function(){
 
     testValidUrl = function(string, $rootScope){
       if(string.substring(7,0) === "http://" || 
-      string.substring(8,0) === "https://" || 
-      string.substring(4,0) === "www."){
+      string.substring(8,0) === "https://"){
         return true;
       } else {
         $rootScope.$broadcast('notification',{
