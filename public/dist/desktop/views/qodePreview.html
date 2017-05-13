@@ -14,10 +14,6 @@
       <hr class="is-light" ng-show="card.files.length > 0">
       <small ng-repeat="file in card.files"><p><a href="{{file.path}}" class="is-white"><i class="fa fa-cloud-download" ></i>{{file.name}}</a> | {{file.type}}</p></small>
     </div>
-    <div class="card qode-preview-card" data-color="default" ng-show="edit.newQode.files.length > 0">
-      <h4>Attached files</h4>
-      <p ng-repeat="file in edit.newQode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a></small></p>
-    </div>
   </div>
 </div>
 <small class="is-centered"><i class="fa fa-eye" aria-hidden="true"></i>Preview</small>
