@@ -19,7 +19,7 @@
     <p ng-repeat="file in view.qode.files" class="file-list"><small><span class="file-type">{{file.fileType}}</span><a href="{{file.filePath}}" download>{{file.fileName}}</a></small></p>
   </div>
   <small>
-    <p ng-show="currentUser.isLogged && view.qode.isLiked === false && view.qode.isMine === false"><span class="card-options"><i class="fa fa-thumbs-up"></i><span class="is-clickable" ng-click="view.likeThis(view.qode._id)">&nbsp;&nbsp;THANKS THE AUTHOR</span></span></p>
+    <p ng-show="currentUser.isLogged && view.qode.isLiked === false && view.qode.isMine === false"><span class="card-options"><i class="fa fa-thumbs-up"></i><span class="is-clickable" ng-click="view.likeThis(view.qode._id)">&nbsp;&nbsp;LIKE THIS PAGE</span></span></p>
     <p ng-show="currentUser.isLogged && view.qode.isLiked === true || view.qode.isMine === true"><span class="card-options is-light"><i class="fa fa-thumbs-up"></i><span>&nbsp;&nbsp;{{view.qode.upVotes}} LIKE<span ng-show="view.qode.upVotes>1">S</span></span></span></p>
     <p ng-show="currentUser.isLogged && view.qode.isFavorited === false && view.qode.isMine === false"><span class="card-options"><i class="fa fa-heart is-red"></i><span class="is-clickable" ng-click="view.addToFavorites(view.qode._id)">&nbsp;&nbsp;ADD TO FAVORITES</span></span></p>
     <p ng-show="currentUser.isLogged && view.qode.isFavorited === true && view.qode.isMine === false"><span class="card-options is-light"><i class="fa fa-heart is-red"></i><span>&nbsp;&nbsp;IN YOUR FAVORITES</span></span></p>
