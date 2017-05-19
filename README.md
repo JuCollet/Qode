@@ -2,6 +2,10 @@
 
 Share infos & files with a code.
 
+[www.qode.be](http://www.qode.be/)
+
+***
+
 ## What's this ?
 
 This is a project made for the Coursera's full stack web development capstone's project which requires to use the courses viewed material. This project is fully functionnal and allowed me to get the specialization certification from Coursera on may 17, 2017. 
@@ -47,3 +51,5 @@ More details about primary features :
 - mLab
 - AWS S3
 - Sendgrid
+
+
