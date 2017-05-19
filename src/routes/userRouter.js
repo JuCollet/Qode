@@ -127,7 +127,7 @@ userRouter.route('/passwordrecovery')
         err.status = 404;
         return next(err);
       }
-      const recoveryToken = jwt.sign({mail:req.body.mail}, 'shhhhh', { expiresIn: '1h' });
+      const recoveryToken = jwt.sign({mail:req.body.mail}, process.env.jwtSecret, { expiresIn: '1h' });
       Recovery.create({'recoveryToken':recoveryToken});
       mailer.recoveryMail(req.body.mail,recoveryToken);
       res.json({'status':'ok'});
@@ -139,7 +139,7 @@ userRouter.route('/passwordrecovery/:token')
     Recovery.findOneAndRemove({recoveryToken:req.params.token},null,function(err,token){
       if(err) return next(err);
       if(token !== null && token !== undefined){
-        jwt.verify(req.params.token, 'shhhhh', function(err, decoded) {
+        jwt.verify(req.params.token, process.env.jwtSecret, function(err, decoded) {
           if(err) return next(err);
           User.findOne({mail:decoded.mail},null,function(err,user){
             if(err) return next(err);
