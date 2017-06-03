@@ -467,9 +467,6 @@ input[type=radio]:checked ~ .check {
   font-weight: 300;
   color: white;
 }
-.form-input[type="password"] {
-  letter-spacing: .3em;
-}
 .form-textarea {
   display: block;
   overflow: none;

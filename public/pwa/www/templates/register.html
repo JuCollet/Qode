@@ -4,8 +4,8 @@
       <form name="register" ng-submit='doRegister()' autocapitalize="off">
         <input type="text" name="name" ng-model="name" placeholder="What's your name ?"/>
         <input type="mail" name="mail" ng-model="mail" placeholder="What's your e-mail address ?"/>
-        <input type="password" name="password" ng-model="password" placeholder="Choose a password"/>
-        <input type="password" name="confirmPassword" ng-model="confirmPassword" placeholder="Confirm your password"/>
+        <input type="password" name="password" ng-model="password" ng-minlength="6" placeholder="Choose a password"/>
+        <input type="password" name="confirmPassword" ng-minlength="6" ng-model="confirmPassword" placeholder="Confirm your password"/>
         <button class="form-button" type="submit">REGISTER</button>
       </form>
     </div>
